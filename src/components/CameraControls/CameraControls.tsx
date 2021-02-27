@@ -30,9 +30,9 @@ const CameraControls: React.FC<CameraControlsProps> = ({enableZoom = true}) => {
         ref={controls}
         args={[camera, domElement]}
         enableZoom={enableZoom}
-        maxAzimuthAngle={Math.PI / 4}
-        maxPolarAngle={Math.PI}
-        minAzimuthAngle={-Math.PI / 4}
+        // maxAzimuthAngle={Math.PI / 4}
+        // minAzimuthAngle={-Math.PI / 4}
+        maxPolarAngle={Math.PI / 2}
         minPolarAngle={0}
         />
     );

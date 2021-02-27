@@ -7,9 +7,9 @@ import {Preflight} from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
       <Preflight />
-      <App />
+      <Provider store={store}>
+        <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
