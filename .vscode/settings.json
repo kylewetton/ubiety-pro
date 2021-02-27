@@ -1,0 +1,13 @@
+{
+    "explorer.compactFolders": false,
+    "boxed-components.useTemplates": {
+        "component" : {
+            "src" : "templates/component",
+            "dest" : "src/components"
+        },
+        "reduxSlice" : {
+            "src" : "templates/slice",
+            "dest" : "src/store"
+        }
+    }
+}
