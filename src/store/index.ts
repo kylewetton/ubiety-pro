@@ -1,17 +1,17 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
-import {mailReducer} from './mail/reducers';
+import {productReducer} from './product/reducers';
 import thunkMiddleware, { ThunkDispatch } from 'redux-thunk';
 
 const rootReducer = combineReducers({
-    mail: mailReducer
+    product: productReducer
 });
 
 export const store = configureStore({
     reducer: rootReducer
 });
 
-type State = ReturnType<typeof rootReducer>;
+export type State = ReturnType<typeof rootReducer>;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = ThunkDispatch<RootState, void, Action>;

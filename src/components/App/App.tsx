@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
-
+import React, {Suspense} from 'react';
 import World from '../World';
 
-
-const App = () => {
-
+const App: React.FC = () => {
     return (
-        <World />
+        <Suspense fallback={<p>Loading...</p>}>
+            <World />
+        </Suspense>
     )
 }
 
