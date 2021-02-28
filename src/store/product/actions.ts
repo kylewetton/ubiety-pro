@@ -30,8 +30,8 @@ export function productAddParts(data: any): productActionTypes {
             material: materialId,
             locked: part.name.includes('|disable'),
             active: false,
-            textureFolder: config.initialTextures[parseTag(part.name)],
-            color: '#FFFFFF',
+            textureFolder: config.initialTextures[parseTag(part.name)] && config.initialTextures[parseTag(part.name)]['folder'],
+            color: config.initialTextures[parseTag(part.name)] && config.initialTextures[parseTag(part.name)].color ? config.initialTextures[parseTag(part.name)].color : '#FFFFFF',
         } as productPartType
     })
 
