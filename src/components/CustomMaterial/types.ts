@@ -1,3 +1,4 @@
 export interface CustomMaterialProps {
-    folder: string
+    folder: string,
+    color: string,
 }

@@ -6,7 +6,7 @@ interface ProductConfigType {
 const productConfig: ProductConfigType = {
     file: '/shoe.glb',
     initialTextures: {
-        'heel_counter' : '/canvas',
+        'heel counter' : '/canvas',
         'eyestay' : '/canvas',
         'foxing' : '/canvas',
         'inner' : '/canvas',

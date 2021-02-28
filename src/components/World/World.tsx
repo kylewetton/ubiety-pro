@@ -1,22 +1,42 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import {Canvas} from 'react-three-fiber';
 import { EffectComposer, SSAO, SMAA } from 'react-postprocessing';
 import worldConfig from '../../config/worldConfig';
 import {WorldDiv} from './styles/WorldStyles';
 import { WorldProps } from './types';
-import {useModel} from '../../hooks';
 import Product from '../Product';
-import {useDispatch, Provider} from 'react-redux';
+import {useDispatch, Provider, useSelector} from 'react-redux';
 import CameraControls from '../CameraControls';
-import { productAddParts } from '../../store/product/actions';
+import { productAddParts, productSetActivePart, productSetTextureToActive, productSetColorToActive } from '../../store/product/actions';
 import {store} from '../../store';
 import { useGLTF } from 'drei';
+import Button from '../Button';
+import { getAllProductParts } from '../../store/product/selectors';
 
 const World: React.FC<WorldProps> = () => {
     const dispatch = useDispatch();
-
+    
+    /**
+     * Data
+     */
     const d = 8.25;
     const { effects } = worldConfig;
+    const { nodes } = useGLTF('/shoe.glb');
+    
+    /**
+     * State
+     */
+    const PARTS = useSelector(getAllProductParts);
+
+    useEffect(() => {
+        dispatch(productAddParts(nodes));
+    }, [nodes, dispatch]);
+    
+
+    /**
+     * Methods
+     * @private
+     */
 
     const _renderEffectComposer = () => (
         <EffectComposer multisampling={2}>
@@ -34,11 +54,31 @@ const World: React.FC<WorldProps> = () => {
         </EffectComposer>
     )  
 
-    const { nodes } = useGLTF('/shoe.glb');
-    dispatch(productAddParts(nodes));
+
+    const _handleDebugChangeTexture = (folder: string) => {
+        dispatch(productSetTextureToActive(folder));
+    }
+
+    const _handleDebugChangeColor = (hex: string) => {
+        dispatch(productSetColorToActive(hex));
+    }
+
+    const _handleDebugSetActive = (tag: string) => {
+        const partToSetActive = PARTS.filter(part => part.tag === tag)[0];
+        dispatch(productSetActivePart(partToSetActive.id));
+    }
+
+
 
     return (
         <WorldDiv>
+            <div style={{position: 'absolute', top: '1rem', left: '1rem', zIndex: 999}}>
+                <Button onClick={() => _handleDebugSetActive('quarters')}>Quarters</Button>
+                <Button onClick={() => _handleDebugSetActive('tongue')}>Tongue</Button>
+                <Button onClick={() => _handleDebugChangeTexture('/wood')}>Make Wood</Button>
+                <Button onClick={() => _handleDebugChangeTexture('/canvas')}>Make Canvas</Button>
+                <Button onClick={() => _handleDebugChangeColor('#FF0000')}>Make Red</Button>
+            </div>
             <Canvas concurrent={false}>
                 {/** Scene */}
                 <CameraControls />
