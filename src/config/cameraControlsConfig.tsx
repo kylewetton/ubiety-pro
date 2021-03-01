@@ -2,7 +2,7 @@ const cameraControlsConfig = {
     enableDampening: true,
     dampeningFactor: 0.1,
     enableZoom: true,
-    maxPolarAngle: 90,
+    maxPolarAngle: 85,
     minPolarAngle: 0,
     enablePan: false
 }

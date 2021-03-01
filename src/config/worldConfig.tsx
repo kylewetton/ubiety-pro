@@ -1,5 +1,5 @@
 const worldConfig = {
-    effects: true
+    effects: false
 }
 
 export default worldConfig;

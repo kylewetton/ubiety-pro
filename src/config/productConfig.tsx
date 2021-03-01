@@ -5,14 +5,26 @@ interface MaterialSettingsType {
     color?: string;
 }
 
+interface Texture {
+    maps: Map[],
+    normalIntensity?: number
+}
+
+interface Textures {
+    [key: string] : Texture
+}
+
 interface ProductConfigType {
     file: string;
     initialTextures: {[key: string]: MaterialSettingsType}
 }
 
-export const textureMaps: {[key: string] : Map[]} = {
-    '/canvas': ['color', 'ao', 'normal'],
-    '/wood': ['ao', 'color', 'normal', 'roughness']
+export const textures: Textures = {
+    '/canvas': {
+        maps: ['color', 'ao', 'normal'],
+        normalIntensity: 0.1
+        },
+    '/wood': {maps: ['ao', 'color', 'normal', 'roughness']}
 }
 
 const productConfig: ProductConfigType = {
