@@ -4,14 +4,14 @@ interface CameraConfig {
     fov: number,
     near: number,
     far: number,
-    position: Vector3
+    position: [x: number, y: number, z: number]
 }
 
 const cameraConfig: CameraConfig = {
     fov: 30,
     near: 1,
     far: 300,
-    position: new Vector3(0, 0, 1),
+    position: [0, 0, 5],
   };
 
   export default cameraConfig;

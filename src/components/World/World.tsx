@@ -8,9 +8,9 @@ import { WorldProps } from './types';
 import Product from '../Product';
 import {useDispatch, Provider, useSelector} from 'react-redux';
 import CameraControls from '../CameraControls';
-import { productAddParts, productSetActivePart, productSetTextureToActive, productSetColorToActive } from '../../store/product/actions';
+import { productAddParts, productSetTextureToActive, productSetColorToActive } from '../../store/product/actions';
 import {store} from '../../store';
-import { useGLTF, PerspectiveCamera } from 'drei';
+import { useGLTF } from 'drei';
 import Button from '../Button';
 import { getAllProductParts } from '../../store/product/selectors';
 
@@ -82,9 +82,9 @@ const World: React.FC<WorldProps> = () => {
                 pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio}
                 concurrent={false}
                 raycaster={{ filter: _intersectionsFilter }}
+                camera={{ fov: cameraConfig.fov, position: cameraConfig.position }}
             >
                 {/** Scene */}
-                <PerspectiveCamera position={cameraConfig.position} fov={cameraConfig.fov} />
                 <CameraControls />
                 <hemisphereLight intensity={0.5} position={[0, 50, 0]} />
                 <directionalLight

@@ -4,7 +4,7 @@ const cameraControlsConfig = {
     enableZoom: true,
     maxPolarAngle: 85,
     minPolarAngle: 0,
-    enablePan: false
+    enablePan: false,
 }
 
 export default cameraControlsConfig;
