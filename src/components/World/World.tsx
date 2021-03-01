@@ -2,6 +2,7 @@ import React, {Suspense, useEffect} from 'react';
 import {Canvas} from 'react-three-fiber';
 import { EffectComposer, SSAO, SMAA } from 'react-postprocessing';
 import worldConfig from '../../config/worldConfig';
+import cameraConfig from '../../config/cameraConfig';
 import {WorldDiv} from './styles/WorldStyles';
 import { WorldProps } from './types';
 import Product from '../Product';
@@ -9,7 +10,7 @@ import {useDispatch, Provider, useSelector} from 'react-redux';
 import CameraControls from '../CameraControls';
 import { productAddParts, productSetActivePart, productSetTextureToActive, productSetColorToActive } from '../../store/product/actions';
 import {store} from '../../store';
-import { useGLTF } from 'drei';
+import { useGLTF, PerspectiveCamera } from 'drei';
 import Button from '../Button';
 import { getAllProductParts } from '../../store/product/selectors';
 
@@ -68,8 +69,6 @@ const World: React.FC<WorldProps> = () => {
         dispatch(productSetActivePart(partToSetActive.id));
     }
 
-
-
     return (
         <WorldDiv>
             <div style={{position: 'absolute', top: '1rem', left: '1rem', zIndex: 999}}>
@@ -81,6 +80,7 @@ const World: React.FC<WorldProps> = () => {
             </div>
             <Canvas concurrent={false}>
                 {/** Scene */}
+                <PerspectiveCamera position={cameraConfig.position} fov={cameraConfig.fov} />
                 <CameraControls />
                 <hemisphereLight intensity={0.5} position={[0, 50, 0]} />
                 <directionalLight
