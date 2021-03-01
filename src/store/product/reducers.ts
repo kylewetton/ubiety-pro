@@ -20,10 +20,14 @@ export function productReducer(state = initialState, action: productActionTypes)
     case PRODUCT_SET_ACTIVE:
       const newActiveParts = state.parts.map(part => {
         const newPart = {...part};
+
         if (newPart.id !== action.payload) {
           newPart.active = false;
+          if (newPart.parent === action.payload)
+            newPart.active = true;
           return newPart;
         }
+
         newPart.active = true;
         return newPart;
       });

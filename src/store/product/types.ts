@@ -5,9 +5,11 @@ export interface productPartType {
     parent: string;
     material: string;
     locked: boolean;
+    isControlledChild: boolean;
     active: boolean;
     textureFolder: string;
     color: string;
+    children: string[]
 }
 
 export type productState = {

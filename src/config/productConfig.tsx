@@ -39,7 +39,7 @@ const productConfig: ProductConfigType = {
     file: '/shoe.glb',
     initialTextures: {
         'heel_counter' : {
-            folder: '/canvas',
+            folder: '/wood',
             color: '#FFFFFF',
     },
         'eyestay' : {
