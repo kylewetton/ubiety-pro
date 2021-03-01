@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import _map from 'lodash/map';
 import {useSelector} from 'react-redux';
 import { ProductProps } from './types';
@@ -25,9 +25,10 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                     return (
                         <mesh key={mesh.uuid} geometry={mesh.geometry} castShadow receiveShadow>
                             { textureFolder && (
-                            <Suspense fallback={<meshStandardMaterial color={'white'} />}>
+                            
                                 <CustomMaterial color={color} folder={textureFolder} />
-                            </Suspense>) }
+                            
+                            ) }
                         </mesh>);
                     })
                 }
