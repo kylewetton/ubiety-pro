@@ -76,6 +76,7 @@ const World: React.FC<WorldProps> = () => {
                 <Button onClick={() => _handleDebugSetActive('tongue')}>Tongue</Button>
                 <Button onClick={() => _handleDebugChangeTexture('/wood')}>Make Wood</Button>
                 <Button onClick={() => _handleDebugChangeTexture('/canvas')}>Make Canvas</Button>
+                <Button onClick={() => _handleDebugChangeTexture('/simple')}>Make Simple</Button>
                 <Button onClick={() => _handleDebugChangeColor('#FF0000')}>Make Red</Button>
             </div>
             <Canvas gl={{antialias: true}} pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio} concurrent={false}>

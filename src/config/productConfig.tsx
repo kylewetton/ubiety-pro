@@ -7,7 +7,8 @@ interface MaterialSettingsType {
 
 interface Texture {
     maps: Map[],
-    normalIntensity?: number
+    normalIntensity?: number,
+    flipY?: boolean
 }
 
 interface Textures {
@@ -24,7 +25,14 @@ export const textures: Textures = {
         maps: ['color', 'ao', 'normal'],
         normalIntensity: 0.1
         },
-    '/wood': {maps: ['ao', 'color', 'normal', 'roughness']}
+    '/wood': {maps: ['ao', 'color', 'normal', 'roughness']},
+    '/shadow' : {
+        maps: ['alpha'],
+        flipY: true
+    },
+    '/simple' : {
+        maps: ['color'],
+    }
 }
 
 const productConfig: ProductConfigType = {
@@ -75,8 +83,8 @@ const productConfig: ProductConfigType = {
             color: '#FFFFFF',
     },
         'shadow' : {
-             folder: '/wood',
-            color: '#FFFFFF',
+             folder: '/shadow',
+            color: '#222222',
     },
     }
 }
