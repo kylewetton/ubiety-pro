@@ -1,7 +1,9 @@
 import React, {useRef} from 'react';
+import {MathUtils} from 'three';
 import { CameraControlsProps } from './types';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {extend, useFrame, ReactThreeFiber, useThree} from 'react-three-fiber';
+import config from '../../config/cameraControlsConfig';
 
 extend({ OrbitControls });
 
@@ -13,7 +15,9 @@ declare global {
     }
   }
 
-const CameraControls: React.FC<CameraControlsProps> = ({enableZoom = true}) => {
+const CameraControls: React.FC<CameraControlsProps> = () => {
+
+      const {enableDampening, enablePan, dampeningFactor, enableZoom, maxPolarAngle, minPolarAngle} = config;
 
       const {
         camera,
@@ -30,10 +34,11 @@ const CameraControls: React.FC<CameraControlsProps> = ({enableZoom = true}) => {
         ref={controls}
         args={[camera, domElement]}
         enableZoom={enableZoom}
-        // maxAzimuthAngle={Math.PI / 4}
-        // minAzimuthAngle={-Math.PI / 4}
-        maxPolarAngle={Math.PI / 2}
-        minPolarAngle={0}
+        enableDamping={enableDampening}
+        dampingFactor={dampeningFactor}
+        enablePan={enablePan}
+        maxPolarAngle={MathUtils.degToRad(maxPolarAngle)}
+        minPolarAngle={MathUtils.degToRad(minPolarAngle)}
         />
     );
 };
