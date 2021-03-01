@@ -75,6 +75,7 @@ const World: React.FC<WorldProps> = () => {
                 <Button onClick={() => _handleDebugChangeTexture('/canvas')}>Make Canvas</Button>
                 <Button onClick={() => _handleDebugChangeTexture('/simple')}>Make Simple</Button>
                 <Button onClick={() => _handleDebugChangeColor('#FF0000')}>Make Red</Button>
+                <Button onClick={() => _handleDebugChangeColor('#FFFFFF')}>Make White</Button>
             </div>
             <Canvas
                 gl={{antialias: true}}
