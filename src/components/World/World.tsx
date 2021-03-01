@@ -39,6 +39,10 @@ const World: React.FC<WorldProps> = () => {
      * @private
      */
 
+    const _intersectionsFilter = (intersections: any) => {
+        return intersections?.length ? [intersections[0]] : intersections;
+    }
+
     const _renderEffectComposer = () => (
         <EffectComposer multisampling={2}>
             <SSAO
@@ -64,22 +68,20 @@ const World: React.FC<WorldProps> = () => {
         dispatch(productSetColorToActive(hex));
     }
 
-    const _handleDebugSetActive = (tag: string) => {
-        const partToSetActive = PARTS.filter(part => part.tag === tag)[0];
-        dispatch(productSetActivePart(partToSetActive.id));
-    }
-
     return (
         <WorldDiv>
             <div style={{position: 'absolute', top: '1rem', left: '1rem', zIndex: 999}}>
-                <Button onClick={() => _handleDebugSetActive('quarters')}>Quarters</Button>
-                <Button onClick={() => _handleDebugSetActive('tongue')}>Tongue</Button>
                 <Button onClick={() => _handleDebugChangeTexture('/wood')}>Make Wood</Button>
                 <Button onClick={() => _handleDebugChangeTexture('/canvas')}>Make Canvas</Button>
                 <Button onClick={() => _handleDebugChangeTexture('/simple')}>Make Simple</Button>
                 <Button onClick={() => _handleDebugChangeColor('#FF0000')}>Make Red</Button>
             </div>
-            <Canvas gl={{antialias: true}} pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio} concurrent={false}>
+            <Canvas
+                gl={{antialias: true}}
+                pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio}
+                concurrent={false}
+                raycaster={{ filter: _intersectionsFilter }}
+            >
                 {/** Scene */}
                 <PerspectiveCamera position={cameraConfig.position} fov={cameraConfig.fov} />
                 <CameraControls />
