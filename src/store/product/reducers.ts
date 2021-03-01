@@ -18,7 +18,6 @@ export function productReducer(state = initialState, action: productActionTypes)
         // add new state here
       };
     case PRODUCT_SET_ACTIVE:
-
       const newActiveParts = state.parts.map(part => {
         const newPart = {...part};
         if (newPart.id !== action.payload) {
