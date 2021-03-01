@@ -78,7 +78,7 @@ const World: React.FC<WorldProps> = () => {
                 <Button onClick={() => _handleDebugChangeTexture('/canvas')}>Make Canvas</Button>
                 <Button onClick={() => _handleDebugChangeColor('#FF0000')}>Make Red</Button>
             </div>
-            <Canvas concurrent={false}>
+            <Canvas gl={{antialias: true}} pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio} concurrent={false}>
                 {/** Scene */}
                 <PerspectiveCamera position={cameraConfig.position} fov={cameraConfig.fov} />
                 <CameraControls />
