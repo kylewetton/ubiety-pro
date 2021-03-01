@@ -5,14 +5,14 @@ import worldConfig from '../../config/worldConfig';
 import cameraConfig from '../../config/cameraConfig';
 import {WorldDiv} from './styles/WorldStyles';
 import { WorldProps } from './types';
+import _filter from 'lodash/filter';
 import Product from '../Product';
-import {useDispatch, Provider, useSelector} from 'react-redux';
+import {useDispatch, Provider } from 'react-redux';
 import CameraControls from '../CameraControls';
 import { productAddParts, productSetTextureToActive, productSetColorToActive } from '../../store/product/actions';
 import {store} from '../../store';
 import { useGLTF } from 'drei';
 import Button from '../Button';
-import { getAllProductParts } from '../../store/product/selectors';
 
 const World: React.FC<WorldProps> = () => {
     const dispatch = useDispatch();
@@ -27,10 +27,11 @@ const World: React.FC<WorldProps> = () => {
     /**
      * State
      */
-    const PARTS = useSelector(getAllProductParts);
 
     useEffect(() => {
-        dispatch(productAddParts(nodes));
+        const parts = _filter(nodes, part => part.name !== 'Scene' );
+        const sceneId = _filter(nodes, part => part.name === 'Scene')[0].uuid;
+        dispatch(productAddParts({parts, sceneId}));
     }, [nodes, dispatch]);
     
 

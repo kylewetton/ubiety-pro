@@ -15,18 +15,19 @@ const parseTag = (name: string) => {
 
 export function productAddParts(data: any): productActionTypes {
 
-    const parts: productPartType[] = _map(data, (part: Mesh) => {
+    const { sceneId } = data; 
 
-        /**
-        * @TODO Figure out materials type here, Material should have uuid?
-        */
-        const materialId: string = (part as any).hasOwnProperty('material') ? (part as any).material.uuid : 'na';
+    const parts: productPartType[] = _map(data.parts, (part: Mesh) => {
+
+        const materialId: string = (part as any).hasOwnProperty('material') ? (part as any).material.uuid : null;
 
         return {
             id: part.uuid,
             tag: parseTag(part.name),
             name: parseName(part.name),
-            parent: part.parent ? part.parent.name : null,
+            parent: part.parent && part.parent.uuid !== sceneId ? part.parent.uuid : null,
+            children: part.children.map(child => child.uuid),
+            isControlledChild: part.parent !== null,
             material: materialId,
             locked: part.name.includes('|disable'),
             active: false,
