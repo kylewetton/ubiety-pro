@@ -1,7 +1,8 @@
-import { PRODUCT_ADD_PARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState } from './types';
+import { PRODUCT_ADD_PARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState } from './types';
 
 const initialState: productState = {
   parts: [],
+  materials: []
 };
 
 /**
@@ -35,10 +36,11 @@ export function productReducer(state = initialState, action: productActionTypes)
       return {...state, parts: newActiveParts};
 
     case PRODUCT_SET_TEXTURE:
+      const material = state.materials.filter(material => material.id === action.payload)[0];
       const newTextureParts = state.parts.map(part => {
         const newPart = {...part};
         if (!newPart.active) return newPart;
-        newPart.textureFolder = action.payload;
+        newPart.textureFolder = material.src;
         return newPart;
       });
 
@@ -53,6 +55,14 @@ export function productReducer(state = initialState, action: productActionTypes)
       });
 
       return {...state, parts: newColorParts};
+
+    case PRODUCT_ADD_MATERIALS:
+      // Create new materials logic
+      return {
+        ...state,
+        materials: action.payload
+        // add new state here
+      };
 
     default:
       return state;

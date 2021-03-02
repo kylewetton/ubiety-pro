@@ -4,7 +4,7 @@ import {productReducer} from './product/reducers';
 import thunkMiddleware, { ThunkDispatch } from 'redux-thunk';
 
 const rootReducer = combineReducers({
-    product: productReducer
+    product: productReducer,
 });
 
 export const store = configureStore({

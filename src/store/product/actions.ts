@@ -1,8 +1,12 @@
 import { Mesh } from 'three';
 import _map from 'lodash/map';
-import { PRODUCT_ADD_PARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType } from './types';
+import { PRODUCT_ADD_PARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, materialsActionTypes } from './types';
 import config from '../../config/productConfig';
 
+/**
+ * 
+ * Helpers
+ */
 const parseName = (name: string) => {
     const label = name.split('|')[0];
     const readable = label.split('_');
@@ -12,6 +16,11 @@ const parseName = (name: string) => {
 const parseTag = (name: string) => {
     return name.split('|')[0];
 }
+
+/**
+ * 
+ * Parts
+ */
 
 export function productAddParts(data: any): productActionTypes {
 
@@ -49,10 +58,10 @@ export function productSetActivePart(id: string) {
     }
 }
 
-export function productSetTextureToActive(folder: string) {
+export function productSetTextureToActive(id: string) {
     return {
         type: PRODUCT_SET_TEXTURE,
-        payload: folder
+        payload: id
     }
 }
 
@@ -60,5 +69,12 @@ export function productSetColorToActive(hex: string) {
     return {
         type: PRODUCT_SET_COLOR,
         payload: hex
+    }
+}
+
+export function productAddMaterials(data: any): materialsActionTypes {
+    return {
+        type: PRODUCT_ADD_MATERIALS,
+        payload: data
     }
 }
