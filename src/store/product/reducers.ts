@@ -22,13 +22,22 @@ export function productReducer(state = initialState, action: productActionTypes)
       const newActiveParts = state.parts.map(part => {
         const newPart = {...part};
 
+        // When it doesn't match clicked item
         if (newPart.id !== action.payload) {
+          // Active by default
           newPart.active = false;
-          if (newPart.parent === action.payload)
+
+          // If its parent or child matches
+        if (
+            newPart.parent === action.payload
+            || newPart.children.includes(action.payload)
+          )
             newPart.active = true;
+          
           return newPart;
         }
-
+    
+          
         newPart.active = true;
         return newPart;
       });
