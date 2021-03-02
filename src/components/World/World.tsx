@@ -61,8 +61,8 @@ const World: React.FC<WorldProps> = () => {
     )  
 
 
-    const _handleDebugChangeTexture = (folder: string) => {
-        dispatch(productSetTextureToActive(folder));
+    const _handleDebugChangeTexture = (id: string) => {
+        dispatch(productSetTextureToActive(id));
     }
 
     const _handleDebugChangeColor = (hex: string) => {
@@ -72,9 +72,8 @@ const World: React.FC<WorldProps> = () => {
     return (
         <WorldDiv>
             <div style={{position: 'absolute', top: '1rem', left: '1rem', zIndex: 999}}>
-                <Button onClick={() => _handleDebugChangeTexture('/wood')}>Make Wood</Button>
-                <Button onClick={() => _handleDebugChangeTexture('/canvas')}>Make Canvas</Button>
-                <Button onClick={() => _handleDebugChangeTexture('/simple')}>Make Simple</Button>
+                <Button onClick={() => _handleDebugChangeTexture('wood')}>Make Wood</Button>
+                <Button onClick={() => _handleDebugChangeTexture('canvas')}>Make Canvas</Button>
                 <Button onClick={() => _handleDebugChangeColor('#FF0000')}>Make Red</Button>
                 <Button onClick={() => _handleDebugChangeColor('#FFFFFF')}>Make White</Button>
             </div>

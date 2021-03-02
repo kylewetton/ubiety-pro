@@ -6,3 +6,5 @@ export const getActiveProductPart = (state: RootState) => {
     const active = state.product.parts.filter(part => part.active)[0];
     return active;
 }
+
+export const getAllMaterials = (state: RootState) => state.product.materials;
