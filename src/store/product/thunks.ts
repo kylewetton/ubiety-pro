@@ -1,7 +1,7 @@
 import { ThunkAction } from "@reduxjs/toolkit";
 import {Action, Dispatch} from 'redux';
 import {GetState, RootState} from '../../store';
-import {productAddMaterials} from './actions';
+import {productAddMaterials, productAddModelData} from './actions';
 import {Texture} from './types';
 
 export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknown, Action<string>> => async(dispatch: Dispatch, getState: GetState) => {
@@ -25,4 +25,16 @@ export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknow
     ];
 
     dispatch(productAddMaterials(response));
+}
+
+export const thunkProductLoadModel = (): ThunkAction<void, RootState, unknown, Action<string>> => async(dispatch: Dispatch, getState: GetState) => {
+
+    console.log("xx in thunk");
+    // async some stuff
+    fetch('http://localhost/wp-json/wp/v2/custom/51')
+    .then(res => res.json())
+    .then(data => {
+        dispatch(productAddModelData(data))
+    })
+    .catch(error => console.error('thunkProductLoadModel was not successfull'));
 }

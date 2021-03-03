@@ -1,8 +1,9 @@
-import { PRODUCT_ADD_PARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState } from './types';
+import { PRODUCT_ADD_PARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA } from './types';
 
 const initialState: productState = {
   parts: [],
-  materials: []
+  materials: [],
+  src: ''
 };
 
 /**
@@ -61,6 +62,15 @@ export function productReducer(state = initialState, action: productActionTypes)
       return {
         ...state,
         materials: action.payload
+        // add new state here
+      };
+
+    case PRODUCT_ADD_MODEL_DATA:
+      const {model_file} = action.payload.acf;
+      console.log('xx', model_file);
+      return {
+        ...state,
+        src: model_file
         // add new state here
       };
 

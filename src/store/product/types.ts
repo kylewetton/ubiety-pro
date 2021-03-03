@@ -7,13 +7,15 @@ export const PRODUCT_SET_ACTIVE = 'PRODUCT_SET_ACTIVE';
 export const PRODUCT_SET_TEXTURE = 'PRODUCT_SET_TEXTURE';
 export const PRODUCT_SET_COLOR = 'PRODUCT_SET_COLOR';
 export const PRODUCT_ADD_MATERIALS = 'PRODUCT_ADD_MATERIALS';
+export const PRODUCT_ADD_MODEL_DATA = 'PRODUCT_ADD_MODEL_DATA';
 
-interface productAddParts {
+interface productAction {
     type: typeof PRODUCT_ADD_PARTS
     | typeof PRODUCT_SET_ACTIVE
     | typeof PRODUCT_SET_TEXTURE
     | typeof PRODUCT_SET_COLOR
-    | typeof PRODUCT_ADD_MATERIALS,
+    | typeof PRODUCT_ADD_MATERIALS
+    | typeof PRODUCT_ADD_MODEL_DATA,
     payload: any
 }
 
@@ -41,18 +43,10 @@ export interface Texture {
     flipY?: boolean
 }
 
-// action
-
-interface materialsAction {
-    type: typeof PRODUCT_ADD_MATERIALS,
-    payload: any
-}
-
-export type materialsActionTypes = materialsAction;
-
-export type productActionTypes = productAddParts;
+export type productActionTypes = productAction;
 
 export type productState = {
     parts: productPartType[];
-    materials: Texture[]
+    materials: Texture[];
+    src: string;
 };
