@@ -8,3 +8,5 @@ export const getActiveProductPart = (state: RootState) => {
 }
 
 export const getAllMaterials = (state: RootState) => state.product.materials;
+
+export const getProductModelPath = (state: RootState) => state.product.src;

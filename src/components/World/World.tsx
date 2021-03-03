@@ -14,7 +14,7 @@ import {store} from '../../store';
 import { useGLTF } from 'drei';
 import Button from '../Button';
 
-const World: React.FC<WorldProps> = () => {
+const World: React.FC<WorldProps> = ({model}) => {
     const dispatch = useDispatch();
     
     /**
@@ -22,7 +22,7 @@ const World: React.FC<WorldProps> = () => {
      */
     const d = 8.25;
     const { effects } = worldConfig;
-    const { nodes } = useGLTF('/shoe.glb');
+    const { nodes } = useGLTF(model);
     
     /**
      * State
@@ -69,7 +69,7 @@ const World: React.FC<WorldProps> = () => {
         dispatch(productSetColorToActive(hex));
     }
 
-    return (
+    return (    
         <WorldDiv>
             <div style={{position: 'absolute', top: '1rem', left: '1rem', zIndex: 999}}>
                 <Button onClick={() => _handleDebugChangeTexture('wood')}>Make Wood</Button>

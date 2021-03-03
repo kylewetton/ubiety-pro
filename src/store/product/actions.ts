@@ -1,6 +1,6 @@
 import { Mesh } from 'three';
 import _map from 'lodash/map';
-import { PRODUCT_ADD_PARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, materialsActionTypes } from './types';
+import { PRODUCT_ADD_PARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA } from './types';
 import config from '../../config/productConfig';
 
 /**
@@ -68,9 +68,17 @@ export function productSetColorToActive(hex: string) {
     }
 }
 
-export function productAddMaterials(data: any): materialsActionTypes {
+export function productAddMaterials(data: any): productActionTypes {
     return {
         type: PRODUCT_ADD_MATERIALS,
         payload: data
     }
 }
+
+export function productAddModelData(data: any): productActionTypes {
+    return {
+        type: PRODUCT_ADD_MODEL_DATA,
+        payload: data
+    }
+}
+

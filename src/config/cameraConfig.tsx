@@ -1,5 +1,3 @@
-import {Vector3} from 'three';
-
 interface CameraConfig {
     fov: number,
     near: number,
