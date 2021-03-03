@@ -9,16 +9,34 @@ export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknow
     // async some stuff
     const response: Texture[] = [
         {
-            id: 'canvas',
+            tag: 'canvas',
             src: '/canvas',
             maps: ['color', 'ao', 'normal'],
+            normalIntensity: 0.2,
+        },
+        {
+            tag: 'shadow',
+            src: '/shadow',
+            maps: ['alpha'],
+            flipY: true
+        },
+        {
+            tag: 'wood',
+            src: '/wood',
+            maps: ['color', 'ao', 'normal', 'roughness'],
+            normalIntensity: 0.2,
+        },
+        {
+            tag: 'foxing',
+            src: '/foxing',
+            maps: ['color'],
             normalIntensity: 0.2,
             flipY: false
         },
         {
-            id: 'wood',
-            src: '/wood',
-            maps: ['color', 'ao', 'normal', 'roughness'],
+            tag: 'foxing_toe',
+            src: '/foxing_toe',
+            maps: ['color'],
             normalIntensity: 0.2,
             flipY: false
         }

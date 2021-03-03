@@ -1,23 +1,29 @@
 import React from 'react';
 import { CustomMaterialProps } from './types';
 import {useTexture} from 'drei';
-import {textures} from '../../config/productConfig';
 import { Vector2 } from 'three';
 import _map from 'lodash/map';
+import { useSelector } from 'react-redux';
+import { getAllMaterials } from '../../store/product/selectors';
 
-const CustomMaterial: React.FC<CustomMaterialProps> = ({folder, color}) => {
-    // Sort in alphabetical order
+/**
+ * 
+ * @param tag – the material tag
+ */
 
-    const maps = textures[folder]['maps'];
+const CustomMaterial: React.FC<CustomMaterialProps> = ({tag, color}) => {
+    const materials = useSelector(getAllMaterials);
+    const material = materials.filter(mat => mat.tag === tag)[0];
+    const maps = material.maps;
     // Convert to texture image paths
-    const paths = maps.map(texture => `${folder}/${texture}.jpg`);
+    const paths = maps.map(texture => `${material.src}/${texture}.jpg`);
     // Load all the textures (useTexture returns an array)
     const texture = useTexture(paths);
     // Convert texture array to an object where the key === the index position of the map array
     let textureObj = Object.assign({}, texture);
 
     // Flip the textures if needed 
-    if (textures[folder]['flipY'])
+    if (material.flipY)
       _map(textureObj, txt => {txt.flipY = false});
 
 
@@ -30,7 +36,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({folder, color}) => {
                 aoMap={maps.includes('ao') ? textureObj[maps.indexOf('ao')] : null}
                 alphaMap={maps.includes('alpha') ? textureObj[maps.indexOf('alpha')] : null}
                 normalMap={maps.includes('normal') ? textureObj[maps.indexOf('normal')] : null}
-                normalScale={new Vector2(textures[folder]['normalIntensity'], textures[folder]['normalIntensity'])}
+                normalScale={new Vector2(material.normalIntensity, material.normalIntensity)}
                 transparent={true}
             />
         )
@@ -44,7 +50,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({folder, color}) => {
             roughnessMap={maps.includes('roughness') ? textureObj[maps.indexOf('roughness')] : null}
             alphaMap={maps.includes('alpha') ? textureObj[maps.indexOf('alpha')] : null}
             normalMap={maps.includes('normal') ? textureObj[maps.indexOf('normal')] : null}
-            normalScale={new Vector2(textures[folder]['normalIntensity'], textures[folder]['normalIntensity'])}
+            normalScale={new Vector2(material.normalIntensity, material.normalIntensity)}
             transparent={true}
         />
     )

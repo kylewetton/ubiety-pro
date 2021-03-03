@@ -5,31 +5,34 @@ import CustomMaterial from '../CustomMaterial';
 import config from '../../config/brandConfig';
 import { productSetActivePart, productSetColorToActive } from '../../store/product/actions';
 
-const Part: React.FC<PartProps> = ({folder, color, mesh, locked, id}) => {
+const Part: React.FC<PartProps> = ({materialTag, color, mesh, locked, id}) => {
 
     const dispatch = useDispatch();
-    const [rayPoint, setRayPoint] = useState({x: 0, y: 0});
+    const [rayDownPoint, setRayDownPoint] = useState({x: 0, y: 0});
+    
+    // Disable stops the user from clicking on the item until the color has returned to default
+    // This stops the user being able to lock in the hoverColor
+    const [disabled, setDisabled] = useState(false);
 
     const _handleSetActive = () => {
         dispatch(productSetActivePart(id));
         dispatch(productSetColorToActive(config.hoverColor));
-        setTimeout(() => dispatch(productSetColorToActive(color)), 200);
+        setTimeout(() => {
+            dispatch(productSetColorToActive(color));
+            setDisabled(false);
+        }, 200);
     }
     const _handlePointerDown = (e: React.PointerEvent<Element>) => {
-        setRayPoint({x: e.clientX, y: e.clientY})
+        const {clientX: x, clientY: y} = e;
+        setRayDownPoint({x: Math.floor(x), y: Math.floor(y)});
     }
 
     const _handlePointerUp = (e: React.PointerEvent<Element>) => {
-        setRayPoint(prev => {
-            const {x: px, y: py} = prev;
-            if (px !== e.clientX || py !== e.clientY)
-                return {x: e.clientX, y: e.clientY}
-            _handleSetActive();
-            return {x: e.clientX, y: e.clientY}
-        });
+        const {clientX: x, clientY: y} = e;
+        const {x: downX, y: downY} = rayDownPoint;
+        console.log('xx', Math.floor(x), Math.floor(y), '|', downX, downY)
+
     }
-
-
 
     return (
         <Suspense fallback={
@@ -42,11 +45,11 @@ const Part: React.FC<PartProps> = ({folder, color, mesh, locked, id}) => {
             )
         }>
             <mesh
-                onPointerDown={(e) => !locked && _handlePointerDown(e)}
-                onPointerUp={(e) => !locked && _handlePointerUp(e)}
+                onPointerDown={(e) => !locked && !disabled && _handlePointerDown(e)}
+                onPointerUp={(e) => !locked && !disabled && _handlePointerUp(e)}
                 key={mesh.uuid} geometry={mesh.geometry} castShadow receiveShadow>
-                    { folder && (
-                        <CustomMaterial color={ color } folder={folder} />
+                    { materialTag && (
+                        <CustomMaterial color={ color } tag={materialTag} />
                     ) }
             </mesh>
         </Suspense>

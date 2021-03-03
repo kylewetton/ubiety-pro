@@ -26,7 +26,7 @@ export interface productPartType {
     locked: boolean;
     isControlledChild: boolean;
     active: boolean;
-    textureFolder: string;
+    materialTag: string;
     color: string;
     children: string[]
 }
@@ -34,7 +34,7 @@ export interface productPartType {
 type Map = 'color' | 'ao' | 'roughness' | 'normal' | 'alpha';
 
 export interface Texture {
-    id: string;
+    tag: string;
     src: string;
     maps: Map[];
     normalIntensity?: number,
