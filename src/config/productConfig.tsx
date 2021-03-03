@@ -1,7 +1,7 @@
 type Map = 'color' | 'ao' | 'roughness' | 'normal' | 'alpha';
 
 interface MaterialSettingsType {
-    folder: string;
+    tag: string;
     color?: string;
 }
 
@@ -11,79 +11,60 @@ interface Texture {
     flipY?: boolean
 }
 
-interface Textures {
-    [key: string] : Texture
-}
-
 interface ProductConfigType {
     file: string;
-    initialTextures: {[key: string]: MaterialSettingsType}
-}
-
-export const textures: Textures = {
-    '/canvas': {
-        maps: ['color', 'ao', 'normal'],
-        normalIntensity: 0.1
-        },
-    '/wood': {maps: ['ao', 'color', 'normal', 'roughness']},
-    '/shadow' : {
-        maps: ['alpha'],
-        flipY: true
-    },
-    '/simple' : {
-        maps: ['color'],
-    }
+    initialMaterials: {[key: string]: MaterialSettingsType}
 }
 
 const productConfig: ProductConfigType = {
     file: '/shoe.glb',
-    initialTextures: {
+    initialMaterials: {
         'heel_counter' : {
-            folder: '/wood',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'eyestay' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'foxing' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'inner' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'tongue' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'laces' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'badge' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'quarters' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'side_stripe' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'vamp' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'binding' : {
-            folder: '/canvas',
+            tag: 'canvas',
             color: '#FFFFFF',
     },
         'shadow' : {
-             folder: '/shadow',
+             tag: 'shadow',
             color: '#222222',
     },
     }

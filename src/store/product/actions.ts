@@ -27,9 +27,6 @@ export function productAddParts(data: any): productActionTypes {
     const { sceneId } = data; 
 
     const parts: productPartType[] = _map(data.parts, (part: Mesh) => {
-
-        const materialId: string = (part as any).hasOwnProperty('material') ? (part as any).material.uuid : null;
-
         return {
             id: part.uuid,
             tag: parseTag(part.name),
@@ -37,11 +34,10 @@ export function productAddParts(data: any): productActionTypes {
             parent: part.parent && part.parent.uuid !== sceneId ? part.parent.uuid : null,
             children: part.children.map(child => child.uuid),
             isControlledChild: part.parent !== null,
-            material: materialId,
             locked: part.name.includes('|disable'),
             active: false,
-            textureFolder: config.initialTextures[parseTag(part.name)] && config.initialTextures[parseTag(part.name)]['folder'],
-            color: config.initialTextures[parseTag(part.name)] && config.initialTextures[parseTag(part.name)].color ? config.initialTextures[parseTag(part.name)].color : '#FFFFFF',
+            materialTag: config.initialMaterials[parseTag(part.name)] && config.initialMaterials[parseTag(part.name)]['tag'],
+            color: config.initialMaterials[parseTag(part.name)] && config.initialMaterials[parseTag(part.name)].color ? config.initialMaterials[parseTag(part.name)].color : '#FFFFFF',
         } as productPartType
     })
 

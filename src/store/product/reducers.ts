@@ -22,14 +22,24 @@ export function productReducer(state = initialState, action: productActionTypes)
     case PRODUCT_SET_ACTIVE:
       const newActiveParts = state.parts.map(part => {
         const newPart = {...part};
-
+        // When it doesn't match clicked item
         if (newPart.id !== action.payload) {
+          // Active by default
           newPart.active = false;
-          if (newPart.parent === action.payload)
-            newPart.active = true;
+
+          // If its parent or child matches
+          if (
+              newPart.parent === action.payload
+              || newPart.children.includes(action.payload)
+            ) {
+              newPart.active = true;
+            } 
+              
+          
           return newPart;
         }
-
+    
+          
         newPart.active = true;
         return newPart;
       });
@@ -37,11 +47,11 @@ export function productReducer(state = initialState, action: productActionTypes)
       return {...state, parts: newActiveParts};
 
     case PRODUCT_SET_TEXTURE:
-      const material = state.materials.filter(material => material.id === action.payload)[0];
+      const material = state.materials.filter(material => material.tag === action.payload)[0];
       const newTextureParts = state.parts.map(part => {
         const newPart = {...part};
         if (!newPart.active) return newPart;
-        newPart.textureFolder = material.src;
+        newPart.materialTag = material.tag;
         return newPart;
       });
 

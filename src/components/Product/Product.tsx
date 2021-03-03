@@ -21,16 +21,16 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                     _map(file, (mesh: any) => {
                         const part = parts.filter(p => p.id === mesh.uuid)[0];
                         if (!part) return false;
-                        const {textureFolder, color, locked, id} = part;
-                      return <Part key={id} id={id} locked={locked} mesh={mesh} folder={textureFolder} color={color} />;
+                        const {materialTag, color, locked, id} = part;
+                      return <Part key={id} id={id} locked={locked} mesh={mesh} materialTag={materialTag} color={color} />;
                     })
                 }
                 {
                     _map(file, (mesh: any) => {
                         const part = parts.filter(p => mesh.parent && mesh.parent.material !== null && p.id === mesh.parent.uuid);
                         return _map(part, p => {
-                            const {textureFolder, color, locked, id} = p;
-                            return <Part key={id} id={id} locked={locked} mesh={mesh} folder={textureFolder} color={color} />;
+                            const {materialTag, color, locked, id} = p;
+                            return <Part key={id} id={id} locked={locked} mesh={mesh} materialTag={materialTag} color={color} />;
                             }
                         );
                     })

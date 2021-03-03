@@ -1,5 +1,5 @@
 export interface PartProps {
-    folder?: string;
+    materialTag: string;
     color: string;
     mesh: any;
     locked: boolean;
