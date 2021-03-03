@@ -49,6 +49,7 @@ export const thunkProductLoadModel = (): ThunkAction<void, RootState, unknown, A
 
     console.log("xx in thunk");
     // async some stuff
+    // 192.168.1.2
     fetch('http://localhost/wp-json/wp/v2/custom/51')
     .then(res => res.json())
     .then(data => {
