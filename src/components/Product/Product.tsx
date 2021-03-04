@@ -1,15 +1,10 @@
 import React from 'react';
 import _map from 'lodash/map';
-import {useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import worldConfig from '../../config/worldConfig';
 import { ProductProps } from './types';
 import { getAllProductParts } from '../../store/product/selectors';
 import Part from '../Part';
-
-/**
- * 
- * @param file – [geometries, center] 
- */
 
 const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
 

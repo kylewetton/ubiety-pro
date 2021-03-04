@@ -2,6 +2,9 @@ import { PRODUCT_ADD_PARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_S
 import {shapeTextureData} from '../../utils';
 
 const initialState: productState = {
+  loadingParts: true,
+  loadingModelData: true,
+  loadingMaterials: true,
   parts: [],
   materials: [],
   src: ''
@@ -14,12 +17,20 @@ const initialState: productState = {
 export function productReducer(state = initialState, action: productActionTypes): productState {
   switch (action.type) {
     case PRODUCT_ADD_PARTS:
+      const parts = action.payload.map((part: any) => {
+        if (part.tag !== 'quarters')
+          return part;
+        part.active = true;
+        return part;
+      });
       // Create new product logic
       return {
         ...state,
-        parts: action.payload
+        loadingParts: false,
+        parts
         // add new state here
       };
+      
     case PRODUCT_SET_ACTIVE:
       const newActiveParts = state.parts.map(part => {
         const newPart = {...part};
@@ -68,6 +79,7 @@ export function productReducer(state = initialState, action: productActionTypes)
       // Create new materials logic
       return {
         ...state,
+        loadingMaterials: false,
         materials: [...state.materials, ...action.payload]
         // add new state here
       };
@@ -79,6 +91,7 @@ export function productReducer(state = initialState, action: productActionTypes)
       return {
         ...state,
         src: model_file,
+        loadingModelData: false,
         materials: [shadow_material, ...state.materials]
         // add new state here
       };

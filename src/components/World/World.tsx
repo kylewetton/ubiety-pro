@@ -9,10 +9,9 @@ import _filter from 'lodash/filter';
 import Product from '../Product';
 import {useDispatch, Provider } from 'react-redux';
 import CameraControls from '../CameraControls';
-import { productAddParts, productSetTextureToActive, productSetColorToActive } from '../../store/product/actions';
+import { productAddParts } from '../../store/product/actions';
 import {store} from '../../store';
 import { useGLTF } from 'drei';
-import Button from '../Button';
 
 const World: React.FC<WorldProps> = ({model}) => {
     const dispatch = useDispatch();
@@ -60,24 +59,8 @@ const World: React.FC<WorldProps> = ({model}) => {
         </EffectComposer>
     )  
 
-
-    const _handleDebugChangeTexture = (id: string) => {
-        dispatch(productSetTextureToActive(id));
-    }
-
-    const _handleDebugChangeColor = (hex: string) => {
-        dispatch(productSetColorToActive(hex));
-    }
-
     return (    
         <WorldDiv>
-            <div style={{position: 'absolute', top: '1rem', left: '1rem', zIndex: 999}}>
-                <Button onClick={() => _handleDebugChangeTexture('wood')}>Make Wood</Button>
-                <Button onClick={() => _handleDebugChangeTexture('canvas')}>Make Canvas</Button>
-                <Button onClick={() => _handleDebugChangeTexture('foxing')}>Make Foxing</Button>
-                <Button onClick={() => _handleDebugChangeColor('#FF0000')}>Make Red</Button>
-                <Button onClick={() => _handleDebugChangeColor('#FFFFFF')}>Make White</Button>
-            </div>
             <Canvas
                 gl={{antialias: true}}
                 pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio}
@@ -101,7 +84,7 @@ const World: React.FC<WorldProps> = ({model}) => {
                 <Suspense fallback={null}>
                     {/** Model */}
                     <Provider store={store}>
-                        <Product file={nodes} rotation={[Math.PI / 2, 0, Math.PI / 4]} />
+                        <Product file={nodes} rotation={[0, 0, 0]} />
                     </Provider>
                     {/** Effects */}
                     {effects && _renderEffectComposer()}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { CustomMaterialProps } from './types';
 import {useTexture} from 'drei';
-import { Vector2 } from 'three';
+import { Vector2, RepeatWrapping } from 'three';
 import _map from 'lodash/map';
 import { useSelector } from 'react-redux';
-import { getAllMaterials } from '../../store/product/selectors';
+import { getMaterialByTag } from '../../store/product/selectors';
 
 /**
  * 
@@ -12,10 +12,9 @@ import { getAllMaterials } from '../../store/product/selectors';
  */
 
 const CustomMaterial: React.FC<CustomMaterialProps> = ({tag, color}) => {
-    const materials = useSelector(getAllMaterials);
+    const material = useSelector(getMaterialByTag(tag));
 
-    const material = materials.filter(mat => mat.tag === tag)[0];
-    const maps = materials && material.maps;
+    const maps = material && material.maps;
     // Convert to texture image paths
     const paths = maps.map(texture => `${material.src}/${texture}.jpg`);
     // Load all the textures (useTexture returns an array)
@@ -26,8 +25,15 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({tag, color}) => {
     // Flip the textures if needed 
     if (material.flipY)
       _map(textureObj, txt => {txt.flipY = false});
-      
 
+    // Set more texture values
+    _map(textureObj, txt => {
+        const shapedTexture = {...txt};
+        material.repeat && shapedTexture.repeat.set(material.repeat, material.repeat);
+        shapedTexture.wrapS = RepeatWrapping;
+        shapedTexture.wrapT = RepeatWrapping;
+        return shapedTexture;
+    });  
 
     if (maps.includes('alpha'))
         return (

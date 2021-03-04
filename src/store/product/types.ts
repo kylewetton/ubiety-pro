@@ -35,17 +35,27 @@ export interface productPartType {
 
 type Map = 'color' | 'ao' | 'roughness' | 'normal' | 'alpha';
 
+export interface SwatchData {
+    label: string;
+    swatch: string;
+}
+
 export interface Texture {
     tag: string;
     src: string;
     maps: Map[];
     normalIntensity?: number,
-    flipY?: boolean
+    flipY?: boolean;
+    swatches: SwatchData[];
+    repeat?: number;
 }
 
 export type productActionTypes = productAction;
 
 export type productState = {
+    loadingParts: boolean;
+    loadingMaterials: boolean;
+    loadingModelData: boolean;
     parts: productPartType[];
     materials: Texture[];
     src: string;
