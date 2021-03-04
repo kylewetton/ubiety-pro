@@ -1,4 +1,5 @@
 import { PRODUCT_ADD_PARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA } from './types';
+import {shapeTextureData} from '../../utils';
 
 const initialState: productState = {
   parts: [],
@@ -33,13 +34,9 @@ export function productReducer(state = initialState, action: productActionTypes)
               || newPart.children.includes(action.payload)
             ) {
               newPart.active = true;
-            } 
-              
-          
+            }  
           return newPart;
-        }
-    
-          
+        }     
         newPart.active = true;
         return newPart;
       });
@@ -71,16 +68,18 @@ export function productReducer(state = initialState, action: productActionTypes)
       // Create new materials logic
       return {
         ...state,
-        materials: action.payload
+        materials: [...state.materials, ...action.payload]
         // add new state here
       };
 
     case PRODUCT_ADD_MODEL_DATA:
-      const {model_file} = action.payload.acf;
-      console.log('xx', model_file);
+      const {model_file, shadow_file} = action.payload.acf;
+      const [shadow_material] = shapeTextureData([shadow_file], true);
+      shadow_material.maps = ['alpha'];
       return {
         ...state,
-        src: model_file
+        src: model_file,
+        materials: [shadow_material, ...state.materials]
         // add new state here
       };
 

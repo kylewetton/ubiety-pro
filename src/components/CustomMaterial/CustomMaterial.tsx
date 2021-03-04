@@ -13,8 +13,9 @@ import { getAllMaterials } from '../../store/product/selectors';
 
 const CustomMaterial: React.FC<CustomMaterialProps> = ({tag, color}) => {
     const materials = useSelector(getAllMaterials);
+
     const material = materials.filter(mat => mat.tag === tag)[0];
-    const maps = material.maps;
+    const maps = materials && material.maps;
     // Convert to texture image paths
     const paths = maps.map(texture => `${material.src}/${texture}.jpg`);
     // Load all the textures (useTexture returns an array)
@@ -25,6 +26,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({tag, color}) => {
     // Flip the textures if needed 
     if (material.flipY)
       _map(textureObj, txt => {txt.flipY = false});
+      
 
 
     if (maps.includes('alpha'))
