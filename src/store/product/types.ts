@@ -43,6 +43,7 @@ export interface SwatchData {
 export interface Texture {
     uid: number;
     tag: string;
+    label: string;
     src: string;
     maps: Map[];
     normalIntensity?: number,
@@ -57,7 +58,8 @@ export interface Section {
     tag: string;
     label: string;
     available_materials: MaterialReference[];
-    initial_texture: MaterialReference[];
+    initial_material: MaterialReference;
+    current_material: MaterialReference;
     active: boolean;
 }
 

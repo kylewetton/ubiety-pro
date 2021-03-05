@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useState} from 'react';
+import React, {Suspense, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { PartProps } from './types';
 import CustomMaterial from '../CustomMaterial';
