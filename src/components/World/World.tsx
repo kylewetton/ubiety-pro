@@ -19,6 +19,7 @@ const World: React.FC<WorldProps> = ({model}) => {
     /**
      * Data
      */
+
     const d = 8.25;
     const { effects } = worldConfig;
     const { nodes } = useGLTF(model);
@@ -31,7 +32,7 @@ const World: React.FC<WorldProps> = ({model}) => {
         const meshParts = _filter(nodes, part => part.name !== 'Scene' );
         const sceneId = _filter(nodes, part => part.name === 'Scene')[0].uuid;
         dispatch(productAddMeshParts({meshParts, sceneId}));
-    }, [nodes, dispatch]);
+    }, []);
     
 
     /**
@@ -59,6 +60,10 @@ const World: React.FC<WorldProps> = ({model}) => {
         </EffectComposer>
     )  
 
+    console.log('xx nodes', !!nodes);
+    if (!nodes)
+        return <p>Wait...</p>
+
     return (    
         <WorldDiv>
             <Canvas
@@ -81,14 +86,16 @@ const World: React.FC<WorldProps> = ({model}) => {
                     shadow-camera-far={1500}
                     castShadow
                 />
-                <Suspense fallback={null}>
+                
                     {/** Model */}
                     <Provider store={store}>
-                        <Product file={nodes} rotation={[0, 0, 0]} />
+                        <Suspense fallback={<p>Creating something awesome...</p>}>
+                            <Product file={nodes} rotation={[0, 0, 0]} />
+                        </Suspense>
                     </Provider>
                     {/** Effects */}
                     {effects && _renderEffectComposer()}
-                </Suspense>
+                
             </Canvas>
         </WorldDiv>
     );

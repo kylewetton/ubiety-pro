@@ -9,6 +9,7 @@ import Part from '../Part';
 const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
 
     const meshParts = useSelector(getAllProductMeshParts);
+    console.log('xx Products > files', file);
 
     return (        
             <group position={worldConfig.worldOffset} rotation={rotation}>
