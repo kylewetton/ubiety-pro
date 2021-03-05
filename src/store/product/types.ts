@@ -2,7 +2,7 @@
 
  // action
 
-export const PRODUCT_ADD_PARTS = 'PRODUCT_ADD_PARTS';
+export const PRODUCT_ADD_MESHPARTS = 'PRODUCT_ADD_MESHPARTS';
 export const PRODUCT_SET_ACTIVE = 'PRODUCT_SET_ACTIVE';
 export const PRODUCT_SET_TEXTURE = 'PRODUCT_SET_TEXTURE';
 export const PRODUCT_SET_COLOR = 'PRODUCT_SET_COLOR';
@@ -10,7 +10,7 @@ export const PRODUCT_ADD_MATERIALS = 'PRODUCT_ADD_MATERIALS';
 export const PRODUCT_ADD_MODEL_DATA = 'PRODUCT_ADD_MODEL_DATA';
 
 interface productAction {
-    type: typeof PRODUCT_ADD_PARTS
+    type: typeof PRODUCT_ADD_MESHPARTS
     | typeof PRODUCT_SET_ACTIVE
     | typeof PRODUCT_SET_TEXTURE
     | typeof PRODUCT_SET_COLOR
@@ -41,6 +41,7 @@ export interface SwatchData {
 }
 
 export interface Texture {
+    uid: number;
     tag: string;
     src: string;
     maps: Map[];
@@ -50,13 +51,25 @@ export interface Texture {
     repeat?: number;
 }
 
+type MaterialReference = {uid: number, tag: string};
+
+export interface Section {
+    tag: string;
+    label: string;
+    available_materials: MaterialReference[];
+    initial_texture: MaterialReference[];
+    active: boolean;
+}
+
 export type productActionTypes = productAction;
 
 export type productState = {
-    loadingParts: boolean;
+    [key: string]: any;
+    loadingMeshParts: boolean;
     loadingMaterials: boolean;
     loadingModelData: boolean;
-    parts: productPartType[];
+    meshParts: productPartType[];
     materials: Texture[];
+    sections: Section[];
     src: string;
 };

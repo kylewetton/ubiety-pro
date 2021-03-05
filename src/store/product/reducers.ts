@@ -1,12 +1,13 @@
-import { PRODUCT_ADD_PARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA } from './types';
-import {shapeTextureData} from '../../utils';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA } from './types';
+import {shapeSectionData, shapeTextureData} from '../../utils';
 
 const initialState: productState = {
-  loadingParts: true,
+  loadingMeshParts: true,
   loadingModelData: true,
   loadingMaterials: true,
-  parts: [],
+  meshParts: [],
   materials: [],
+  sections: [],
   src: ''
 };
 
@@ -16,8 +17,8 @@ const initialState: productState = {
  */
 export function productReducer(state = initialState, action: productActionTypes): productState {
   switch (action.type) {
-    case PRODUCT_ADD_PARTS:
-      const parts = action.payload.map((part: any) => {
+    case PRODUCT_ADD_MESHPARTS:
+      const meshParts = action.payload.map((part: any) => {
         if (part.tag !== 'quarters')
           return part;
         part.active = true;
@@ -26,13 +27,16 @@ export function productReducer(state = initialState, action: productActionTypes)
       // Create new product logic
       return {
         ...state,
-        loadingParts: false,
-        parts
+        loadingMeshParts: false,
+        meshParts
         // add new state here
       };
       
     case PRODUCT_SET_ACTIVE:
-      const newActiveParts = state.parts.map(part => {
+
+    let refTag: string | null = null;
+
+      const newActiveMeshParts = state.meshParts.map(part => {
         const newPart = {...part};
         // When it doesn't match clicked item
         if (newPart.id !== action.payload) {
@@ -47,33 +51,45 @@ export function productReducer(state = initialState, action: productActionTypes)
               newPart.active = true;
             }  
           return newPart;
-        }     
+        }
+        // Has exact match
+        refTag = newPart.tag;     
         newPart.active = true;
         return newPart;
       });
 
-      return {...state, parts: newActiveParts};
+      const newSections = state.sections.map(section => {
+        const nSection = {...section};
+        if (nSection.tag !== refTag) {
+          nSection.active = false;
+          return nSection;
+        }
+        nSection.active = true;
+        return nSection;
+      })
+
+      return {...state, meshParts: newActiveMeshParts, sections: newSections};
 
     case PRODUCT_SET_TEXTURE:
       const material = state.materials.filter(material => material.tag === action.payload)[0];
-      const newTextureParts = state.parts.map(part => {
+      const newTextureMeshParts = state.meshParts.map(part => {
         const newPart = {...part};
         if (!newPart.active) return newPart;
         newPart.materialTag = material.tag;
         return newPart;
       });
 
-      return {...state, parts: newTextureParts};
+      return {...state, meshParts: newTextureMeshParts};
     
     case PRODUCT_SET_COLOR:
-      const newColorParts = state.parts.map(part => {
+      const newColorMeshParts = state.meshParts.map(part => {
         const newPart = {...part};
         if (!newPart.active) return newPart;
         newPart.color = action.payload;
         return newPart;
       });
 
-      return {...state, parts: newColorParts};
+      return {...state, meshParts: newColorMeshParts};
 
     case PRODUCT_ADD_MATERIALS:
       // Create new materials logic
@@ -85,15 +101,15 @@ export function productReducer(state = initialState, action: productActionTypes)
       };
 
     case PRODUCT_ADD_MODEL_DATA:
-      const {model_file, shadow_file} = action.payload.acf;
+      const {model_file, shadow_file, sections} = action.payload.acf;
       const [shadow_material] = shapeTextureData([shadow_file], true);
       shadow_material.maps = ['alpha'];
       return {
         ...state,
         src: model_file,
         loadingModelData: false,
-        materials: [shadow_material, ...state.materials]
-        // add new state here
+        materials: [shadow_material, ...state.materials],
+        sections: shapeSectionData(sections)
       };
 
     default:

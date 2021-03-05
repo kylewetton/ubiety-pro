@@ -7,6 +7,7 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
     if (isMaskedShadow)
         return data.map((entry: any) => {
             return  {
+                uid: null,
                 tag: entry.title,
                 src: '/shadow',
                 maps: ['alpha'],
@@ -18,7 +19,9 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
     
     return data.map((entry: any) => {
         return  {
+            uid: entry.id,
             tag: entry.slug,
+            label: entry.title.rendered,
             src: `/${entry.acf.texture_file.title}`,
             maps: entry.acf.texture_maps_included,
             normalIntensity: +entry.acf.material_attributes.normal_intensity,

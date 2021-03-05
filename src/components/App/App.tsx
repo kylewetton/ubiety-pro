@@ -4,6 +4,8 @@ import World from '../World';
 import {thunkProductLoadMaterials, thunkProductLoadModel} from '../../store/product/thunks';
 import {getIsLoading, getProductModelPath} from '../../store/product/selectors';
 import SwatchTray from '../SwatchTray';
+import Selector from '../Selector';
+import ControlPanel from '../../layout/ControlPanel'
 
 const App: React.FC = () => {
 
@@ -21,7 +23,10 @@ const App: React.FC = () => {
         
     return (
         <Suspense fallback={<p>Building world...</p>}>
-            <SwatchTray />
+            <ControlPanel>
+                <Selector type={`material`} />
+                <SwatchTray />
+            </ControlPanel>
             <World model={MODEL_PATH} />
         </Suspense>
     )

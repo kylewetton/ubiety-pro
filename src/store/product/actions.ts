@@ -1,6 +1,6 @@
 import { Mesh } from 'three';
 import _map from 'lodash/map';
-import { PRODUCT_ADD_PARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA } from './types';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA } from './types';
 import config from '../../config/productConfig';
 
 /**
@@ -19,14 +19,14 @@ const parseTag = (name: string) => {
 
 /**
  * 
- * Parts
+ * MeshParts
  */
 
-export function productAddParts(data: any): productActionTypes {
+export function productAddMeshParts(data: any): productActionTypes {
 
     const { sceneId } = data; 
 
-    const parts: productPartType[] = _map(data.parts, (part: Mesh) => {
+    const meshParts: productPartType[] = _map(data.meshParts, (part: Mesh) => {
         return {
             id: part.uuid,
             tag: parseTag(part.name),
@@ -42,8 +42,8 @@ export function productAddParts(data: any): productActionTypes {
     })
 
     return {
-        type: PRODUCT_ADD_PARTS,
-        payload: parts
+        type: PRODUCT_ADD_MESHPARTS,
+        payload: meshParts
     }
 }
 
