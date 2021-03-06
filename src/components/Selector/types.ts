@@ -1,3 +1,4 @@
 export interface SelectorProps {
-    type: 'section' | 'material'
+    type: 'section' | 'material',
+    activeSection: any;
 }

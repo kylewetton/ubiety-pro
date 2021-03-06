@@ -26,9 +26,7 @@ export interface productPartType {
     parent: string;
     material: string;
     locked: boolean;
-    isControlledChild: boolean;
-    active: boolean;
-    materialTag: string;
+    materialUid: number;
     color: string;
     children: string[]
 }
@@ -52,7 +50,7 @@ export interface Texture {
     repeat?: number;
 }
 
-type MaterialReference = {uid: number, tag: string};
+export type MaterialReference = {uid: number, tag: string, label: string};
 
 export interface Section {
     tag: string;
@@ -61,6 +59,8 @@ export interface Section {
     initial_material: MaterialReference;
     current_material: MaterialReference;
     active: boolean;
+    meshPart: string;
+    color: string;
 }
 
 export type productActionTypes = productAction;

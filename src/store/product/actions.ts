@@ -1,7 +1,6 @@
 import { Mesh } from 'three';
 import _map from 'lodash/map';
 import { PRODUCT_ADD_MESHPARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA } from './types';
-import config from '../../config/productConfig';
 
 /**
  * 
@@ -33,11 +32,7 @@ export function productAddMeshParts(data: any): productActionTypes {
             name: parseName(part.name),
             parent: part.parent && part.parent.uuid !== sceneId ? part.parent.uuid : null,
             children: part.children.map(child => child.uuid),
-            isControlledChild: part.parent !== null,
             locked: part.name.includes('|disable'),
-            active: false,
-            materialTag: config.initialMaterials[parseTag(part.name)] && config.initialMaterials[parseTag(part.name)]['tag'],
-            color: config.initialMaterials[parseTag(part.name)] && config.initialMaterials[parseTag(part.name)].color ? config.initialMaterials[parseTag(part.name)].color : '#FFFFFF',
         } as productPartType
     })
 
@@ -54,10 +49,10 @@ export function productSetActivePart(id: string) {
     }
 }
 
-export function productSetTextureToActive(id: string) {
+export function productSetTextureToActive(uid: string | number) {
     return {
         type: PRODUCT_SET_TEXTURE,
-        payload: id
+        payload: uid
     }
 }
 

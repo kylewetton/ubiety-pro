@@ -4,15 +4,16 @@ import {useTexture} from 'drei';
 import { Vector2, RepeatWrapping } from 'three';
 import _map from 'lodash/map';
 import { useSelector } from 'react-redux';
-import { getMaterialByTag } from '../../store/product/selectors';
+import { getMaterialByUid } from '../../store/product/selectors';
 
 /**
  * 
- * @param tag – the material tag
+ * @param uid – the material uid
  */
 
-const CustomMaterial: React.FC<CustomMaterialProps> = ({tag, color}) => {
-    const material = useSelector(getMaterialByTag(tag));
+const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color}) => {
+    
+    const material = useSelector(getMaterialByUid(uid));
 
     const maps = material && material.maps;
     // Convert to texture image paths

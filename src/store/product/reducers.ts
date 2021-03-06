@@ -1,5 +1,6 @@
 import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA } from './types';
 import {shapeSectionData, shapeTextureData} from '../../utils';
+import {productPartType} from './types';
 
 const initialState: productState = {
   loadingMeshParts: true,
@@ -18,6 +19,14 @@ const initialState: productState = {
 export function productReducer(state = initialState, action: productActionTypes): productState {
   switch (action.type) {
     case PRODUCT_ADD_MESHPARTS:
+      
+      const newSectionsWithMeshParts = [...state.sections].map(section => {
+        const newSec = {...section};
+        const [part] = action.payload.filter((part: productPartType) => part.tag === section.tag);
+        newSec.meshPart = part.id;
+        return newSec;
+      });
+
       const meshParts = action.payload.map((part: any) => {
         if (part.tag !== 'quarters')
           return part;
@@ -28,68 +37,64 @@ export function productReducer(state = initialState, action: productActionTypes)
       return {
         ...state,
         loadingMeshParts: false,
+        sections: newSectionsWithMeshParts,
         meshParts
         // add new state here
       };
       
     case PRODUCT_SET_ACTIVE:
+    // action.payload === mesh.uuid
 
-    let refTag: string | null = null;
+    const [meshByIdOrParentOrChildren] = state.meshParts
+    .filter(meshPart => meshPart.id === action.payload ||
+      meshPart.parent === action.payload ||
+      meshPart.children.includes(action.payload));
 
-      const newActiveMeshParts = state.meshParts.map(part => {
-        const newPart = {...part};
-        // When it doesn't match clicked item
-        if (newPart.id !== action.payload) {
-          // Active by default
-          newPart.active = false;
-
-          // If its parent or child matches
-          if (
-              newPart.parent === action.payload
-              || newPart.children.includes(action.payload)
-            ) {
-              newPart.active = true;
-            }  
-          return newPart;
+    const newSectionsNewActive = [...state.sections].map(section => {
+        const ns = {...section};
+        if (ns.meshPart !== meshByIdOrParentOrChildren.id) {
+          ns.active = false;
+          return ns;
         }
-        // Has exact match
-        refTag = newPart.tag;     
-        newPart.active = true;
-        return newPart;
-      });
+        ns.active = true;
+        return ns;
+    });
 
-      const newSections = state.sections.map(section => {
-        const nSection = {...section};
-        if (nSection.tag !== refTag) {
-          nSection.active = false;
-          return nSection;
-        }
-        nSection.active = true;
-        return nSection;
-      })
-
-      return {...state, meshParts: newActiveMeshParts, sections: newSections};
+      return {
+        ...state,
+        sections: newSectionsNewActive,
+      };
 
     case PRODUCT_SET_TEXTURE:
-      const material = state.materials.filter(material => material.tag === action.payload)[0];
-      const newTextureMeshParts = state.meshParts.map(part => {
-        const newPart = {...part};
-        if (!newPart.active) return newPart;
-        newPart.materialTag = material.tag;
-        return newPart;
+      // payload === material.uid
+      const [newMaterial] = state.materials.filter(material => material.uid === action.payload);
+      const newActiveSections = [...state.sections].map(section => {
+        const ns = {...section};
+        if (!ns.active)
+          return ns;
+        ns.current_material = newMaterial;
+        return ns;
       });
 
-      return {...state, meshParts: newTextureMeshParts};
+      return {
+        ...state,
+        sections: newActiveSections
+      };
     
     case PRODUCT_SET_COLOR:
-      const newColorMeshParts = state.meshParts.map(part => {
-        const newPart = {...part};
-        if (!newPart.active) return newPart;
-        newPart.color = action.payload;
-        return newPart;
-      });
-
-      return {...state, meshParts: newColorMeshParts};
+         // payload === material.uid
+         const newColorSections = [...state.sections].map(section => {
+           const ns = {...section};
+           if (!ns.active)
+             return ns;
+           ns.color = action.payload;
+           return ns;
+         });
+   
+         return {
+           ...state,
+           sections: newColorSections
+         };
 
     case PRODUCT_ADD_MATERIALS:
       // Create new materials logic
