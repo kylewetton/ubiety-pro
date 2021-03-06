@@ -2,7 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import {productReducer} from './product/reducers';
 import {interfaceReducer} from './interface/reducers';
-import thunkMiddleware, { ThunkDispatch } from 'redux-thunk';
+import { ThunkDispatch } from 'redux-thunk';
 
 const rootReducer = combineReducers({
     product: productReducer,

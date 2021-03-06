@@ -32,9 +32,7 @@ export function productAddMeshParts(data: any): productActionTypes {
             name: parseName(part.name),
             parent: part.parent && part.parent.uuid !== sceneId ? part.parent.uuid : null,
             children: part.children.map(child => child.uuid),
-            isControlledChild: part.parent !== null,
             locked: part.name.includes('|disable'),
-            active: false,
         } as productPartType
     })
 

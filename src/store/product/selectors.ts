@@ -5,7 +5,7 @@ export const getIsLoading = (state: RootState) => state.product.loadingMeshParts
 export const getAllProductMeshParts = (state: RootState) => state.product.meshParts;
 
 export const getActiveProductPart = (state: RootState) => {
-    const active = state.product.meshParts.filter(part => part.active)[0];
+    const active = state.product.sections.filter(section => section.active)[0];
     return active;
 }
 

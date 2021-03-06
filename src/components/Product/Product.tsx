@@ -11,8 +11,6 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
     const meshParts = useSelector(getAllProductMeshParts);
     const sections = useSelector(getAllSections);
 
-    console.log('xx Product meshParts', meshParts);
-
     return (        
             <group position={worldConfig.worldOffset} rotation={rotation}>
                 {
@@ -20,7 +18,6 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                         const part = meshParts.filter(p => p.id === mesh.uuid)[0];
                         if (!part) return false;
                         const {materialUid, color, locked, id} = part;
-                        console.log('xx', sections.filter(section => section.tag === part.tag));
 
                       return <Part key={id} id={id} locked={locked} mesh={mesh} materialUid={materialUid} color={color} />;
                     })

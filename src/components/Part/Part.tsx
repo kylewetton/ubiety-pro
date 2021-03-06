@@ -9,8 +9,6 @@ import {interfaceGetPointerPosition} from '../../store/interface/selectors';
 
 const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id}) => {
 
-    console.log('xx Part UID', materialUid);
-
     const dispatch = useDispatch();
     // Disable stops the user from clicking on the item until the color has returned to default
     // This stops the user being able to lock in the hoverColor
