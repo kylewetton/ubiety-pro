@@ -71,11 +71,11 @@ export function productReducer(state = initialState, action: productActionTypes)
       return {...state, meshParts: newActiveMeshParts, sections: newSections};
 
     case PRODUCT_SET_TEXTURE:
-      const material = state.materials.filter(material => material.tag === action.payload)[0];
+      const material = state.materials.filter(material => material.uid === action.payload)[0];
       const newTextureMeshParts = state.meshParts.map(part => {
         const newPart = {...part};
         if (!newPart.active) return newPart;
-        newPart.materialTag = material.tag;
+        newPart.materialUid = material.uid;
         return newPart;
       });
 

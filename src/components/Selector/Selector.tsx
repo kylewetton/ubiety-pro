@@ -1,32 +1,61 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
 import {SelectorDiv, SelectorMenu, SelectorTitle, SelectorArrows, SelectorArrow} from './styles/SelectorStyles';
+import {MaterialReference} from '../../store/product/types';
+import {productSetTextureToActive} from '../../store/product/actions';
 import { SelectorProps } from './types';
-import { getAllMaterials, getActiveSection } from '../../store/product/selectors';
 
-const Selector: React.FC<SelectorProps> = (props) => {
-    const {type} = props;
-    const dispatch = useDispatch();
-    const [ACTIVE_SECTION] = useSelector(getActiveSection);
-    const ALL_MATERIALS = useSelector(getAllMaterials);
-    // Create and array of uid from available materials
-    const AVAILABLE_MATERIALS = ACTIVE_SECTION ? ACTIVE_SECTION.available_materials.map(mat => mat.uid) : [];
-    // Get the actual materials from the store based on those available uids
-    const MATERIALS = ALL_MATERIALS.filter(material => AVAILABLE_MATERIALS.includes(material.uid));
-    const [CURRENT_MATERIAL] = MATERIALS.filter(material => material.uid === ACTIVE_SECTION.current_material.uid);
+const Selector: React.FC<SelectorProps> = ({type, activeSection}) => {
     
-    if (!ACTIVE_SECTION)
+    /**
+     * Data
+     */
+    const dispatch = useDispatch();
+    const AVAILABLE_MATERIALS = activeSection.available_materials;
+    const CURRENT_MATERIAL = activeSection && activeSection.current_material;
+    
+    /**
+     * State
+     */
+    const [materialIndex, setMaterialIndex] = useState<number>(0);
+
+    useEffect(() => {
+        const current = AVAILABLE_MATERIALS.findIndex((material: MaterialReference) => material.uid === CURRENT_MATERIAL.uid);
+        setMaterialIndex(current);
+    },[])
+
+    /**
+     * Methods
+     */
+
+     const _handleCycleMaterial = (direction: '<' | '>') => {
+         let idx;
+         switch(direction) {
+             case '<' :
+                idx = materialIndex - 1;
+                break;
+             case '>' :
+                idx = materialIndex + 1;
+                break;
+            default: 
+                idx = materialIndex;
+         }
+         dispatch(productSetTextureToActive(AVAILABLE_MATERIALS[idx].uid));
+     }
+    
+    
+    if (!activeSection)
         return <p>No active section</p>;
 
     return (
         <SelectorDiv>
             <SelectorMenu></SelectorMenu>
             <SelectorTitle>
-                {CURRENT_MATERIAL.label}
+                {AVAILABLE_MATERIALS[materialIndex].label}
             </SelectorTitle>
             <SelectorArrows>
-                <SelectorArrow></SelectorArrow>
-                <SelectorArrow></SelectorArrow>
+                <SelectorArrow onClick={() => _handleCycleMaterial('<')} >prev</SelectorArrow>
+                <SelectorArrow onClick={() => _handleCycleMaterial('>')} >next</SelectorArrow>
             </SelectorArrows>
         </SelectorDiv>
     );

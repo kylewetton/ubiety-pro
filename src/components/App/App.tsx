@@ -5,12 +5,14 @@ import {thunkProductLoadMaterials, thunkProductLoadModel} from '../../store/prod
 import {getProductModelPath} from '../../store/product/selectors';
 import SwatchTray from '../SwatchTray';
 import Selector from '../Selector';
-import ControlPanel from '../../layout/ControlPanel'
+import ControlPanel from '../../layout/ControlPanel';
+import { getActiveSection } from '../../store/product/selectors';
 
 const App: React.FC = () => {
 
     const dispatch = useDispatch();
     const MODEL_PATH = useSelector(getProductModelPath);
+    const [ACTIVE_SECTION] = useSelector(getActiveSection);
     
     useEffect(() => {
         dispatch(thunkProductLoadMaterials());
@@ -23,7 +25,7 @@ const App: React.FC = () => {
     return (
         <Suspense fallback={<p>Building world...</p>}>
             <ControlPanel>
-                <Selector type={`material`} />
+                <Selector activeSection={ACTIVE_SECTION} type={`material`} />
                 <SwatchTray />
             </ControlPanel>
             <World model={MODEL_PATH} />

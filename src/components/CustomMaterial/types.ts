@@ -1,4 +1,4 @@
 export interface CustomMaterialProps {
-    tag: string,
+    uid: number,
     color: string,
 }

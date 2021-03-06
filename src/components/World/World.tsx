@@ -32,7 +32,7 @@ const World: React.FC<WorldProps> = ({model}) => {
         const meshParts = _filter(nodes, part => part.name !== 'Scene' );
         const sceneId = _filter(nodes, part => part.name === 'Scene')[0].uuid;
         dispatch(productAddMeshParts({meshParts, sceneId}));
-    }, []);
+    }, [dispatch, nodes]);
     
 
     /**
@@ -60,7 +60,6 @@ const World: React.FC<WorldProps> = ({model}) => {
         </EffectComposer>
     )  
 
-    console.log('xx nodes', !!nodes);
     if (!nodes)
         return <p>Wait...</p>
 

@@ -13,5 +13,5 @@ export const getAllMaterials = (state: RootState) => state.product.materials;
 export const getAllSections = (state: RootState) => state.product.sections;
 export const getActiveSection = (state: RootState) => state.product.sections.filter(section => section.active);
 export const getProductModelPath = (state: RootState) => state.product.src;
-export const getMaterialByTag = (tag: string | null) => (state: RootState) => state.product.materials.filter(material => material.tag === tag)[0];
+export const getMaterialByUid = (uid: number | null) => (state: RootState) => state.product.materials.filter(material => material.uid === uid)[0];
 export const getProductDataByType = (type: string) => (state: RootState) => state.product[type];
