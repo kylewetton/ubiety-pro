@@ -15,14 +15,15 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
             <group position={worldConfig.worldOffset} rotation={rotation}>
                 {
                     _map(file, (mesh: any) => {
-                        const part = meshParts.filter(p => p.id === mesh.uuid)[0];
-                        if (!part) return false;
-                        const {materialUid, color, locked, id} = part;
-
-                      return <Part key={id} id={id} locked={locked} mesh={mesh} materialUid={materialUid} color={color} />;
+                        const [part] = meshParts.filter(p => p.id === mesh.uuid);
+                        const [section] = sections.filter(s => s.meshPart === mesh.uuid);
+                        if (!part || !section) return false;
+                        const {locked, id} = part;
+                        const {current_material, color} = section;
+                      return <Part key={id} id={id} locked={locked} mesh={mesh} materialUid={current_material.uid} color={color} />;
                     })
                 }
-                {
+                {/* {
                     _map(file, (mesh: any) => {
                         const part = meshParts.filter(p => mesh.parent && mesh.parent.material !== null && p.id === mesh.parent.uuid);
                         return _map(part, p => {
@@ -31,7 +32,7 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                             }
                         );
                     })
-                }
+                } */}
             </group>
     );
 };
