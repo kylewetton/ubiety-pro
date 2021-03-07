@@ -13,7 +13,7 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
                 maps: ['alpha'],
                 normalIntensity: 0,
                 flipY: true,
-                swatches: []
+                swatches: [],
             }
         });
     
@@ -22,12 +22,13 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
             uid: entry.id,
             tag: entry.slug,
             label: entry.title.rendered,
-            src: `/${entry.acf.texture_file.title}`,
+            src: entry.acf.texture_file ? `/${entry.acf.texture_file.title}` : null,
             maps: entry.acf.texture_maps_included,
             normalIntensity: +entry.acf.material_attributes.normal_intensity,
             flipY: false,
             swatches: entry.acf.swatches,
-            repeat: +entry.acf.material_attributes.repeat || 1
+            repeat: +entry.acf.material_attributes.repeat || 1,
+            metallic: entry.acf.material_attributes.metallic
         }
     });
 }

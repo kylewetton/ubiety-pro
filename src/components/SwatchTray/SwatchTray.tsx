@@ -7,19 +7,18 @@ import { SwatchTrayProps } from './types';
 import Swatch from '../Swatch';
 
 const SwatchTray: React.FC<SwatchTrayProps> = () => {
-    return <p>TODO Swatch tray</p>;
-//     const ACTIVE_PRODUCT = useSelector(getActiveProductPart);
-//     const ACTIVE_MATERIALS = useSelector(getMaterialByUid(ACTIVE_PRODUCT ? ACTIVE_PRODUCT.materialUid : null));
-//     const SWATCHES = ACTIVE_MATERIALS && ACTIVE_MATERIALS.swatches;
+    const ACTIVE_PRODUCT = useSelector(getActiveProductPart);
+    const ACTIVE_MATERIALS = useSelector(getMaterialByUid(ACTIVE_PRODUCT ? ACTIVE_PRODUCT.current_material.uid : null));
+    const SWATCHES = ACTIVE_MATERIALS && ACTIVE_MATERIALS.swatches;
   
-//   if (!ACTIVE_PRODUCT)
-//       return <p></p>;
+  if (!ACTIVE_PRODUCT)
+      return null;
 
-//     return (
-//         <SwatchTrayDiv>
-//             {SWATCHES && SWATCHES.map((swatch: SwatchData) => <Swatch key={swatch.label} label={swatch.label} color={swatch.swatch} />)}
-//         </SwatchTrayDiv>
-//     );
+    return (
+        <SwatchTrayDiv>
+            {SWATCHES && SWATCHES.map((swatch: SwatchData) => <Swatch key={swatch.label} label={swatch.label} color={swatch.swatch} />)}
+        </SwatchTrayDiv>
+    );
 };
 
 export default SwatchTray;

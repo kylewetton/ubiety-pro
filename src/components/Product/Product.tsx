@@ -15,24 +15,26 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
             <group position={worldConfig.worldOffset} rotation={rotation}>
                 {
                     _map(file, (mesh: any) => {
-                        const [part] = meshParts.filter(p => p.id === mesh.uuid);
+                        const [part] = meshParts.filter(meshPart => meshPart.id === mesh.uuid);
                         const [section] = sections.filter(s => s.meshPart === mesh.uuid);
                         if (!part || !section) return false;
                         const {locked, id} = part;
                         const {current_material, color} = section;
-                      return <Part key={id} id={id} locked={locked} mesh={mesh} materialUid={current_material.uid} color={color} />;
+                        return <Part key={id} id={id} locked={locked} mesh={mesh} materialUid={current_material.uid} color={color} />;
                     })
                 }
-                {/* {
+                {
                     _map(file, (mesh: any) => {
-                        const part = meshParts.filter(p => mesh.parent && mesh.parent.material !== null && p.id === mesh.parent.uuid);
-                        return _map(part, p => {
-                            const {materialUid, color, locked, id} = p;
-                            return <Part key={id} id={id} locked={locked} mesh={mesh} materialUid={materialUid} color={color} />;
-                            }
-                        );
+                       return mesh.children.map((child: any) => {
+                            const [part] = meshParts.filter(meshPart => meshPart.id === child.parent.uuid);
+                            const [section] = sections.filter(s => s.meshPart === child.parent.uuid);
+                            if (!part || !section) return false;
+                            const {locked, id} = part;
+                            const {current_material, color} = section;
+                            return <Part key={id} id={id} locked={locked} mesh={child} materialUid={current_material.uid} color={color} />;
+                        });
                     })
-                } */}
+                }
             </group>
     );
 };

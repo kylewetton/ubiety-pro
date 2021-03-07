@@ -16,7 +16,8 @@ const shapeSectionData: ShapeSectionDataFn = (data: any) => {
                 return {uid: at.ID, tag: at.post_name, label: at.post_title}
             }) : [],
             current_material: initial_material.length ? initial_material[0] : null,
-            active: idx === 0
+            active: idx === 0,
+            color: '#FFFFFF',
         }
     });
 }

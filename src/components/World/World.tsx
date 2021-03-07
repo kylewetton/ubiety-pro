@@ -61,7 +61,7 @@ const World: React.FC<WorldProps> = ({model}) => {
     )  
 
     if (!nodes)
-        return <p>Wait...</p>
+        return null;
 
     return (    
         <WorldDiv>

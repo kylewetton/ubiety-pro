@@ -1,7 +1,7 @@
 import React from 'react';
 import { CustomMaterialProps } from './types';
 import {useTexture} from 'drei';
-import { Vector2, RepeatWrapping } from 'three';
+import { Vector2, RepeatWrapping, Texture } from 'three';
 import _map from 'lodash/map';
 import { useSelector } from 'react-redux';
 import { getMaterialByUid } from '../../store/product/selectors';
@@ -19,7 +19,8 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color}) => {
     // Convert to texture image paths
     const paths = maps.map(texture => `${material.src}/${texture}.jpg`);
     // Load all the textures (useTexture returns an array)
-    const texture = useTexture(paths);
+    let texture: Texture[] | null = useTexture(paths);
+
     // Convert texture array to an object where the key === the index position of the map array
     let textureObj = Object.assign({}, texture);
 
@@ -36,21 +37,8 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color}) => {
         return shapedTexture;
     });  
 
-    if (maps.includes('alpha'))
-        return (
-            <meshPhongMaterial
-                attach="material"
-                color={color}
-                map={maps.includes('color') ? textureObj[maps.indexOf('color')] : null}
-                aoMap={maps.includes('ao') ? textureObj[maps.indexOf('ao')] : null}
-                alphaMap={maps.includes('alpha') ? textureObj[maps.indexOf('alpha')] : null}
-                normalMap={maps.includes('normal') ? textureObj[maps.indexOf('normal')] : null}
-                normalScale={new Vector2(material.normalIntensity, material.normalIntensity)}
-                transparent={true}
-            />
-        )
 
-    return (
+    const _getTexture = () => (
         <meshStandardMaterial
             attach="material"
             color={color}
@@ -61,8 +49,25 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color}) => {
             normalMap={maps.includes('normal') ? textureObj[maps.indexOf('normal')] : null}
             normalScale={new Vector2(material.normalIntensity, material.normalIntensity)}
             transparent={true}
+        />);
+
+    /**
+     * @TODO Ground shadow
+     */
+    const _getGroundShadow = () => (
+        <meshPhongMaterial
+            attach="material"
+            color={color}
+            map={(maps.includes('color') ? textureObj[maps.indexOf('color')] : null)}
+            aoMap={maps.includes('ao') ? textureObj[maps.indexOf('ao')] : null}
+            alphaMap={maps.includes('alpha') ? textureObj[maps.indexOf('alpha')] : null}
+            normalMap={maps.includes('normal') ? textureObj[maps.indexOf('normal')] : null}
+            normalScale={new Vector2(material.normalIntensity, material.normalIntensity)}
+            transparent={true}
         />
-    )
+    );
+
+    return maps.includes('alpha') ? _getGroundShadow() : _getTexture();
 };
 
 export default CustomMaterial;

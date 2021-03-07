@@ -9,6 +9,7 @@ import {interfaceGetPointerPosition} from '../../store/interface/selectors';
 
 const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id}) => {
 
+
     const dispatch = useDispatch();
     // Disable stops the user from clicking on the item until the color has returned to default
     // This stops the user being able to lock in the hoverColor
@@ -16,6 +17,7 @@ const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id}) => {
     const {x: downX, y: downY} = useSelector(interfaceGetPointerPosition);
 
     const _handleSetActive = () => {
+        setDisabled(true);
         dispatch(productSetActivePart(id));
         dispatch(productSetColorToActive(config.hoverColor));
         setTimeout(() => {
@@ -41,14 +43,14 @@ const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id}) => {
             <mesh
             geometry={mesh.geometry}
             >
-                <meshStandardMaterial color={'#ff55bb'} wireframe/>
+                <meshStandardMaterial color={'#ebebeb'} wireframe/>
             </mesh>
             )
         }>
             <mesh
                 onPointerDown={(e) => !locked && !disabled && _handlePointerDown(e)}
                 onPointerUp={(e) => !locked && !disabled && _handlePointerUp(e)}
-                key={mesh.uuid} geometry={mesh.geometry} castShadow receiveShadow>
+                key={id} geometry={mesh.geometry} castShadow receiveShadow>
                     { materialUid && (
                         <CustomMaterial color={ color } uid={materialUid} />
                     ) }
