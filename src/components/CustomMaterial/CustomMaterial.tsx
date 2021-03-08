@@ -30,13 +30,11 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color}) => {
 
     // Set more texture values
     _map(textureObj, txt => {
-        const shapedTexture = {...txt};
-        material.repeat && shapedTexture.repeat.set(material.repeat, material.repeat);
-        shapedTexture.wrapS = RepeatWrapping;
-        shapedTexture.wrapT = RepeatWrapping;
-        return shapedTexture;
-    });  
-
+        material.repeat && txt.repeat.set(material.repeat, material.repeat);
+        txt.wrapS = RepeatWrapping;
+        txt.wrapT = RepeatWrapping;
+        return txt;
+    });
 
     const _getTexture = () => (
         <meshStandardMaterial

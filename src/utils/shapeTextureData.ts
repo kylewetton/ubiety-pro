@@ -7,13 +7,13 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
     if (isMaskedShadow)
         return data.map((entry: any) => {
             return  {
-                uid: null,
+                uid: -1,
                 tag: entry.title,
                 src: '/shadow',
                 maps: ['alpha'],
                 normalIntensity: 0,
                 flipY: true,
-                swatches: [],
+                swatches: []
             }
         });
     
