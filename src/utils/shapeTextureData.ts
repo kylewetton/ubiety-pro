@@ -13,7 +13,9 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
                 maps: ['alpha'],
                 normalIntensity: 0,
                 flipY: true,
-                swatches: []
+                swatches: [],
+                metallic: false,
+                roughness: 0
             }
         });
     

@@ -48,6 +48,7 @@ export interface Texture {
     flipY?: boolean;
     swatches: SwatchData[];
     repeat?: number;
+    metallic?: boolean;
 }
 
 export type MaterialReference = {uid: number, tag: string, label: string};

@@ -73,6 +73,14 @@ export function productReducer(state = initialState, action: productActionTypes)
         if (!ns.active)
           return ns;
         ns.current_material = newMaterial;
+
+        /**
+         * If the current color doesn't exist in the new material, change the color to the first in swatches of new material
+         */
+        const canKeepCurrentColor = newMaterial.swatches.filter(swatch => swatch.swatch.toLowerCase() === ns.color.toLowerCase()).length !== 0;
+        if (!canKeepCurrentColor)
+          ns.color = newMaterial.swatches[0].swatch;
+
         return ns;
       });
 
