@@ -4,4 +4,5 @@ export interface PartProps {
     mesh: any;
     locked: boolean;
     id: string;
+    customTexture?: string;
 }

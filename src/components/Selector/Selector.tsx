@@ -1,15 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {SelectorDiv, SelectorMenu, SelectorTitle, SelectorArrows, SelectorArrow} from './styles/SelectorStyles';
 import {productSetTextureToActive} from '../../store/product/actions';
 import { SelectorProps } from './types';
+import { getActiveSection } from '../../store/product/selectors';
 
-const Selector: React.FC<SelectorProps> = ({type, activeSection}) => {
+const Selector: React.FC<SelectorProps> = ({type}) => {
     
     const dispatch = useDispatch();
     /**
      * Data
      */
+
+    const [activeSection] = useSelector(getActiveSection);
 
     const {
         current_material: CURRENT,

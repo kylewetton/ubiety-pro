@@ -1,17 +1,18 @@
 import React, {Suspense, useEffect} from 'react';
-import {Canvas} from 'react-three-fiber';
+import {Canvas, useResource} from 'react-three-fiber';
+import {useDispatch, Provider } from 'react-redux';
 import { EffectComposer, SSAO, SMAA } from 'react-postprocessing';
+import _filter from 'lodash/filter';
+import { useGLTF } from 'drei';
+import {LinearToneMapping} from 'three';
 import worldConfig from '../../config/worldConfig';
 import cameraConfig from '../../config/cameraConfig';
 import {WorldDiv} from './styles/WorldStyles';
 import { WorldProps } from './types';
-import _filter from 'lodash/filter';
 import Product from '../Product';
-import {useDispatch, Provider } from 'react-redux';
 import CameraControls from '../CameraControls';
 import { productAddMeshParts } from '../../store/product/actions';
 import {store} from '../../store';
-import { useGLTF } from 'drei';
 
 const World: React.FC<WorldProps> = ({model}) => {
     const dispatch = useDispatch();
@@ -19,10 +20,9 @@ const World: React.FC<WorldProps> = ({model}) => {
     /**
      * Data
      */
-
-    const d = 8.25;
-    const { effects } = worldConfig;
+    const { effects, lighting } = worldConfig;
     const { nodes } = useGLTF(model);
+    // const ref = useResource();
     
     /**
      * State
@@ -58,7 +58,8 @@ const World: React.FC<WorldProps> = ({model}) => {
             />
             <SMAA />
         </EffectComposer>
-    )  
+    );
+    
 
     if (!nodes)
         return null;
@@ -66,34 +67,36 @@ const World: React.FC<WorldProps> = ({model}) => {
     return (    
         <WorldDiv>
             <Canvas
-                gl={{antialias: true}}
+                gl={{
+                    antialias: true,
+                    preserveDrawingBuffer: true
+                }}
                 pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio}
-                concurrent={false}
+                concurrent={true}
                 raycaster={{ filter: _intersectionsFilter }}
                 camera={{ fov: cameraConfig.fov, position: cameraConfig.position }}
             >
                 {/** Scene */}
                 <CameraControls />
-                <hemisphereLight intensity={0.5} position={[0, 50, 0]} />
-                <directionalLight
-                    position={[-8, 20, 8]}
-                    shadow-camera-left={d * -1}
-                    shadow-camera-bottom={d * -1}
-                    shadow-camera-right={d}
-                    shadow-camera-top={d}
-                    shadow-camera-near={0.1}
-                    shadow-camera-far={1500}
-                    castShadow
-                />
+                {/* <hemisphereLight intensity={0.6} position={[0, 50, 0]} /> */}
+                {lighting.map((light, idx) => (
+                    <spotLight
+                        key={idx}
+                        color={light.color}
+                        position={light.position}
+                        intensity={light.intensity}
+                        castShadow={false}
+                    />
+                ))}
                 
-                    {/** Model */}
-                    <Provider store={store}>
-                        <Suspense fallback={<p>Creating something awesome...</p>}>
-                            <Product file={nodes} rotation={[0, 0, 0]} />
-                        </Suspense>
-                    </Provider>
-                    {/** Effects */}
-                    {effects && _renderEffectComposer()}
+                {/** Model */}
+                <Provider store={store}>
+                    <Suspense fallback={<p>Creating something awesome...</p>}>
+                        <Product file={nodes} rotation={[0, 0, 0]} />
+                    </Suspense>
+                </Provider>
+                {/** Effects */}
+                {effects && _renderEffectComposer()}
                 
             </Canvas>
         </WorldDiv>

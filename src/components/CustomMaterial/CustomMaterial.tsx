@@ -1,26 +1,83 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useCubeTexture} from 'drei';
 import { CustomMaterialProps } from './types';
 import {useTexture} from 'drei';
+import {fabric} from 'fabric';
 import { Vector2, RepeatWrapping, Texture } from 'three';
 import _map from 'lodash/map';
 import { useSelector } from 'react-redux';
 import { getMaterialByUid } from '../../store/product/selectors';
 
+const multiplyMaterialsTogether = (customBlob: string, baseTexture: string) => {
+    const dimensions = 1024;
+    const proxy = document.createElement('canvas');
+    proxy.id = 'proxyCanvas';
+    proxy.width = dimensions;
+    proxy.height = dimensions;
+
+    return new Promise<string>((res, rej) => {
+        const canvas = new fabric.Canvas('proxyCanvas');
+        canvas.setDimensions({width:dimensions, height:dimensions});
+    
+        fabric.Image.fromURL(baseTexture, (filt) => {
+
+            filt.scaleToWidth(dimensions);
+
+            const filter = new fabric.Image.filters.BlendImage({
+              image: filt,
+              mode: "multiply",
+              alpha: 0.5,
+            });
+
+            console.log('xx filter', filter);
+
+            fabric.Image.fromURL(customBlob, image => {
+                image.scaleToWidth(dimensions);
+                const customImage = image.set({left: 0, top: 0});
+                if (filter) {
+                    (customImage as any).filters.push(filter);
+                    (customImage as any).applyFilters();
+                }
+                canvas.add(customImage);
+                const comped = canvas.toDataURL();
+
+                fetch(comped)
+                .then(u => u.blob())
+                .then(window.URL.createObjectURL)
+                .then(res);
+            })
+        });
+    });
+}
 
 /**
  * 
  * @param uid – the material uid
  */
 
-const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color}) => {
-    
+const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTexture}) => {
+
     const material = useSelector(getMaterialByUid(uid));
+    const [compedCustomTexture, setCompedCustomTexture] = useState<string | null>(null);
     const envMap = useCubeTexture(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], { path: '/cubemap/medium-studio/' })
 
+    useEffect(() => {
+        if (customTexture && material.maps.includes('color'))
+            multiplyMaterialsTogether(customTexture, `${material.src}/color.jpg`)
+            .then(res => setCompedCustomTexture(res));
+    }, [customTexture, material]);
+
+
     const maps = material && material.maps;
+
     // Convert to texture image paths
-    const paths = maps.map(texture => `${material.src}/${texture}.jpg`);
+        const paths = maps.map(texture => {
+            if (texture === 'color' && compedCustomTexture)
+                return compedCustomTexture;
+             return `${material.src}/${texture}.jpg`
+        });
+
+
     // Load all the textures (useTexture returns an array)
     let texture: Texture[] | null = useTexture(paths);
 

@@ -1,6 +1,6 @@
 import { Mesh } from 'three';
 import _map from 'lodash/map';
-import { PRODUCT_ADD_MESHPARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA } from './types';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_SET_ACTIVE, PRODUCT_SET_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA } from './types';
 
 /**
  * 
@@ -77,3 +77,16 @@ export function productAddModelData(data: any): productActionTypes {
     }
 }
 
+export function productSetCustomImage(data: any): productActionTypes {
+    return {
+        type: PRODUCT_SET_CUSTOM_IMAGE,
+        payload: data
+    }
+}
+
+export function productApplyCustomImage(data: string): productActionTypes {
+    return {
+        type: PRODUCT_APPLY_CUSTOM_IMAGE,
+        payload: data
+    }
+}

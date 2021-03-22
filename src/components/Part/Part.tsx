@@ -7,8 +7,7 @@ import { productSetActivePart, productSetColorToActive } from '../../store/produ
 import {interfaceUpdatePointer} from '../../store/interface/actions';
 import {interfaceGetPointerPosition} from '../../store/interface/selectors';
 
-const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id}) => {
-
+const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id, customTexture}) => {
 
     const dispatch = useDispatch();
     // Disable stops the user from clicking on the item until the color has returned to default
@@ -52,7 +51,7 @@ const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id}) => {
                 onPointerUp={(e) => !locked && !disabled && _handlePointerUp(e)}
                 key={id} geometry={mesh.geometry} castShadow receiveShadow>
                     { materialUid && (
-                        <CustomMaterial color={ color } uid={materialUid} />
+                        <CustomMaterial customTexture={customTexture} color={ color } uid={materialUid} />
                     ) }
             </mesh>
         </Suspense>

@@ -1,4 +1,4 @@
-import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA } from './types';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_CUSTOM_IMAGE } from './types';
 import {shapeSectionData, shapeTextureData} from '../../utils';
 import {productPartType} from './types';
 
@@ -9,7 +9,8 @@ const initialState: productState = {
   meshParts: [],
   materials: [],
   sections: [],
-  src: ''
+  src: '',
+  customImage: 'test_texture.png',
 };
 
 /**
@@ -124,6 +125,25 @@ export function productReducer(state = initialState, action: productActionTypes)
         materials: [shadow_material, ...state.materials],
         sections: shapeSectionData(sections)
       };
+
+    case PRODUCT_SET_CUSTOM_IMAGE:
+      return {
+        ...state,
+        customImage: action.payload
+      }
+
+    case PRODUCT_APPLY_CUSTOM_IMAGE:
+      // Get active section
+      const [activeSection] = state.sections.filter(section => section.active);
+      const rest = state.sections.filter(section => !section.active);
+      const newActive = {
+       ...activeSection,
+       custom_texture: action.payload
+      }
+      return {
+        ...state,
+        sections: [newActive, ...rest]
+      }
 
     default:
       return state;

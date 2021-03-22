@@ -24,8 +24,8 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                         const [section] = sections.filter(s => s.meshPart === mesh.uuid);
                         if (!part || !section) return null;
                         const {locked, id} = part;
-                        const {current_material, color} = section;
-                        return <Part key={id} id={id} locked={locked} mesh={mesh} materialUid={current_material.uid} color={color} />;
+                        const {current_material, custom_texture, color} = section;
+                        return <Part key={id} id={id} customTexture={custom_texture} locked={locked} mesh={mesh} materialUid={current_material.uid} color={color} />;
                     })
                 }
                 {
@@ -38,8 +38,8 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                             const [section] = sections.filter(s => s.meshPart === child.parent.uuid);
                             if (!part || !section) return null;
                             const {locked, id} = part;
-                            const {current_material, color} = section;
-                            return <Part key={id} id={id} locked={locked} mesh={child} materialUid={current_material.uid} color={color} />;
+                            const {current_material, custom_texture, color} = section;
+                            return <Part key={id} id={id} customTexture={custom_texture} locked={locked} mesh={child} materialUid={current_material.uid} color={color} />;
                         });
                     })
                 }

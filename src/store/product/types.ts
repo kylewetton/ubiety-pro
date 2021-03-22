@@ -8,6 +8,8 @@ export const PRODUCT_SET_TEXTURE = 'PRODUCT_SET_TEXTURE';
 export const PRODUCT_SET_COLOR = 'PRODUCT_SET_COLOR';
 export const PRODUCT_ADD_MATERIALS = 'PRODUCT_ADD_MATERIALS';
 export const PRODUCT_ADD_MODEL_DATA = 'PRODUCT_ADD_MODEL_DATA';
+export const PRODUCT_SET_CUSTOM_IMAGE = 'PRODUCT_SET_CUSTOM_IMAGE';
+export const PRODUCT_APPLY_CUSTOM_IMAGE = 'PRODUCT_APPLY_CUSTOM_IMAGE';
 
 interface productAction {
     type: typeof PRODUCT_ADD_MESHPARTS
@@ -15,6 +17,8 @@ interface productAction {
     | typeof PRODUCT_SET_TEXTURE
     | typeof PRODUCT_SET_COLOR
     | typeof PRODUCT_ADD_MATERIALS
+    | typeof PRODUCT_SET_CUSTOM_IMAGE
+    | typeof PRODUCT_APPLY_CUSTOM_IMAGE
     | typeof PRODUCT_ADD_MODEL_DATA,
     payload: any
 }
@@ -62,6 +66,7 @@ export interface Section {
     active: boolean;
     meshPart: string;
     color: string;
+    custom_texture?: any;
 }
 
 export type productActionTypes = productAction;
@@ -75,4 +80,5 @@ export type productState = {
     materials: Texture[];
     sections: Section[];
     src: string;
+    customImage: string;
 };
