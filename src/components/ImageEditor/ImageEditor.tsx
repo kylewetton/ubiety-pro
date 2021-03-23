@@ -61,9 +61,13 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
      * Methods
      */
 
+     const _handleCloseCustomImageModal = () => {
+        dispatch(interfaceToggleModal({id: 'customImage', status: 'closed'}));;
+    }
+
     const _generateCustomTexture = () => {
         const texture = editor.toDataURL({multiplier: 1024 / dimensions});
-        dispatch(interfaceToggleModal({id: 'customImage', status: 'closed'}));
+        _handleCloseCustomImageModal();
         fetch(texture)
         .then(res => res.blob())
         .then(window.URL.createObjectURL)
@@ -89,9 +93,10 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
      */
 
     const _destroyCustomTexture = () => {
-        dispatch(interfaceToggleModal({id: 'customImage', status: 'closed'}));
+        _handleCloseCustomImageModal();
         dispatch(destroyCustomTextureFromActive());
     }
+
 
 
     const _renderContent = () => {
@@ -105,7 +110,10 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
                             <Button color={'mint'} onClick={_clearCustomTexture}>Clear Editor</Button>
                         </div>
                         
-                        <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                        <div>
+                            <Button color={'gray'} onClick={_destroyCustomTexture}>Close</Button>
+                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                        </div>
                     </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>  
         );
@@ -115,7 +123,10 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
                     <ImageUpload uploadImage={_handleUpload} />
                         <ImageEditorButtonTrayDiv>
                             <span />
-                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                            <div>
+                                <Button color={'gray'} onClick={_destroyCustomTexture}>Close</Button>
+                                <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                            </div>
                         </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>
         );
