@@ -49,7 +49,7 @@ const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id, custom
             <mesh
                 onPointerDown={(e) => !locked && !disabled && _handlePointerDown(e)}
                 onPointerUp={(e) => !locked && !disabled && _handlePointerUp(e)}
-                key={id} geometry={mesh.geometry} castShadow receiveShadow>
+                key={id} geometry={mesh.geometry} castShadow={false} receiveShadow={false}>
                     { materialUid && (
                         <CustomMaterial customTexture={customTexture} color={ color } uid={materialUid} />
                     ) }

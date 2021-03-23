@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {colors, spacing, textSize} from '../../../theme';
 
 interface ButtonDivProps {
-
+    big?: boolean;
 }
 
 const _genButtonTheme = (color: string) => {
@@ -20,7 +20,7 @@ const _genButtonTheme = (color: string) => {
 }
 
 export const ButtonEl = styled.button<ButtonDivProps>`
-    padding: ${spacing[1]} ${spacing[3]};
+    padding: ${props => props.big ? `${spacing[3]} ${spacing[6]}` : `${spacing[1]} ${spacing[3]}`};
     background: ${props => props.color ? _genButtonTheme(props.color) : colors.brand.green};
     color: ${colors.white};
 

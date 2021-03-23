@@ -21,6 +21,7 @@ const space = 3;
 export const SelectorDiv = styled.div`
     display: inline-flex;
     align-items: stretch;
+    margin-right: ${spacing[12]};
     * {
         color: ${colors.white};
         fill: ${colors.white};
