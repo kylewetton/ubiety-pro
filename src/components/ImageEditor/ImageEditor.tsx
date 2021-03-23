@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import uuid from 'react-uuid';
 import {fabric} from 'fabric';
-import {ImageEditorDiv} from './styles/ImageEditorStyles';
+import {ImageEditorDiv, ImageEditorButtonTrayDiv} from './styles/ImageEditorStyles';
 import { ImageEditorProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductCustomImage } from '../../store/product/selectors';
 import { productApplyCustomImage, productSetCustomImage, productClearCustomImage, destroyCustomTextureFromActive } from '../../store/product/actions';
 import ImageUpload from '../ImageUpload';
+import Button from '../Button';
+import Modal from '../../layout/Modal';
+import { interfaceToggleModal } from '../../store/interface/actions';
+import { interfaceGetModalState } from '../../store/interface/selectors';
 
 const ImageEditor: React.FC<ImageEditorProps> = () => {
     
@@ -16,6 +20,7 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
     const dimensions = 480;
     const canvasPadding = 10; // Relates to image size vs canvas size
     const customImageUrl = useSelector(getProductCustomImage);
+    const modalState = useSelector(interfaceGetModalState('customImage'));
 
     /**
      * Instance setup
@@ -58,11 +63,11 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
 
     const _generateCustomTexture = () => {
         const texture = editor.toDataURL({multiplier: 1024 / dimensions});
+        dispatch(interfaceToggleModal({id: 'customImage', status: 'closed'}));
         fetch(texture)
         .then(res => res.blob())
         .then(window.URL.createObjectURL)
         .then(objectUrl => dispatch(productApplyCustomImage(objectUrl)))
-        
     }
     
     const _handleUpload = (url: string) => {
@@ -84,29 +89,43 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
      */
 
     const _destroyCustomTexture = () => {
+        dispatch(interfaceToggleModal({id: 'customImage', status: 'closed'}));
         dispatch(destroyCustomTextureFromActive());
     }
 
-    if (customImageUrl)
-    return (
-        <ImageEditorDiv>
-            <canvas id={`image-editor-${uniq}`} />
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <button onClick={_generateCustomTexture}>Add</button>
-                <button onClick={_clearCustomTexture}>Clear Editor</button>
-                <button onClick={_destroyCustomTexture}>Remove Texture</button>
-            </div>
-        </ImageEditorDiv>  
-    );
+
+    const _renderContent = () => {
+        if (customImageUrl)
+        return (
+                <ImageEditorDiv>
+                    <canvas id={`image-editor-${uniq}`} />
+                    <ImageEditorButtonTrayDiv>
+                        <div>
+                            <Button color={'green'} onClick={_generateCustomTexture}>Confirm</Button>
+                            <Button color={'mint'} onClick={_clearCustomTexture}>Clear Editor</Button>
+                        </div>
+                        
+                        <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                    </ImageEditorButtonTrayDiv>
+                </ImageEditorDiv>  
+        );
+    
+        return (
+                <ImageEditorDiv>
+                    <ImageUpload uploadImage={_handleUpload} />
+                        <ImageEditorButtonTrayDiv>
+                            <span />
+                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                        </ImageEditorButtonTrayDiv>
+                </ImageEditorDiv>
+        );
+    }
 
     return (
-        <ImageEditorDiv>
-            <ImageUpload uploadImage={_handleUpload} />
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <button onClick={_destroyCustomTexture}>Remove Texture</button>
-            </div>
-        </ImageEditorDiv>
-    );
+       <Modal isOpen={modalState === 'open'}>
+           {_renderContent()}
+       </Modal> 
+    );    
 };
 
 export default ImageEditor;

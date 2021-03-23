@@ -4,8 +4,9 @@ import {SelectorDiv, SelectorMenu, SelectorTitle, SelectorArrows, SelectorArrow}
 import {productSetTextureToActive} from '../../store/product/actions';
 import { SelectorProps } from './types';
 import { getActiveSection } from '../../store/product/selectors';
+import Icon from '../Icon';
 
-const Selector: React.FC<SelectorProps> = ({type}) => {
+const Selector: React.FC<SelectorProps> = ({type, color = 'green'}) => {
     
     const dispatch = useDispatch();
     /**
@@ -47,14 +48,20 @@ const Selector: React.FC<SelectorProps> = ({type}) => {
         return null;
     
     return (
-        <SelectorDiv>
-            <SelectorMenu></SelectorMenu>
+        <SelectorDiv color={color}>
+            <SelectorMenu>
+                <Icon icon={'menu'} />
+            </SelectorMenu>
             <SelectorTitle>
-                {CURRENT.label}
+                Materials / {CURRENT.label}
             </SelectorTitle>
             <SelectorArrows>
-                <SelectorArrow onClick={() => _handleCycleSelector('<')} >prev</SelectorArrow>
-                <SelectorArrow onClick={() => _handleCycleSelector('>')} >next</SelectorArrow>
+                <SelectorArrow className={'prev'} onClick={() => _handleCycleSelector('<')} >
+                    <Icon icon={'left'} />
+                </SelectorArrow>
+                <SelectorArrow className={'next'} onClick={() => _handleCycleSelector('>')} >
+                    <Icon icon={'right'} />
+                </SelectorArrow>
             </SelectorArrows>
         </SelectorDiv>
     );

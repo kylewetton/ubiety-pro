@@ -7,6 +7,7 @@ import SwatchTray from '../SwatchTray';
 import Selector from '../Selector';
 import ControlPanel from '../../layout/ControlPanel';
 import ImageEditor from '../ImageEditor';
+import SelectorTray from '../../layout/SelectorTray';
 
 const App: React.FC = () => {
 
@@ -26,7 +27,9 @@ const App: React.FC = () => {
         <Suspense fallback={<p>Building world...</p>}>
             <ImageEditor />
             <ControlPanel>
-                <Selector type={`material`} />
+                <SelectorTray>
+                    <Selector type={`material`} />
+                </SelectorTray>
                 <SwatchTray />
             </ControlPanel>
                 <World model={MODEL_PATH} />

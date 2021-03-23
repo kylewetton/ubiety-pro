@@ -1,4 +1,6 @@
 export interface ButtonProps {
     className?: string;
-    onClick?: (event: React.MouseEvent) => void
+    color?: 'green' | 'blue' | 'mint' | 'gray';
+    onClick?: (event: React.MouseEvent) => void;
+    minimal?: boolean;
 }

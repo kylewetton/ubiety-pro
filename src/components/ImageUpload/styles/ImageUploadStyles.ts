@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import {colors, radius, spacing, textSize, boxShadow} from '../../../theme';
 
 export const UploadArea = styled.div<{draggingOver: boolean}>`
-    background-color: ${colors.white};
+    background-color: ${colors.gray[100]};
     border-radius: ${radius.sm};
-    padding: ${spacing[24]};
+    padding: 0 ${spacing[24]};
+    height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    color: ${colors.rose[500]};
+    color: ${colors.brand.green};
     text-align: center;
     overflow: hidden;
     * {
@@ -18,7 +22,7 @@ export const UploadArea = styled.div<{draggingOver: boolean}>`
         display: block;
         position: absolute;
         z-index: 1;
-        border: 2px dashed ${({draggingOver}) => draggingOver ? colors.rose[500] : colors.rose[300]};
+        border: 2px dashed ${({draggingOver}) => draggingOver ? colors.brand.green : colors.brand.mint};
         border-radius: ${radius.sm};
         top: ${spacing[4]};
         left: ${spacing[4]};
@@ -29,12 +33,11 @@ export const UploadArea = styled.div<{draggingOver: boolean}>`
 `
 
 export  const LabelPill = styled.label`
-background-color: ${colors.gray[200]};
+background-color: ${colors.brand.green};
 display: inline-block;
 cursor: pointer;
-color: ${colors.rose[500]};
+color: ${colors.white};
 padding: ${spacing[2]} ${spacing[3]};
-border-radius: ${radius.sm};
 line-height: 1;
 margin: ${spacing[1]};
 font-size: ${textSize.sm};

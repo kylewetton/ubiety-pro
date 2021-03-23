@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { SwatchProps } from '../types';
 
 export const SwatchDiv = styled.div<SwatchProps>`
-    height: 64px;
-    width: 64px;
+    height: 78px;
+    width: 78px;
     background-color: ${props => props.color};
     cursor: pointer;
     &:hover {
