@@ -4,3 +4,4 @@ export {default as radius} from './radius';
 export {default as breakpoints} from './breakpoints';
 export {default as textSize} from './textSize';
 export {default as colors} from './colors';
+export {default as boxShadow} from './boxShadow';

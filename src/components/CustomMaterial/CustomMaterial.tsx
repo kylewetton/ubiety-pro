@@ -5,8 +5,10 @@ import {useTexture} from 'drei';
 import {fabric} from 'fabric';
 import { Vector2, RepeatWrapping, Texture } from 'three';
 import _map from 'lodash/map';
+import _filter from 'lodash/filter';
 import { useSelector } from 'react-redux';
 import { getMaterialByUid } from '../../store/product/selectors';
+import map from 'lodash/map';
 
 const multiplyMaterialsTogether = (customBlob: string, baseTexture: string) => {
     const dimensions = 1024;
@@ -28,8 +30,6 @@ const multiplyMaterialsTogether = (customBlob: string, baseTexture: string) => {
               mode: "multiply",
               alpha: 0.5,
             });
-
-            console.log('xx filter', filter);
 
             fabric.Image.fromURL(customBlob, image => {
                 image.scaleToWidth(dimensions);
@@ -59,14 +59,16 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
 
     const material = useSelector(getMaterialByUid(uid));
     const [compedCustomTexture, setCompedCustomTexture] = useState<string | null>(null);
-    const envMap = useCubeTexture(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], { path: '/cubemap/medium-studio/' })
+    const envMap = useCubeTexture(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], { path: '/cubemap/medium-studio/' });
 
     useEffect(() => {
-        if (customTexture && material.maps.includes('color'))
+        if (customTexture && material.maps.includes('color')) {
             multiplyMaterialsTogether(customTexture, `${material.src}/color.jpg`)
             .then(res => setCompedCustomTexture(res));
+        } else {
+            setCompedCustomTexture(null);
+        }
     }, [customTexture, material]);
-
 
     const maps = material && material.maps;
 
@@ -77,7 +79,6 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
              return `${material.src}/${texture}.jpg`
         });
 
-
     // Load all the textures (useTexture returns an array)
     let texture: Texture[] | null = useTexture(paths);
 
@@ -85,8 +86,10 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
     let textureObj = Object.assign({}, texture);
 
     // Flip the textures if needed 
-    if (material.flipY)
+    // if (material.flipY)
       _map(textureObj, txt => {txt.flipY = false});
+        
+    
 
     // Set more texture values
     _map(textureObj, txt => {

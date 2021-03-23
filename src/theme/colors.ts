@@ -1,4 +1,5 @@
 const colors = {
+    white: '#FFFFFF',
     blueGray: {
         50: '#F8FAFC',
         100: '#F1F5F9',
