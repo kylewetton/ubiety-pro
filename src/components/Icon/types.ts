@@ -1,3 +1,3 @@
 export interface IconProps {
-    icon: 'left' | 'right' | 'menu';
+    icon: 'left' | 'right' | 'menu' | 'check';
 }

@@ -5,6 +5,7 @@ import {thunkProductLoadMaterials, thunkProductLoadModel} from '../../store/prod
 import {getProductModelPath} from '../../store/product/selectors';
 import SwatchTray from '../SwatchTray';
 import Selector from '../Selector';
+import SectionSelector from '../SectionSelector';
 import ControlPanel from '../../layout/ControlPanel';
 import ImageEditor from '../ImageEditor';
 import SelectorTray from '../../layout/SelectorTray';
@@ -34,6 +35,7 @@ const App: React.FC = () => {
             <ImageEditor />
             <ControlPanel>
                 <SelectorTray>
+                    <SectionSelector color={'blue'} />
                     <Selector type={`material`} />
                     <Button big onClick={_handleOpenCustomModal}>
                         Custom image

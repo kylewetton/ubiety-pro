@@ -5,10 +5,8 @@ import {useTexture} from 'drei';
 import {fabric} from 'fabric';
 import { Vector2, RepeatWrapping, Texture } from 'three';
 import _map from 'lodash/map';
-import _filter from 'lodash/filter';
 import { useSelector } from 'react-redux';
 import { getMaterialByUid } from '../../store/product/selectors';
-import map from 'lodash/map';
 
 const multiplyMaterialsTogether = (customBlob: string, baseTexture: string) => {
     const dimensions = 1024;
@@ -60,24 +58,29 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
     const material = useSelector(getMaterialByUid(uid));
     const [compedCustomTexture, setCompedCustomTexture] = useState<string | null>(null);
     const envMap = useCubeTexture(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], { path: '/cubemap/medium-studio/' });
+    const maps = material && [...material.maps, 'custom'];
 
     useEffect(() => {
-        if (customTexture && material.maps.includes('color')) {
-            multiplyMaterialsTogether(customTexture, `${material.src}/color.jpg`)
-            .then(res => setCompedCustomTexture(res));
+        if (customTexture) {
+            if (material.maps.includes('color'))
+            {
+                multiplyMaterialsTogether(customTexture, `${material.src}/color.jpg`)
+                .then(res => setCompedCustomTexture(res));
+            } else {
+            setCompedCustomTexture(customTexture);
+            }
         } else {
             setCompedCustomTexture(null);
         }
     }, [customTexture, material]);
 
-    const maps = material && material.maps;
 
     // Convert to texture image paths
         const paths = maps.map(texture => {
-            if (texture === 'color' && compedCustomTexture)
-                return compedCustomTexture;
+            if (texture === 'custom')
+                return compedCustomTexture ? compedCustomTexture : '';
              return `${material.src}/${texture}.jpg`
-        });
+        }).filter(Boolean);
 
     // Load all the textures (useTexture returns an array)
     let texture: Texture[] | null = useTexture(paths);
@@ -90,7 +93,6 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
       _map(textureObj, txt => {txt.flipY = false});
         
     
-
     // Set more texture values
     _map(textureObj, txt => {
         material.repeat && txt.repeat.set(material.repeat, material.repeat);
@@ -99,17 +101,30 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
         return txt;
     });
 
+    const _handleMapVsCustom = () => {
+        switch(true) {
+            case !!compedCustomTexture: 
+                return textureObj[maps.indexOf('custom')];
+            case maps.includes('color'):
+                return textureObj[maps.indexOf('color')];
+            default:
+                return null;
+        }
+
+    }
+
     const _getTexture = () => (
         <meshStandardMaterial
             attach="material"
             color={color}
-            map={maps.includes('color') ? textureObj[maps.indexOf('color')] : null}
+            map={_handleMapVsCustom()}
             aoMap={maps.includes('ao') ? textureObj[maps.indexOf('ao')] : null}
             roughnessMap={maps.includes('roughness') ? textureObj[maps.indexOf('roughness')] : null}
             alphaMap={maps.includes('alpha') ? textureObj[maps.indexOf('alpha')] : null}
             normalMap={maps.includes('normal') ? textureObj[maps.indexOf('normal')] : null}
             normalScale={new Vector2(material.normalIntensity, material.normalIntensity)}
             transparent={true}
+            onUpdate={(self) => (self.needsUpdate = true)}
         />);
 
     /**
@@ -126,6 +141,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
             normalScale={new Vector2(material.normalIntensity, material.normalIntensity)}
             transparent={true}
             shininess={0}
+            onUpdate={(self) => (self.needsUpdate = true)}
         />
     );
 

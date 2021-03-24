@@ -1,4 +1,4 @@
-import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_CUSTOM_IMAGE } from './types';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_CUSTOM_IMAGE } from './types';
 import {shapeSectionData, shapeTextureData} from '../../utils';
 import {productPartType} from './types';
 
@@ -25,10 +25,14 @@ export function productReducer(state = initialState, action: productActionTypes)
         const newSec = {...section};
         const [part] = action.payload.filter((part: productPartType) => part.tag === section.tag);
         newSec.meshPart = part.id;
+        newSec.locked = part.locked;
         return newSec;
       });
 
       const meshParts = action.payload.map((part: any) => {
+        /**
+         * @TODO Need to figure out what to do here?
+         */
         if (part.tag !== 'quarters')
           return part;
         part.active = true;

@@ -39,7 +39,7 @@ export interface productPartType {
     children: string[]
 }
 
-type Map = 'color' | 'ao' | 'roughness' | 'normal' | 'alpha';
+type Map = 'color' | 'ao' | 'roughness' | 'normal' | 'alpha' | 'customTexture';
 
 export interface SwatchData {
     label: string;
@@ -71,6 +71,7 @@ export interface Section {
     meshPart: string;
     color: string;
     custom_texture?: any;
+    locked: boolean;
 }
 
 export type productActionTypes = productAction;
