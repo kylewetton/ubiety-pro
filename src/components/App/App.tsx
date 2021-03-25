@@ -30,6 +30,13 @@ const App: React.FC = () => {
         dispatch(thunkProductLoadModel());
     }, [dispatch]);
 
+    useEffect(() => {
+        if (activeSection) {
+            if ((activeSection.tag !== 'quarters' && currentActiveStage === 'customText' )|| (activeSection.tag !== 'quarters' && currentActiveStage === 'customImage'))
+                dispatch(interfaceSetActiveStage('materials'))
+        }
+    }, [activeSection, currentActiveStage, dispatch])
+
     const _handleOpenCustomModal = () => {
         dispatch(interfaceToggleModal({id: 'customImage', status: 'open'}));
     }
