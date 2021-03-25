@@ -15,6 +15,7 @@ import StageSelector from '../StageSelector';
 import Button from '../Button';
 import { interfaceSetActiveStage, interfaceToggleModal } from '../../store/interface/actions';
 import { interfaceGetActiveStage } from '../../store/interface/selectors';
+import LoadingOverlay from '../LoadingOverlay';
 
 const App: React.FC = () => {
 
@@ -39,10 +40,10 @@ const App: React.FC = () => {
 
 
     if (!MODEL_PATH)
-        return <p>Fetching data...</p>
+        return <LoadingOverlay message={'Spinning up...'} />
         
     return (
-        <Suspense fallback={<p>Building world...</p>}>
+        <Suspense fallback={<LoadingOverlay message={'Building world...'} />}>
                 <ImageEditor />
                 <TextEditor />
             <ControlPanel>

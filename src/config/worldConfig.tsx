@@ -1,3 +1,5 @@
+import { colors } from "../theme";
+
 type Point = [x: number, y: number, z: number];
 interface Light {
     id: string;
@@ -22,7 +24,7 @@ const spotlightHeight = spotlightDistance - spotlightHeightReduction;
 
 
 const worldConfig: WorldConfig = {
-    backgroundColor: '#f1f3f4',
+    backgroundColor: colors.brand.offwhite,
     effects: false,
     worldOffset: [0, -0.33, 0],
     lighting:  [
