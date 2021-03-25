@@ -4,6 +4,7 @@ import { CustomMaterialProps } from './types';
 import {useTexture} from 'drei';
 import {fabric} from 'fabric';
 import { Vector2, RepeatWrapping, Texture } from 'three';
+import config from '../../config/brandConfig';
 import _map from 'lodash/map';
 import { useSelector } from 'react-redux';
 import { getMaterialByUid } from '../../store/product/selectors';
@@ -116,7 +117,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
     const _getTexture = () => (
         <meshStandardMaterial
             attach="material"
-            color={color}
+            color={compedCustomTexture ? color === config.hoverColor ? config.hoverColor : '#FFFFFF' : color}
             map={_handleMapVsCustom()}
             aoMap={maps.includes('ao') ? textureObj[maps.indexOf('ao')] : null}
             roughnessMap={maps.includes('roughness') ? textureObj[maps.indexOf('roughness')] : null}

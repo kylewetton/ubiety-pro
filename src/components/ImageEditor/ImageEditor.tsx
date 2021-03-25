@@ -124,8 +124,8 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
                         <ImageEditorButtonTrayDiv>
                             <span />
                             <div>
-                                <Button color={'gray'} onClick={_handleCloseCustomImageModal}>Close</Button>
                                 <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                                <Button color={'gray'} onClick={_handleCloseCustomImageModal}>Close</Button>
                             </div>
                         </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>

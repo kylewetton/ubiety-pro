@@ -12,3 +12,7 @@ export const ImageEditorButtonTrayDiv = styled.div`
     justify-content: space-between;
     margin-top: ${spacing[4]};
 `
+
+export const ImageEditorFontSelector = styled.select`
+    padding: ${spacing[2]};
+`

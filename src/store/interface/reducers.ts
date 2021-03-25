@@ -24,15 +24,18 @@ export function interfaceReducer(state = initialState, action: interfaceActionTy
       };
     case INTERFACE_TOGGLE_MODAL:
       /**
-       * This reducer will toggle all modals closed,
+       * This will toggle all modals closed,
        * it will only open a single modal at a time
        * if isOpen is true in the action payload.
        */
+      
       const newModals: {[key: string]: 'open' | 'closed'} = {};
       _map({...state.modalIsOpen}, (modal, key) => {
-       if (key !== action.payload.id)
-        newModals[key] = 'closed';
-      newModals[key] = action.payload.status;
+        if (key !== action.payload.id) {
+          newModals[key] = 'closed';
+       } else {
+        newModals[key] = action.payload.status;
+        }
       });
 
     return {
