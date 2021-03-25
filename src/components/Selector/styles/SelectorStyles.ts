@@ -26,6 +26,7 @@ export const SelectorDiv = styled.div`
     `
 export const SelectorMenu = styled.div`
     padding: ${spacing[space]};
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;

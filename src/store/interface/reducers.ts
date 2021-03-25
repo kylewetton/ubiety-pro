@@ -1,13 +1,14 @@
 import _map from 'lodash/map';
 
-import { INTERFACE_UPDATE_POINTER, INTERFACE_TOGGLE_MODAL, interfaceActionTypes, interfaceState } from './types';
+import { INTERFACE_UPDATE_POINTER, INTERFACE_TOGGLE_MODAL, INTERFACE_SET_ACTIVE_STAGE, interfaceActionTypes, interfaceState } from './types';
 
 const initialState: interfaceState = {
   pointer: {x: 0, y: 0},
   modalIsOpen: {
     customImage: 'closed',
     customText: 'closed',
-  }
+  },
+  currentStage: 'materials'
 };
 
 /**
@@ -42,6 +43,13 @@ export function interfaceReducer(state = initialState, action: interfaceActionTy
       ...state,
       modalIsOpen: newModals
     }
+
+  case INTERFACE_SET_ACTIVE_STAGE:
+    return {
+      ...state,
+      currentStage: action.payload
+    }
+
     default:
       return state;
   }
