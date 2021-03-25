@@ -16,6 +16,7 @@ export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknow
 }
 
 export const thunkProductLoadModel = (): ThunkAction<void, RootState, unknown, Action<string>> => async(dispatch: Dispatch, getState: GetState) => {
+    console.log(mockProductData);
     // fetch('http://192.168.1.2/wp-json/wp/v2/custom/51')
     fetch('https://jsonplaceholder.typicode.com/todos/100')
     .then(res => res.json())

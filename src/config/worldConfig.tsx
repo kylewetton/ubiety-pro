@@ -9,20 +9,22 @@ interface Light {
 }
 
 interface WorldConfig {
+    backgroundColor: string;
     effects: boolean;
     worldOffset: Point;
     lighting: Light[];
 }
 
-const spotlightIntensity = 0.5; // 10;
+const spotlightIntensity = 10; // 10;
 const spotlightDistance = 10; // 10;
 const spotlightHeightReduction = 3; // 3;
 const spotlightHeight = spotlightDistance - spotlightHeightReduction;
 
 
 const worldConfig: WorldConfig = {
+    backgroundColor: '#f1f3f4',
     effects: false,
-    worldOffset: [0, -0.2, 0],
+    worldOffset: [0, -0.33, 0],
     lighting:  [
         /**
          * Top spotlight
@@ -31,10 +33,11 @@ const worldConfig: WorldConfig = {
           id: 'spot',
           color: '#FFFFFF',
           position: [0, spotlightDistance + spotlightHeightReduction, 0],
-          intensity: spotlightIntensity - spotlightIntensity / 2,
+          intensity: spotlightIntensity - spotlightIntensity / 3,
           mapSize: 1024,
           shadows: false,
         },
+
         /**
          * Inner spotlight
          */

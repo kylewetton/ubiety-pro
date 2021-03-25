@@ -9,7 +9,7 @@ const cameraConfig: CameraConfig = {
     fov: 30,
     near: 1,
     far: 300,
-    position: [0, 0, 5],
+    position: [-3, 0, 2],
   };
 
   export default cameraConfig;

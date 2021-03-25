@@ -4,7 +4,7 @@ import {useDispatch, Provider } from 'react-redux';
 import { EffectComposer, SSAO, SMAA } from 'react-postprocessing';
 import _filter from 'lodash/filter';
 import { useGLTF } from 'drei';
-import {LinearToneMapping} from 'three';
+import {Color, GammaEncoding, LinearToneMapping, NoToneMapping, PCFSoftShadowMap} from 'three';
 import worldConfig from '../../config/worldConfig';
 import cameraConfig from '../../config/cameraConfig';
 import {WorldDiv} from './styles/WorldStyles';
@@ -69,7 +69,18 @@ const World: React.FC<WorldProps> = ({model}) => {
             <Canvas
                 gl={{
                     antialias: true,
-                    preserveDrawingBuffer: true
+                    preserveDrawingBuffer: true,
+                    alpha: false
+                }}
+                onCreated={({gl}) => {
+                    gl.toneMappingExposure = 1;
+                    gl.setClearColor(worldConfig.backgroundColor);
+                    gl.outputEncoding = GammaEncoding;
+                    gl.physicallyCorrectLights = true;
+                    gl.shadowMap.enabled = true;
+                    gl.shadowMap.type = PCFSoftShadowMap;
+                    gl.toneMapping = NoToneMapping;
+                    
                 }}
                 pixelRatio={window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio}
                 concurrent={true}
@@ -78,7 +89,7 @@ const World: React.FC<WorldProps> = ({model}) => {
             >
                 {/** Scene */}
                 <CameraControls />
-                {/* <hemisphereLight intensity={0.6} position={[0, 50, 0]} /> */}
+                <hemisphereLight intensity={0.66} groundColor={new Color('#FFFFFF')} position={[0, 50, 0]} />
                 {lighting.map((light, idx) => (
                     <spotLight
                         key={idx}
