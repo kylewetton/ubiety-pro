@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {fabric} from 'fabric';
-import {ImageEditorDiv, ImageEditorButtonTrayDiv, ImageEditorFontSelector} from '../ImageEditor/styles/ImageEditorStyles';
+import { useSelector, useDispatch } from 'react-redux';
+import { HexColorPicker, HexColorInput } from "react-colorful";
+import {ImageEditorDiv, ImageEditorButtonTrayDiv, ImageEditorFontSelector, ImageEditorColorPicker, ImageEditorColorHouse} from '../ImageEditor/styles/ImageEditorStyles';
 import { TextEditorProps } from './types';
 import config from '../../config/brandConfig';
-import { useSelector, useDispatch } from 'react-redux';
 import { getActiveSection } from '../../store/product/selectors';
-import { productApplyCustomImage, productClearCustomImage, destroyCustomTextureFromActive } from '../../store/product/actions';
+import { productApplyCustomImage, destroyCustomTextureFromActive } from '../../store/product/actions';
 import Button from '../Button';
 import Modal from '../../layout/Modal';
 import { interfaceToggleModal } from '../../store/interface/actions';
@@ -20,6 +21,8 @@ const TextEditor: React.FC<TextEditorProps> = () => {
     const modalState = useSelector(interfaceGetModalState('customText'));
     const [lastSubmittedText, setLastSubmittedText] = useState<string>();
     const [textNode, setTextNode] = useState<any>();
+    const [textColor, setTextColor] = useState<string>('#000000');
+    const [colorPickerOpen, setColorPickerOpen] = useState<boolean>(false);
 
     /**
      * Instance setup
@@ -37,6 +40,7 @@ const TextEditor: React.FC<TextEditorProps> = () => {
                 top: 200,
                 padding: 7,
                 fill: "rgb(0,0,0)",
+                fontFamily: 'Arial'
               });
               canvas.add(text);
               text.enterEditing();
@@ -102,20 +106,35 @@ const TextEditor: React.FC<TextEditorProps> = () => {
         textNode.set("fill", 'red');
     }
 
+    useEffect(() => {
+        if (textNode) {
+            textNode.set("fill", textColor);
+            editor.renderAll();
+        }
+    }, [textColor, textNode]);
+
 
     const _renderContent = () => {
         
         return (
                 <ImageEditorDiv>
+                
                     <canvas id={`image-editor-text`} />
                     <ImageEditorButtonTrayDiv>
-                        <div>
+                        <div style={{flex: '1 1 auto', display: 'flex'}}>
                             <Button color={'green'} onClick={_generateCustomTexture}>Confirm</Button>
                             <ImageEditorFontSelector onChange={event => _changeFont(event.target.value)} id="">
                                 <option value="Arial">Arial</option>
                                 <option value="Georgia">Georgia</option>
                                 <option value="system-ui">System</option>
                             </ImageEditorFontSelector>
+                            <ImageEditorColorHouse>
+                                <ImageEditorColorPicker className={colorPickerOpen ? '' : 'hidden'}>
+                                    <HexColorPicker style={{borderRadius: 0}} color={textColor} onChange={setTextColor} />
+                                    <HexColorInput style={{width: '100%', padding: '5px 10px', backgroundColor: 'rgba(225,225,225, 0.6)', borderRadius: '3px', marginTop: '5px'}} color={textColor} onChange={setTextColor} />
+                                </ImageEditorColorPicker>
+                                <Button color={'mint'} onClick={() => setColorPickerOpen(prev => !prev)}>{colorPickerOpen ? 'Add Color' : 'Edit Color'}</Button>
+                            </ImageEditorColorHouse>
                         </div>
                         
                         <div>
