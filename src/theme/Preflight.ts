@@ -6,7 +6,6 @@ import { createGlobalStyle } from 'styled-components';
 */
 
 const Preflight = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
