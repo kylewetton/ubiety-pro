@@ -123,7 +123,24 @@
     "normal"
     ],
     "product": "",
-    "swatches": false,
+    "swatches": [{
+        "label": "White",
+        "swatch": "#FFFFFF"
+
+    },
+    {
+        "label": "Tan",
+        "swatch": "#807c6b"
+    },
+    {
+        "label": "Clay",
+        "swatch": "#bfbeba"
+    },
+    {
+       "label": "Black",
+       "swatch": "#222222" 
+    }
+],
     "thumbnail_png": false,
     "material_attributes": {
     "blendable": false,
@@ -218,7 +235,7 @@
     "swatches": [
     {
     "label": "White",
-    "swatch": ""
+    "swatch": "#FFFFFF"
     },
     {
     "label": "Black",
