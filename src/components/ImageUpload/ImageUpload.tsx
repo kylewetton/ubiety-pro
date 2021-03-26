@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useIntl} from 'react-intl';
 import UploadFormlet from './UploadFormlet';
 import {UploadArea, ErrorPanel} from './styles/ImageUploadStyles';
 
@@ -9,6 +10,8 @@ interface ImageUploadInterface {
 }
 
 const ImageUpload: React.FC<ImageUploadInterface> = ({error, handleFileUpload, clearError}) => {
+
+    const intl = useIntl();
 
     const [draggingOver, setDraggingOver] = useState<boolean>(false);
     
@@ -43,7 +46,7 @@ const ImageUpload: React.FC<ImageUploadInterface> = ({error, handleFileUpload, c
         draggingOver={draggingOver}
         >
             {error ? <ErrorPanel>{error}</ErrorPanel> : ''}
-            <p><UploadFormlet error={error} onClick={clearError} handleUpload={handleFileUpload} /> or drop image here.</p>
+            <p><UploadFormlet error={error} onClick={clearError} handleUpload={handleFileUpload} /> {intl.formatMessage({id : 'modal.image-upload.upload-text'})}</p>
         </UploadArea>
     );
 };

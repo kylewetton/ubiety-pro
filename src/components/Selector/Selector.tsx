@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useIntl} from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import {SelectorDiv, SelectorMenu, SelectorListItem, SelectorTitle, SelectorArrows, SelectorArrow, SelectorList} from './styles/SelectorStyles';
 import {productSetTextureToActive} from '../../store/product/actions';
@@ -10,6 +11,7 @@ import { map } from 'lodash';
 const Selector: React.FC<SelectorProps> = ({type, color = 'green'}) => {
     
     const dispatch = useDispatch();
+    const intl = useIntl();
     /**
      * Data
      */
@@ -85,7 +87,7 @@ const Selector: React.FC<SelectorProps> = ({type, color = 'green'}) => {
                 <Icon icon={'menu'} />
             </SelectorMenu>
             <SelectorTitle color={color}>
-                Materials / {CURRENT.label}
+                {intl.formatMessage({id: 'stage.materials.title'})} / {CURRENT.label}
             </SelectorTitle>
             <SelectorArrows>
                 <SelectorArrow color={color} className={'prev'} onClick={() => _handleCycleSelector('<')} >

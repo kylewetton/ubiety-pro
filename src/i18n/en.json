@@ -1,4 +1,30 @@
 {
     "loading.message.fetching-data" : "Spinning up...",
-    "loading.message.loading-model" : "Building world..."
+    "loading.message.loading-model" : "Building world...",
+
+    "stage.customImage.title": "Custom Image",
+    "stage.customImage.button.add-edit" : "Add/edit custom image",
+    "stage.customText.button.add-edit" : "Add/edit custom text",
+    "stage.customText.title": "Custom Text",
+    "stage.materials.title": "Materials",
+    "stage.initials.title": "Initials",
+
+    "modal.image-editor.confirm": "Confirm",
+    "modal.image-editor.clear": "Clear editor",
+    "modal.image-editor.close": "Close",
+    "modal.image-editor.remove": "Remove image",
+
+    "modal.text-editor.confirm": "Confirm",
+    "modal.text-editor.clear": "Clear editor",
+    "modal.text-editor.close": "Close",
+    "modal.text-editor.remove": "Remove text",
+    "modal.text-editor.color-add" : "Done",
+    "modal.text-editor.color-edit" : "Edit color",
+
+    "modal.image-upload.upload-button": "Upload file",
+    "modal.image-upload.upload-text": "or drop file here."
+
+    
+
+
 }

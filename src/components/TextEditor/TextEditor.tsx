@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {fabric} from 'fabric';
+import {useIntl} from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import {ImageEditorDiv, ImageEditorButtonTrayDiv, ImageEditorFontSelector, ImageEditorColorPicker, ImageEditorColorHouse} from '../ImageEditor/styles/ImageEditorStyles';
@@ -23,6 +24,7 @@ const TextEditor: React.FC<TextEditorProps> = () => {
     const [textNode, setTextNode] = useState<any>();
     const [textColor, setTextColor] = useState<string>('#000000');
     const [colorPickerOpen, setColorPickerOpen] = useState<boolean>(false);
+    const intl = useIntl();
 
     /**
      * Instance setup
@@ -102,10 +104,6 @@ const TextEditor: React.FC<TextEditorProps> = () => {
         editor.renderAll();
     }
 
-    const _changeTextColor = () => {
-        textNode.set("fill", 'red');
-    }
-
     useEffect(() => {
         if (textNode) {
             textNode.set("fill", textColor);
@@ -122,7 +120,7 @@ const TextEditor: React.FC<TextEditorProps> = () => {
                     <canvas id={`image-editor-text`} />
                     <ImageEditorButtonTrayDiv>
                         <div style={{flex: '1 1 auto', display: 'flex'}}>
-                            <Button color={'green'} onClick={_generateCustomTexture}>Confirm</Button>
+                            <Button color={'green'} onClick={_generateCustomTexture}>{intl.formatMessage({id: 'modal.text-editor.confirm'})}</Button>
                             <ImageEditorFontSelector onChange={event => _changeFont(event.target.value)} id="">
                                 <option value="Arial">Arial</option>
                                 <option value="Georgia">Georgia</option>
@@ -133,13 +131,13 @@ const TextEditor: React.FC<TextEditorProps> = () => {
                                     <HexColorPicker style={{borderRadius: 0}} color={textColor} onChange={setTextColor} />
                                     <HexColorInput style={{width: '100%', padding: '5px 10px', backgroundColor: 'rgba(225,225,225, 0.6)', borderRadius: '3px', marginTop: '5px'}} color={textColor} onChange={setTextColor} />
                                 </ImageEditorColorPicker>
-                                <Button color={'mint'} onClick={() => setColorPickerOpen(prev => !prev)}>{colorPickerOpen ? 'Add Color' : 'Edit Color'}</Button>
+                                <Button color={'mint'} onClick={() => setColorPickerOpen(prev => !prev)}>{colorPickerOpen ? intl.formatMessage({id: 'modal.text-editor.color-add'}) : intl.formatMessage({id: 'modal.text-editor.color-edit'})}</Button>
                             </ImageEditorColorHouse>
                         </div>
                         
                         <div>
-                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
-                            <Button color={'gray'} onClick={_handleCloseCustomImageModal}>Close</Button>
+                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>{intl.formatMessage({id: 'modal.text-editor.remove'})}</Button>
+                            <Button color={'gray'} onClick={_handleCloseCustomImageModal}>{intl.formatMessage({id: 'modal.text-editor.close'})}</Button>
                         </div>
                     </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>  

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import uuid from 'react-uuid';
+import {useIntl} from 'react-intl';
 import {fabric} from 'fabric';
 import {ImageEditorDiv, ImageEditorButtonTrayDiv} from './styles/ImageEditorStyles';
 import { ImageEditorProps } from './types';
@@ -21,6 +22,7 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
     const canvasPadding = 10; // Relates to image size vs canvas size
     const customImageUrl = useSelector(getProductCustomImage);
     const modalState = useSelector(interfaceGetModalState('customImage'));
+    const intl = useIntl();
 
     /**
      * Instance setup
@@ -106,13 +108,21 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
                     <canvas id={`image-editor-${uniq}`} />
                     <ImageEditorButtonTrayDiv>
                         <div>
-                            <Button color={'green'} onClick={_generateCustomTexture}>Confirm</Button>
-                            <Button color={'mint'} onClick={_clearCustomTexture}>Clear Editor</Button>
+                            <Button color={'green'} onClick={_generateCustomTexture}>
+                                {intl.formatMessage({id : 'modal.image-editor.confirm'})}
+                            </Button>
+                            <Button color={'mint'} onClick={_clearCustomTexture}>
+                                {intl.formatMessage({id : 'modal.image-editor.clear'})}
+                            </Button>
                         </div>
                         
                         <div>
-                            <Button color={'gray'} onClick={_handleCloseCustomImageModal}>Close</Button>
-                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
+                            <Button color={'gray'} onClick={_handleCloseCustomImageModal}>
+                                {intl.formatMessage({id : 'modal.image-editor.close'})}
+                            </Button>
+                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>
+                                {intl.formatMessage({id : 'modal.image-editor.remove'})}
+                            </Button>
                         </div>
                     </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>  
@@ -124,8 +134,12 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
                         <ImageEditorButtonTrayDiv>
                             <span />
                             <div>
-                                <Button color={'gray'} minimal onClick={_destroyCustomTexture}>Remove Texture</Button>
-                                <Button color={'gray'} onClick={_handleCloseCustomImageModal}>Close</Button>
+                                <Button color={'gray'} minimal onClick={_destroyCustomTexture}>
+                                    {intl.formatMessage({id : 'modal.image-editor.remove'})}
+                                </Button>
+                                <Button color={'gray'} onClick={_handleCloseCustomImageModal}>
+                                    {intl.formatMessage({id : 'modal.image-editor.close'})}
+                                </Button>
                             </div>
                         </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>

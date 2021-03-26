@@ -1,0 +1,30 @@
+{
+    "loading.message.fetching-data" : "Attendere il caricamento prego...",
+    "loading.message.loading-model" : "Costruire il mondo...",
+
+    "stage.customImage.title": "Foto   ",
+    "stage.customImage.button.add-edit" : "Aggiungi/modifica foto",
+    "stage.customText.button.add-edit" : "Aggiungi/modifica testo",
+    "stage.customText.title": "Testo",
+    "stage.materials.title": "Materiali",
+    "stage.initials.title": "Iniziali",
+
+    "modal.image-editor.confirm": "Salva",
+    "modal.image-editor.clear": "Libero il redattore",
+    "modal.image-editor.close": "Annulla",
+    "modal.image-editor.remove": "Cancellare foto",
+
+    "modal.text-editor.confirm": "Salva",
+    "modal.text-editor.clear": "Libero il redattore",
+    "modal.text-editor.close": "Annulla",
+    "modal.text-editor.remove": "Cancellare testo",
+    "modal.text-editor.color-add" : "Salva",
+    "modal.text-editor.color-edit" : "Modifica colori",
+
+    "modal.image-upload.upload-button": "Caricare un file",
+    "modal.image-upload.upload-text": "o rilascia il file qui."
+
+    
+
+
+}

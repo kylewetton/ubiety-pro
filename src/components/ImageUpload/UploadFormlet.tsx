@@ -1,4 +1,5 @@
 import React from 'react';
+import {useIntl} from 'react-intl';
 import {LabelPill} from './styles/ImageUploadStyles';
 
 interface UploadFormletInterface {
@@ -9,6 +10,8 @@ interface UploadFormletInterface {
 
 const UploadFormlet: React.FC<UploadFormletInterface> = ({handleUpload, onClick}) => {
 
+    const intl = useIntl();
+    
     const handleClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         const element = e.target as HTMLInputElement;
         element.value = '';
@@ -22,7 +25,7 @@ const UploadFormlet: React.FC<UploadFormletInterface> = ({handleUpload, onClick}
             onChange={ (e) => handleUpload((e.target.files as FileList))}
             type="file" id="BtnBrowseHidden" name="files" style={{display: 'none'}} />
             <LabelPill htmlFor="BtnBrowseHidden">
-                Upload file
+                {intl.formatMessage({id: 'modal.image-upload.upload-button'})}
             </LabelPill>
         </>
     );
