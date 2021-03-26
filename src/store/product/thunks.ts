@@ -11,7 +11,18 @@ export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknow
     fetch('https://jsonplaceholder.typicode.com/todos/100')
     .then(res => res.json())
     .then(data => shapeTextureData(mockTextureData))
-    .then(textures => dispatch(productAddMaterials(textures)))
+    .then(textures => {
+        dispatch(productAddMaterials([{
+            uid: -2,
+            tag: 'stampa',
+            src: '/stampa',
+            maps: ['alpha'],
+            normalIntensity: 3,
+            flipY: true,
+            swatches: [],
+            metallic: false,
+        }, ...textures])
+    )})
     .catch(error => console.error('thunkProductLoadMaterials was not successful', error));
 }
 

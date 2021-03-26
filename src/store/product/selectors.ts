@@ -17,3 +17,7 @@ export const getMaterialByUid = (uid: number | null) => (state: RootState) => st
 export const getMaterialByTag = (tag: string | null) => (state: RootState) => state.product.materials.filter(material => material.tag === tag)[0];
 export const getProductDataByType = (type: string) => (state: RootState) => state.product[type];
 export const getProductCustomImage = (state: RootState) => state.product.customImage;
+export const getProductStampas = (state: RootState) => state.product.stampa;
+export const getProductStampaColor = (state: RootState) => state.product.stampaColor;
+export const getProductStampaPos = (state: RootState) => state.product.stampaPos;
+export const getProductStampaStyle = (state: RootState) => state.product.stampaStyle;

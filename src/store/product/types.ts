@@ -12,6 +12,11 @@ export const PRODUCT_SET_CUSTOM_IMAGE = 'PRODUCT_SET_CUSTOM_IMAGE';
 export const PRODUCT_APPLY_CUSTOM_IMAGE = 'PRODUCT_APPLY_CUSTOM_IMAGE';
 export const PRODUCT_CLEAR_CUSTOM_IMAGE = 'PRODUCT_CLEAR_CUSTOM_IMAGE';
 export const PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE = 'PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE';
+export const PRODUCT_SET_TEXTURE_TO_TAG = 'PRODUCT_SET_TEXTURE_TO_TAG';
+export const PRODUCT_SET_STAMPA = 'PRODUCT_SET_STAMPA';
+export const PRODUCT_SET_STAMPA_COLOR = 'PRODUCT_SET_STAMPA_COLOR';
+export const PRODUCT_SET_STAMPA_POS = 'PRODUCT_SET_STAMPA_POS';
+export const PRODUCT_SET_STAMPA_STYLE = 'PRODUCT_SET_STAMPA_STYLE';
 
 interface productAction {
     type: typeof PRODUCT_ADD_MESHPARTS
@@ -23,6 +28,11 @@ interface productAction {
     | typeof PRODUCT_APPLY_CUSTOM_IMAGE
     | typeof PRODUCT_CLEAR_CUSTOM_IMAGE
     | typeof PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE
+    | typeof PRODUCT_SET_TEXTURE_TO_TAG
+    | typeof PRODUCT_SET_STAMPA
+    | typeof PRODUCT_SET_STAMPA_COLOR
+    | typeof PRODUCT_SET_STAMPA_POS
+    | typeof PRODUCT_SET_STAMPA_STYLE
     | typeof PRODUCT_ADD_MODEL_DATA,
     payload: any
 }
@@ -86,4 +96,8 @@ export type productState = {
     sections: Section[];
     src: string;
     customImage: string;
+    stampa: {[key: string] : string};
+    stampaColor: string;
+    stampaPos: '1' | '2';
+    stampaStyle: 'printed' | 'stitched';
 };

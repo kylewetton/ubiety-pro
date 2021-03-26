@@ -2,7 +2,7 @@ import React, {Suspense, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import World from '../World';
 import {thunkProductLoadMaterials, thunkProductLoadModel} from '../../store/product/thunks';
-import {getActiveSection, getProductModelPath} from '../../store/product/selectors';
+import {getActiveSection, getProductModelPath, getProductStampaPos, getProductStampaStyle} from '../../store/product/selectors';
 import {useIntl} from 'react-intl';
 import SwatchTray from '../SwatchTray';
 import Selector from '../Selector';
@@ -17,14 +17,17 @@ import Button from '../Button';
 import { interfaceSetActiveStage, interfaceToggleModal } from '../../store/interface/actions';
 import { interfaceGetActiveStage } from '../../store/interface/selectors';
 import LoadingOverlay from '../LoadingOverlay';
+import {productSetStampaPos, productSetStampaStyle } from '../../store/product/actions';
+import StampaColorPicker from '../StampaColorPicker';
 
 const App: React.FC = () => {
 
-    
     const dispatch = useDispatch();
     const MODEL_PATH = useSelector(getProductModelPath);
     const [activeSection] = useSelector(getActiveSection);
     const currentActiveStage = useSelector(interfaceGetActiveStage);
+    const stampaPos = useSelector(getProductStampaPos);
+    const stampaStyle = useSelector(getProductStampaStyle);
     const intl = useIntl();
     
     useEffect(() => {
@@ -75,6 +78,28 @@ const App: React.FC = () => {
                         </Button>
                     }
                     </>
+                    }
+                    {currentActiveStage === 'initials' && 
+                        <>
+                            <Button boldupper color={stampaPos === '1' ? 'green' : 'mint'} big onClick={() => dispatch(productSetStampaPos('1'))}>
+                                {intl.formatMessage({id : 'stage.initials.button.left'})}
+                            </Button>
+                            <Button boldupper color={stampaPos === '1' ? 'mint' : 'green'} big onClick={() => dispatch(productSetStampaPos('2'))}>
+                                {intl.formatMessage({id : 'stage.initials.button.right'})}
+                            </Button>
+                            
+                            <div style={{marginLeft: '1rem'}}>
+                            <Button boldupper color={stampaStyle === 'printed' ? 'green' : 'mint'} big onClick={() => dispatch(productSetStampaStyle('printed'))}>
+                                {intl.formatMessage({id : 'stage.initials.button.style-print'})}
+                            </Button>
+                            <Button boldupper color={stampaStyle === 'printed' ? 'mint' : 'green'} big onClick={() => dispatch(productSetStampaStyle('stitched'))}>
+                                {intl.formatMessage({id : 'stage.initials.button.style-stitch'})}
+                            </Button>
+                            </div>
+                            <div style={{marginLeft: '1rem'}}>
+                                <StampaColorPicker />
+                            </div>
+                        </>
                     }
                 </SelectorTray>
                 <SwatchTray />

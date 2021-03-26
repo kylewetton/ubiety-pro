@@ -1,6 +1,6 @@
 import { Mesh } from 'three';
 import _map from 'lodash/map';
-import { PRODUCT_ADD_MESHPARTS, PRODUCT_SET_ACTIVE, PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE, PRODUCT_SET_CUSTOM_IMAGE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA } from './types';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_SET_STAMPA_COLOR, PRODUCT_SET_STAMPA_POS, PRODUCT_SET_STAMPA_STYLE, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE_TO_TAG, PRODUCT_SET_CUSTOM_IMAGE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_TEXTURE, PRODUCT_SET_COLOR, productActionTypes, productPartType, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_STAMPA } from './types';
 
 /**
  * 
@@ -56,6 +56,13 @@ export function productSetTextureToActive(uid: string | number) {
     }
 }
 
+export function productSetTextureToSectionByTag(tag: string) {
+    return {
+        type: PRODUCT_SET_TEXTURE_TO_TAG,
+        payload: tag
+    }
+}
+
 export function productSetColorToActive(hex: string) {
     return {
         type: PRODUCT_SET_COLOR,
@@ -101,5 +108,33 @@ export function destroyCustomTextureFromActive(): any {
     return {
         type: PRODUCT_APPLY_CUSTOM_IMAGE,
         payload: null
+    }
+}
+
+export function productSetStampa(data: {pos: '1' | '2', letter: string}): productActionTypes {
+    return {
+        type: PRODUCT_SET_STAMPA,
+        payload: data
+    }
+}
+
+export function productSetStampaColor(data: string): productActionTypes {
+    return {
+        type: PRODUCT_SET_STAMPA_COLOR,
+        payload: data
+    }
+}
+
+export function productSetStampaPos(data: '1' | '2'): productActionTypes {
+    return {
+        type: PRODUCT_SET_STAMPA_POS,
+        payload: data
+    }
+}
+
+export function productSetStampaStyle(data: 'printed' | 'stitched'): productActionTypes {
+    return {
+        type: PRODUCT_SET_STAMPA_STYLE,
+        payload: data
     }
 }

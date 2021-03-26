@@ -1,4 +1,4 @@
-import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_CUSTOM_IMAGE } from './types';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_SET_STAMPA_STYLE, PRODUCT_SET_STAMPA_POS, PRODUCT_SET_STAMPA_COLOR, PRODUCT_SET_STAMPA, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_CUSTOM_IMAGE } from './types';
 import {shapeSectionData, shapeTextureData} from '../../utils';
 import {productPartType} from './types';
 
@@ -10,7 +10,14 @@ const initialState: productState = {
   materials: [],
   sections: [],
   src: '',
-  customImage: '', // test_texture.png
+  customImage: '',
+  stampa: {
+    1: '',
+    2: ''
+  },
+  stampaColor: '#111111',
+  stampaPos: '1',
+  stampaStyle: 'printed'
 };
 
 /**
@@ -121,6 +128,7 @@ export function productReducer(state = initialState, action: productActionTypes)
     case PRODUCT_ADD_MODEL_DATA:
       const {model_file, shadow_file, sections} = action.payload.acf;
       const [shadow_material] = shapeTextureData([shadow_file], true);
+
       shadow_material.maps = ['alpha'];
       return {
         ...state,
@@ -155,6 +163,35 @@ export function productReducer(state = initialState, action: productActionTypes)
         customImage: ''
       }
 
+    case PRODUCT_SET_STAMPA:
+      const newStampas = {...state.stampa};
+      newStampas[action.payload.pos] = newStampas[action.payload.pos] === action.payload.letter ? '' : action.payload.letter;
+      return {
+        ...state,
+        stampa: newStampas
+      }
+    case PRODUCT_SET_STAMPA_COLOR:
+      
+      return {
+        ...state,
+        stampaColor: action.payload
+      }
+    case PRODUCT_SET_STAMPA_POS:
+      return {
+        ...state,
+        stampaPos: action.payload
+      }
+      case PRODUCT_SET_STAMPA_STYLE:
+        const [stampaMat] = state.materials.filter(mat => mat.uid === -2); 
+        const restMats = state.materials.filter(mat => mat.uid !== -2); 
+        const newStampaMat = {...stampaMat};
+        newStampaMat.maps = action.payload === 'stitched' ? ['alpha', 'ao', 'normal'] : ['alpha'];
+        const newMats = [...restMats, newStampaMat];
+        return {
+          ...state,
+          materials: newMats,
+          stampaStyle: action.payload
+        }
     default:
       return state;
   }

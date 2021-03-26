@@ -22,7 +22,6 @@ const World: React.FC<WorldProps> = ({model}) => {
      */
     const { effects, lighting } = worldConfig;
     const { nodes } = useGLTF(model);
-    // const ref = useResource();
     
     /**
      * State

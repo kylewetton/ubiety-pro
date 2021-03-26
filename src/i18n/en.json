@@ -8,6 +8,12 @@
     "stage.customText.title": "Custom Text",
     "stage.materials.title": "Materials",
     "stage.initials.title": "Initials",
+    "stage.initials.button.left": "Left",
+    "stage.initials.button.right": "Right",
+    "stage.initials.button.color-add": "Done",
+    "stage.initials.button.color-edit": "Edit color",
+    "stage.initials.button.style-print": "Printed",
+    "stage.initials.button.style-stitch": "Stitched",
 
     "modal.image-editor.confirm": "Confirm",
     "modal.image-editor.clear": "Clear editor",

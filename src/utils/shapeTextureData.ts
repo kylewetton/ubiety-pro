@@ -18,6 +18,7 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
                 roughness: 0
             }
         });
+
     
     return data.map((entry: any) => {
         return  {

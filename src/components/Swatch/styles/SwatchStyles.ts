@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { SwatchProps } from '../types';
 
 export const SwatchDiv = styled.div<SwatchProps>`
+    position: relative;
     height: 78px;
     width: 78px;
     background-color: ${props => props.color};

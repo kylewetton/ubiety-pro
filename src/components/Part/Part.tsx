@@ -7,7 +7,7 @@ import { productSetActivePart, productSetColorToActive } from '../../store/produ
 import {interfaceUpdatePointer} from '../../store/interface/actions';
 import {interfaceGetPointerPosition} from '../../store/interface/selectors';
 
-const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id, customTexture}) => {
+const Part: React.FC<PartProps> = ({materialUid, color, mesh, tag, locked, id, customTexture, override}) => {
 
     const dispatch = useDispatch();
     // Disable stops the user from clicking on the item until the color has returned to default
@@ -42,16 +42,17 @@ const Part: React.FC<PartProps> = ({materialUid, color, mesh, locked, id, custom
             <mesh
             geometry={mesh.geometry}
             >
-                <meshStandardMaterial color={'#ebebeb'} wireframe/>
+                <meshBasicMaterial color={'#FFFFFF'} wireframe/>
             </mesh>
             )
         }>
             <mesh
+                renderOrder={tag === 'stampa_1' || tag === 'stampa_2' ? 1 : 0}
                 onPointerDown={(e) => !locked && !disabled && _handlePointerDown(e)}
                 onPointerUp={(e) => !locked && !disabled && _handlePointerUp(e)}
                 key={id} geometry={mesh.geometry} castShadow={false} receiveShadow={false}>
                     { materialUid && (
-                        <CustomMaterial customTexture={customTexture} color={ color } uid={materialUid} />
+                        <CustomMaterial override={override} customTexture={customTexture} color={ color } uid={materialUid} />
                     ) }
             </mesh>
         </Suspense>

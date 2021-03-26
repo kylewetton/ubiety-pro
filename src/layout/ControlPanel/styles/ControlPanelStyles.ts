@@ -5,5 +5,5 @@ import { ControlPanelProps } from '../types';
 export const ControlPanelDiv = styled.div<ControlPanelProps>`
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    z-index: 10;
+    z-index: 60;
 `

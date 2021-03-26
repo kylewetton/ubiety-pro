@@ -8,6 +8,11 @@
     "stage.customText.title": "Testo",
     "stage.materials.title": "Materiali",
     "stage.initials.title": "Iniziali",
+    "stage.initials.button.left": "Sinistro",
+    "stage.initials.button.right": "Destro",
+    "stage.initials.button.color-add": "Salva",
+    "stage.initials.button.color-edit": "Modifica colori",
+
 
     "modal.image-editor.confirm": "Salva",
     "modal.image-editor.clear": "Libero il redattore",

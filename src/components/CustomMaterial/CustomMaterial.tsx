@@ -54,7 +54,7 @@ const multiplyMaterialsTogether = (customBlob: string, baseTexture: string) => {
  * @param uid – the material uid
  */
 
-const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTexture}) => {
+const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTexture, override}) => {
 
     const material = useSelector(getMaterialByUid(uid));
     const [compedCustomTexture, setCompedCustomTexture] = useState<string | null>(null);
@@ -78,9 +78,10 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
 
     // Convert to texture image paths
         const paths = maps.map(texture => {
-            if (texture === 'custom')
+            let fileName = override && override.hasOwnProperty(texture) ? override[texture] : texture;
+            if (fileName === 'custom')
                 return compedCustomTexture ? compedCustomTexture : '';
-             return `${material.src}/${texture}.jpg`
+             return `${material.src}/${fileName}.jpg`
         }).filter(Boolean);
 
     // Load all the textures (useTexture returns an array)
