@@ -8,6 +8,9 @@ import pathConfig from '../../config/pathConfig';
 const IS_STANDALONE = process.env.STANDALONE;
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
+if (IS_STANDALONE)
+    console.log('Running standalone version, loading mock data');
+
 const mockProductData = IS_STANDALONE ? require('../../mock/product.json') : null;
 const mockTextureData = IS_STANDALONE ? require('../../mock/texture.json') : null;
 
@@ -40,6 +43,9 @@ export const thunkProductLoadModel = (): ThunkAction<void, RootState, unknown, A
 }
 
 export const thunkProductLoadVariationIds = (): ThunkAction<void, RootState, unknown, Action<string>> => async(dispatch: Dispatch, getState: GetState) => {
+
+    if (IS_STANDALONE) return false;
+
     const variationIdAction = {
         action: 'ubiety_collect_variation_ids',
     };
