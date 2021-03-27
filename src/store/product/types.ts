@@ -17,6 +17,7 @@ export const PRODUCT_SET_STAMPA = 'PRODUCT_SET_STAMPA';
 export const PRODUCT_SET_STAMPA_COLOR = 'PRODUCT_SET_STAMPA_COLOR';
 export const PRODUCT_SET_STAMPA_POS = 'PRODUCT_SET_STAMPA_POS';
 export const PRODUCT_SET_STAMPA_STYLE = 'PRODUCT_SET_STAMPA_STYLE';
+export const PRODUCT_ADD_CART_VARIATION_IDS = 'PRODUCT_ADD_CART_VARIATION_IDS';
 
 interface productAction {
     type: typeof PRODUCT_ADD_MESHPARTS
@@ -33,6 +34,7 @@ interface productAction {
     | typeof PRODUCT_SET_STAMPA_COLOR
     | typeof PRODUCT_SET_STAMPA_POS
     | typeof PRODUCT_SET_STAMPA_STYLE
+    | typeof PRODUCT_ADD_CART_VARIATION_IDS
     | typeof PRODUCT_ADD_MODEL_DATA,
     payload: any
 }
@@ -86,6 +88,20 @@ export interface Section {
 
 export type productActionTypes = productAction;
 
+interface CartVariation {
+    id: number;
+    tag: string;
+    slug: string;
+}
+
+interface CartLineItem {
+    pid: number;
+    vid: number | null;
+    tag: string;
+    qty: number;
+    vslug?: string;
+}
+
 export type productState = {
     [key: string]: any;
     loadingMeshParts: boolean;
@@ -100,4 +116,6 @@ export type productState = {
     stampaColor: string;
     stampaPos: '1' | '2';
     stampaStyle: 'printed' | 'stitched';
+    cartVariationIds?: {[key: number] : CartVariation[]};
+    cartPayload: CartLineItem[]
 };

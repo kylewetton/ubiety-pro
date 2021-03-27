@@ -15,7 +15,7 @@ const languages: {[key: string]: any} = {
 }
 
 const browserLocale = _get(global, 'navigator.userLanguage') || _get(global, 'navigator.language');
-const locale = browserLocale || 'en';
+const locale = browserLocale ? browserLocale.includes('en') ? 'en' : browserLocale : 'en'  ;
 
 ReactDOM.render(
   <React.StrictMode>

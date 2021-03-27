@@ -5,6 +5,7 @@ import {useTexture} from 'drei';
 import {fabric} from 'fabric';
 import { Vector2, RepeatWrapping, Texture } from 'three';
 import config from '../../config/brandConfig';
+import pathConfig from '../../config/pathConfig';
 import _map from 'lodash/map';
 import { useSelector } from 'react-redux';
 import { getMaterialByUid } from '../../store/product/selectors';
@@ -58,14 +59,14 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
 
     const material = useSelector(getMaterialByUid(uid));
     const [compedCustomTexture, setCompedCustomTexture] = useState<string | null>(null);
-    const envMap = useCubeTexture(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], { path: '/cubemap/medium-studio/' });
+    const envMap = useCubeTexture(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], { path: pathConfig.cubemap });
     const maps = material && [...material.maps, 'custom'];
 
     useEffect(() => {
         if (customTexture) {
             if (material.maps.includes('color'))
             {
-                multiplyMaterialsTogether(customTexture, `${material.src}/color.jpg`)
+                multiplyMaterialsTogether(customTexture, `${pathConfig.textures}/${material.src}/color.jpg`)
                 .then(res => setCompedCustomTexture(res));
             } else {
             setCompedCustomTexture(customTexture);
@@ -81,7 +82,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
             let fileName = override && override.hasOwnProperty(texture) ? override[texture] : texture;
             if (fileName === 'custom')
                 return compedCustomTexture ? compedCustomTexture : '';
-             return `${material.src}/${fileName}.jpg`
+             return `${pathConfig.textures}/${material.src}/${fileName}.jpg`
         }).filter(Boolean);
 
     // Load all the textures (useTexture returns an array)

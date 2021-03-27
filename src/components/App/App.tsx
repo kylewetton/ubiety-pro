@@ -1,7 +1,7 @@
 import React, {Suspense, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import World from '../World';
-import {thunkProductLoadMaterials, thunkProductLoadModel} from '../../store/product/thunks';
+import {thunkProductLoadMaterials, thunkProductLoadModel, thunkProductLoadVariationIds} from '../../store/product/thunks';
 import {getActiveSection, getProductModelPath, getProductStampaPos, getProductStampaStyle} from '../../store/product/selectors';
 import {useIntl} from 'react-intl';
 import SwatchTray from '../SwatchTray';
@@ -24,11 +24,8 @@ import ScaffoldInitialsButtons from '../../layout/ScaffoldInitialsButtons';
 /**
  * 
  * @todo
- * -    Make responsive
- * -    Port to WordPress
- * -    Test real data
+ * -    Remove static 'quarters'
  * -    Dual custom image
- * -    Output to ecommerce store
  * -    Save custom image / custom text
  */
 
@@ -45,6 +42,7 @@ const App: React.FC = () => {
     useEffect(() => {
         dispatch(thunkProductLoadMaterials());
         dispatch(thunkProductLoadModel());
+        dispatch(thunkProductLoadVariationIds());
     }, [dispatch]);
 
     useEffect(() => {
