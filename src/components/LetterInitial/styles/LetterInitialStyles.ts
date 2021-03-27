@@ -6,6 +6,7 @@ export const LetterInitialDiv = styled.div`
     height: 78px;
     width: 78px;
     cursor: pointer;
+    flex: 1 0 auto;
     img {
         height: 100%;
         width: 100%;

@@ -19,6 +19,18 @@ import { interfaceGetActiveStage } from '../../store/interface/selectors';
 import LoadingOverlay from '../LoadingOverlay';
 import {productSetStampaPos, productSetStampaStyle } from '../../store/product/actions';
 import StampaColorPicker from '../StampaColorPicker';
+import ScaffoldInitialsButtons from '../../layout/ScaffoldInitialsButtons';
+
+/**
+ * 
+ * @todo
+ * -    Make responsive
+ * -    Port to WordPress
+ * -    Test real data
+ * -    Dual custom image
+ * -    Output to ecommerce store
+ * -    Save custom image / custom text
+ */
 
 const App: React.FC = () => {
 
@@ -80,26 +92,26 @@ const App: React.FC = () => {
                     </>
                     }
                     {currentActiveStage === 'initials' && 
-                        <>
-                            <Button boldupper color={stampaPos === '1' ? 'green' : 'mint'} big onClick={() => dispatch(productSetStampaPos('1'))}>
-                                {intl.formatMessage({id : 'stage.initials.button.left'})}
-                            </Button>
-                            <Button boldupper color={stampaPos === '1' ? 'mint' : 'green'} big onClick={() => dispatch(productSetStampaPos('2'))}>
-                                {intl.formatMessage({id : 'stage.initials.button.right'})}
-                            </Button>
+                        <ScaffoldInitialsButtons>
+                            <article>
+                                <Button boldupper color={stampaPos === '1' ? 'green' : 'mint'} big onClick={() => dispatch(productSetStampaPos('1'))}>
+                                    {intl.formatMessage({id : 'stage.initials.button.left'})}
+                                </Button>
+                                <Button boldupper color={stampaPos === '1' ? 'mint' : 'green'} big onClick={() => dispatch(productSetStampaPos('2'))}>
+                                    {intl.formatMessage({id : 'stage.initials.button.right'})}
+                                </Button>
+                            </article>
                             
-                            <div style={{marginLeft: '1rem'}}>
-                            <Button boldupper color={stampaStyle === 'printed' ? 'green' : 'mint'} big onClick={() => dispatch(productSetStampaStyle('printed'))}>
-                                {intl.formatMessage({id : 'stage.initials.button.style-print'})}
-                            </Button>
-                            <Button boldupper color={stampaStyle === 'printed' ? 'mint' : 'green'} big onClick={() => dispatch(productSetStampaStyle('stitched'))}>
-                                {intl.formatMessage({id : 'stage.initials.button.style-stitch'})}
-                            </Button>
-                            </div>
-                            <div style={{marginLeft: '1rem'}}>
+                            <article>
                                 <StampaColorPicker />
-                            </div>
-                        </>
+                                <Button boldupper color={stampaStyle === 'printed' ? 'green' : 'mint'} big onClick={() => dispatch(productSetStampaStyle('printed'))}>
+                                    {intl.formatMessage({id : 'stage.initials.button.style-print'})}
+                                </Button>
+                                <Button boldupper color={stampaStyle === 'printed' ? 'mint' : 'green'} big onClick={() => dispatch(productSetStampaStyle('stitched'))}>
+                                    {intl.formatMessage({id : 'stage.initials.button.style-stitch'})}
+                                </Button>
+                            </article>
+                        </ScaffoldInitialsButtons>
                     }
                 </SelectorTray>
                 <SwatchTray />

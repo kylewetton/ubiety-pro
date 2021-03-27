@@ -11,6 +11,7 @@ export const ImageEditorDiv = styled.div<ImageEditorProps>`
 export const ImageEditorButtonTrayDiv = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: ${spacing[4]};
 `
 
@@ -32,4 +33,6 @@ export const ImageEditorColorPicker = styled.div`
 
 export const ImageEditorColorHouse = styled.div`
     position: relative;
+    display: flex;
+    flex: 1 1 auto;
 `

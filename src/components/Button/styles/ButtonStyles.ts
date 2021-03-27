@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {colors, spacing, textSize} from '../../../theme';
+import {breakpoints, colors, spacing, textSize} from '../../../theme';
 
 interface ButtonDivProps {
     big?: boolean;
@@ -25,7 +25,7 @@ const _genButtonTheme = (color: string) => {
 }
 
 export const ButtonEl = styled.button<ButtonDivProps>`
-    padding: ${props => props.big ? `${spacing[3]} ${spacing[6]}` : `${spacing[1]} ${spacing[3]}`};
+    padding: ${spacing[1]} ${spacing[2]};
     background: ${props => props.color ? _genButtonTheme(props.color) : colors.brand.green};
     color: ${props => props.color === 'gray' ? colors.gray[500] : colors.white};
     display: ${props => props.block ? 'block' : 'inline-block'};
@@ -33,6 +33,7 @@ export const ButtonEl = styled.button<ButtonDivProps>`
     text-align: ${props => props.align};
     font-weight: ${props => props.boldupper ? 'bold' : 'initial'};
     text-transform: ${props => props.boldupper ? 'uppercase' : 'initial'};
+    font-size: ${textSize.sm};
 
     &.minimal {
         background: transparent;
@@ -41,5 +42,15 @@ export const ButtonEl = styled.button<ButtonDivProps>`
     }
     &:focus {
         outline: none;
+    }
+
+    @media(min-width: ${breakpoints.lg}) {
+        font-size: ${textSize.base};
+         padding: ${props => props.big ? `${spacing[3]} ${spacing[2]}` : `${spacing[1]} ${spacing[3]}`};  
+        }
+
+    @media(min-width: ${breakpoints.xl}) {
+    font-size: ${textSize.base};
+     padding: ${props => props.big ? `${spacing[3]} ${spacing[6]}` : `${spacing[1]} ${spacing[3]}`};  
     }
 `

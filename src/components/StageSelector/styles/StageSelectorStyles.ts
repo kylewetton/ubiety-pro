@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import { StageSelectorProps } from '../types';
-import {colors, radius, spacing} from '../../../theme';
+import {breakpoints, colors, radius, spacing} from '../../../theme';
 
 export const StageSelectorDiv = styled.div<StageSelectorProps>`
     width: ${props => props.active ? '100%' : `calc(100% - ${spacing[10]})`};
     position: relative;
     transition: 150ms ease-out;
-    margin-bottom: ${spacing[3]};
+    margin-bottom: ${spacing[1]};
     opacity: ${props => props.active ? '1' : '0.66'};
+    @media (min-width: ${breakpoints.md}) {
+        margin-bottom: ${spacing[3]};
+    }
 `
 
 export const StageSelectorAccent = styled.div<{active: boolean}>`

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {boxShadow, colors, radius, spacing} from '../../../theme';
+import {boxShadow, colors, breakpoints, radius, spacing, textSize} from '../../../theme';
 
 
 const _genSelectorTheme = (color: string) => {
@@ -22,10 +22,18 @@ export const SelectorDiv = styled.div`
     position: relative;
     display: inline-flex;
     align-items: stretch;
-    margin-right: ${spacing[12]};
+    margin-right: 0;
+    margin-bottom: ${spacing[1]};
+
+    @media (min-width: ${breakpoints.md}) {
+        margin-right: ${spacing[6]};
+    }
+    @media (min-width: ${breakpoints.lg}) {
+        margin-right: ${spacing[12]};
+    }
     `
 export const SelectorMenu = styled.div`
-    padding: ${spacing[space]};
+    padding: ${spacing[2]};
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -34,12 +42,24 @@ export const SelectorMenu = styled.div`
     svg, path {
         stroke: ${colors.white};
     }    
+    @media (min-width: ${breakpoints.lg}) {
+        padding: ${spacing[space]};
+    }
 `
 export const SelectorTitle = styled.div`
+ display: flex;
+ align-items: center;
  background: ${props => props.color ? _genSelectorTheme(props.color) : colors.brand.green};
- padding: ${spacing[space]} ${spacing[space * 4]} ${spacing[space]} ${spacing[space]};
+ padding: ${spacing[2]};
+ padding-right: ${spacing[4]};
  flex: 1 1 auto;
  color: ${colors.white};
+ font-size: ${textSize.sm};
+
+ @media (min-width: ${breakpoints.lg}) {
+    padding: ${spacing[space]} ${spacing[space * 4]} ${spacing[space]} ${spacing[space]};
+    font-size: ${textSize.base};
+ }
 `
 export const SelectorArrows = styled.div`
     display: flex;
@@ -53,7 +73,7 @@ export const SelectorArrow = styled.div`
  align-items: center;
  justify-content: center;
  cursor: pointer;
- width: ${spacing[12]};
+ width: ${spacing[10]};
  svg {
     transition: 250ms ease-out;
  }
@@ -75,7 +95,8 @@ export const SelectorArrow = styled.div`
      height: 50%;
      background: ${colors.white};
     }
- &.next {
+ @media (min-width: ${breakpoints.lg}) {
+    width: ${spacing[12]};
  }
 `
 
@@ -96,7 +117,8 @@ export const SelectorList = styled.ul`
  justify-content: space-between;
  align-items: center;
  background-color: ${colors.white};
- padding: ${spacing[3]};
+ padding: ${spacing[2]} ${spacing[3]};
+ font-size: ${textSize.sm};
  color: ${colors.brand.blue};
  border-bottom: 1px solid ${colors.gray[200]};
  cursor: pointer;
@@ -109,8 +131,13 @@ export const SelectorList = styled.ul`
  &:last-child {
      border-bottom: 0;
  }
-    svg {
-     fill: ${colors.brand.blue};
-     stroke: ${colors.brand.blue};   
-    }
+svg {
+    fill: ${colors.brand.blue};
+    stroke: ${colors.brand.blue};   
+}
+
+@media (min-width: ${breakpoints.md}) {
+    font-size: ${textSize.base};
+    padding: ${spacing[3]};
+}
 `
