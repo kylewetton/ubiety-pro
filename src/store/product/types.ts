@@ -84,6 +84,7 @@ export interface Section {
     color: string;
     custom_texture?: any;
     locked: boolean;
+    allowCustom: boolean;
 }
 
 export type productActionTypes = productAction;

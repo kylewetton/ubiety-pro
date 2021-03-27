@@ -79,7 +79,6 @@ fetch(pathConfig.endpoints.cart, {
   method: 'POST',
   body: fd
 })
-.then(res => res.json())
 .catch(err => console.warn('There was an error updating the cart (check reducer)', err));
 
   return lineItems;
@@ -101,11 +100,8 @@ export function productReducer(state = initialState, action: productActionTypes)
         return newSec;
       });
 
-      const meshParts = action.payload.map((part: any) => {
-        /**
-         * @TODO Need to figure out what to do here?
-         */
-        if (part.tag !== 'quarters')
+      const meshParts = action.payload.map((part: any, idx: number) => {
+        if (idx !== 0)
           return part;
         part.active = true;
         return part;

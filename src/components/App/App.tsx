@@ -47,7 +47,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         if (activeSection) {
-            if ((activeSection.tag !== 'quarters' && currentActiveStage === 'customText' )|| (activeSection.tag !== 'quarters' && currentActiveStage === 'customImage'))
+            if ((!activeSection.allowCustom && currentActiveStage === 'customText' )|| (!activeSection.allowCustom && currentActiveStage === 'customImage'))
                 dispatch(interfaceSetActiveStage('materials'))
         }
     }, [activeSection, currentActiveStage, dispatch])
@@ -75,7 +75,7 @@ const App: React.FC = () => {
                 }
                 <Selector type={`material`} />
 
-                    {activeSection.tag === 'quarters' && 
+                    {activeSection.allowCustom && 
                     <>
                     {currentActiveStage === 'customImage' && 
                         <Button boldupper color={'blue'} big onClick={_handleOpenCustomModal}>
@@ -118,7 +118,7 @@ const App: React.FC = () => {
                 <StageSelectorSidebar>
                     <StageSelector active={currentActiveStage === 'materials'} onClick={() => dispatch(interfaceSetActiveStage('materials'))} >{intl.formatMessage({id : 'stage.materials.title'})}</StageSelector>
                     <StageSelector active={currentActiveStage === 'initials'} onClick={() => dispatch(interfaceSetActiveStage('initials'))} >{intl.formatMessage({id : 'stage.initials.title'})}</StageSelector>
-                    {activeSection.tag === 'quarters' && 
+                    {activeSection.allowCustom && 
                     <>
                         <StageSelector active={currentActiveStage === 'customText'} onClick={() => dispatch(interfaceSetActiveStage('customText'))} >{intl.formatMessage({id : 'stage.customText.title'})}</StageSelector>
                         <StageSelector active={currentActiveStage === 'customImage'} onClick={() => dispatch(interfaceSetActiveStage('customImage'))} >{intl.formatMessage({id : 'stage.customImage.title'})}</StageSelector>

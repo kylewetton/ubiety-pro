@@ -4,15 +4,16 @@ import {GetState, RootState} from '../../store';
 import {productAddMaterials, productAddModelData, productAddCartVariationIds} from './actions';
 import {shapeTextureData} from '../../utils';
 import pathConfig from '../../config/pathConfig';
-// const mockProductData = require('../../mock/product.json');
-// const mockTextureData = require('../../mock/texture.json');
+
+const mockProductData = process.env.STANDALONE ? require('../../mock/product.json') : null;
+const mockTextureData = process.env.STANDALONE ? require('../../mock/texture.json') : null;
 
 const PRODUCT_ID = process.env.NODE_ENV === 'development' ? '51' : document.getElementById('post_id')?.dataset.id;
 
 export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknown, Action<string>> => async(dispatch: Dispatch, getState: GetState) => {
     fetch(pathConfig.endpoints.texture)
     .then(res => res.json())
-    .then(data => shapeTextureData(data))
+    .then(data => process.env.STANDALONE ? shapeTextureData(mockTextureData) : shapeTextureData(data))
     .then(textures => {
         dispatch(productAddMaterials([{
             uid: -2,
@@ -29,10 +30,9 @@ export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknow
 }
 
 export const thunkProductLoadModel = (): ThunkAction<void, RootState, unknown, Action<string>> => async(dispatch: Dispatch, getState: GetState) => {
-    // fetch('https://jsonplaceholder.typicode.com/todos/100')
     fetch(`${pathConfig.endpoints.product}/${PRODUCT_ID}`)
     .then(res => res.json())
-    .then(data => dispatch(productAddModelData(data)))
+    .then(data => process.env.STANDALONE ? dispatch(productAddModelData(mockProductData)) : dispatch(productAddModelData(data)))
     .catch(error => console.error('thunkProductLoadModel was not successful', error));
 }
 

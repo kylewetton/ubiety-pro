@@ -18,6 +18,7 @@ const shapeSectionData: ShapeSectionDataFn = (data: any) => {
             current_material: initial_material.length ? initial_material[0] : null,
             active: idx === 0,
             color: '#FFFFFF',
+            allowCustom: section.allow_custom
         }
     });
 }
