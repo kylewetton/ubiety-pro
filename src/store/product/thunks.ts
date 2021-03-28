@@ -5,10 +5,8 @@ import {productAddMaterials, productAddModelData, productAddCartVariationIds} fr
 import {shapeTextureData} from '../../utils';
 import pathConfig from '../../config/pathConfig';
 
-const IS_STANDALONE = process.env.STANDALONE === 'true';
+const IS_STANDALONE = window.location.host.includes('netlify');
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
-
-console.log(process.env.STANDALONE);
 
 if (IS_STANDALONE)
     console.log('Running standalone version, loading mock data');
