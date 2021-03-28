@@ -75,6 +75,12 @@ for (var key in endpointPayload) {
   fd.append(key, endpointPayload[key])
 }
 
+/**
+ * Standalone blocker
+ */
+if (window.location.host.includes('netlify'))
+  return [];
+
 fetch(pathConfig.endpoints.cart, {
   method: 'POST',
   body: fd
