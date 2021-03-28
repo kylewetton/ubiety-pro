@@ -25,6 +25,8 @@ const initialState: productState = {
 
 const _updateCart = (state: productState, materials: any) => {
 
+  const cartButton = document.querySelector('#umjs-cart-button-total');
+
   /**
    * Step One: Get product IDs for each section
    */
@@ -75,6 +77,11 @@ for (var key in endpointPayload) {
   fd.append(key, endpointPayload[key])
 }
 
+const _handleUpdateCartButton = (res: any) => {
+  if (cartButton)
+    cartButton.innerHTML = res;
+}
+
 /**
  * Standalone blocker
  */
@@ -85,6 +92,7 @@ fetch(pathConfig.endpoints.cart, {
   method: 'POST',
   body: fd
 })
+.then(res => _handleUpdateCartButton(res))
 .catch(err => console.warn('There was an error updating the cart (check reducer)', err));
 
   return lineItems;
