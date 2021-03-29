@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import uuid from 'react-uuid';
 import {useIntl} from 'react-intl';
 import {fabric} from 'fabric';
-import {ImageEditorDiv, ImageEditorButtonTrayDiv} from './styles/ImageEditorStyles';
+import {ImageEditorDiv, ImageEditorButtonTrayDiv, ImageEditorStencil, ImageEditorProgressDiv} from './styles/ImageEditorStyles';
 import { ImageEditorProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductCustomImage } from '../../store/product/selectors';
-import { productApplyCustomImage, productSetCustomImage, productClearCustomImage, destroyCustomTextureFromActive } from '../../store/product/actions';
+import { getActiveSection, getProductCustomImage, getProductCustomImagePos } from '../../store/product/selectors';
+import { productApplyCustomImage, productSetCustomImage, productToggleCustomImagePos, productClearCustomImage, destroyCustomTextureFromActive } from '../../store/product/actions';
 import ImageUpload from '../ImageUpload';
 import Button from '../Button';
 import Modal from '../../layout/Modal';
 import { interfaceToggleModal } from '../../store/interface/actions';
 import { interfaceGetModalState } from '../../store/interface/selectors';
+import Dots from '../Dots';
 
 const ImageEditor: React.FC<ImageEditorProps> = () => {
     
@@ -23,6 +24,8 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
     const customImageUrl = useSelector(getProductCustomImage);
     const modalState = useSelector(interfaceGetModalState('customImage'));
     const intl = useIntl();
+    const [activeSection] = useSelector(getActiveSection);
+    const customImagePos = useSelector(getProductCustomImagePos);
 
     /**
      * Instance setup
@@ -67,36 +70,36 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
         dispatch(interfaceToggleModal({id: 'customImage', status: 'closed'}));;
     }
 
-    const _generateCustomTexture = () => {
+    const _generateCustomTexture = (goToNextPosition = false) => {
         const texture = editor.toDataURL({multiplier: 1024 / dimensions});
-        _handleCloseCustomImageModal();
+        // _handleCloseCustomImageModal();
         fetch(texture)
         .then(res => res.blob())
         .then(window.URL.createObjectURL)
-        .then(objectUrl => dispatch(productApplyCustomImage(objectUrl)))
+        .then(objectUrl => {
+            dispatch(productApplyCustomImage(objectUrl))
+            
+            if (goToNextPosition) {
+                dispatch(productToggleCustomImagePos(1));
+            } else {
+                dispatch(productToggleCustomImagePos(0));
+                _handleCloseCustomImageModal();
+            }
+        });
+
+        
     }
     
     const _handleUpload = (url: string) => {
         dispatch(productSetCustomImage(url));
     }
 
-    /**
-     * Clear: Clear the image editor, but keep the texture on the active section
-     */
-
     const _clearCustomTexture = () => {
         if (editor) editor.dispose();
         setEditor(null);
-        dispatch(productClearCustomImage());
-    }
-
-    /**
-     * Clear the image editor, and REMOVE the texture on the active section
-     */
-
-    const _destroyCustomTexture = () => {
         _handleCloseCustomImageModal();
         dispatch(destroyCustomTextureFromActive());
+        dispatch(productClearCustomImage());
     }
 
 
@@ -105,13 +108,19 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
         if (customImageUrl)
         return (
                 <ImageEditorDiv>
+                    {activeSection.customStencil && 
+                        <ImageEditorStencil mirror={customImagePos === 1} src={activeSection.customStencil} />
+                    }
                     <canvas id={`image-editor-${uniq}`} />
+
+                    <ImageEditorProgressDiv>
+                        <p>{intl.formatMessage({id : customImagePos === 0 ? 'modal.image-editor.stencil-note.outside' : 'modal.image-editor.stencil-note.inside'})}</p>
+                        <Dots count={2} activeIndex={customImagePos} onClick={(idx) => dispatch(productToggleCustomImagePos(idx))} />
+                    </ImageEditorProgressDiv>
+
                     <ImageEditorButtonTrayDiv>
                         <div>
-                            <Button color={'green'} onClick={_generateCustomTexture}>
-                                {intl.formatMessage({id : 'modal.image-editor.confirm'})}
-                            </Button>
-                            <Button color={'mint'} onClick={_clearCustomTexture}>
+                            <Button minimal color={'red'} onClick={_clearCustomTexture}>
                                 {intl.formatMessage({id : 'modal.image-editor.clear'})}
                             </Button>
                         </div>
@@ -120,9 +129,15 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
                             <Button color={'gray'} onClick={_handleCloseCustomImageModal}>
                                 {intl.formatMessage({id : 'modal.image-editor.close'})}
                             </Button>
-                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>
-                                {intl.formatMessage({id : 'modal.image-editor.remove'})}
-                            </Button>
+                            {customImagePos === 0 ? 
+                            (<Button color={'green'} onClick={() => _generateCustomTexture(true)}>
+                                {intl.formatMessage({id : 'modal.image-editor.next'})}
+                            </Button>)
+                            :
+                            (<Button color={'green'} onClick={() => _generateCustomTexture(false)}>
+                                {intl.formatMessage({id : 'modal.image-editor.confirm'})}
+                            </Button>)
+                            }
                         </div>
                     </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>  
@@ -132,11 +147,12 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
                 <ImageEditorDiv>
                     <ImageUpload uploadImage={_handleUpload} />
                         <ImageEditorButtonTrayDiv>
-                            <span />
                             <div>
-                                <Button color={'gray'} minimal onClick={_destroyCustomTexture}>
-                                    {intl.formatMessage({id : 'modal.image-editor.remove'})}
+                                <Button minimal color={'red'} onClick={_clearCustomTexture}>
+                                    {intl.formatMessage({id : 'modal.image-editor.clear'})}
                                 </Button>
+                            </div>
+                            <div>
                                 <Button color={'gray'} onClick={_handleCloseCustomImageModal}>
                                     {intl.formatMessage({id : 'modal.image-editor.close'})}
                                 </Button>

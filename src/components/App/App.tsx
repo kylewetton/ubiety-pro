@@ -60,7 +60,6 @@ const App: React.FC = () => {
         dispatch(interfaceToggleModal({id: 'customText', status: 'open'}));
     }
 
-
     if (!MODEL_PATH)
         return <LoadingOverlay message={intl.formatMessage({id : 'loading.message.fetching-data'})} />
         

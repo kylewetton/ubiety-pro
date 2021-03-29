@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {fabric} from 'fabric';
 import {useIntl} from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
+import _isEqual from 'lodash/isEqual';
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import {ImageEditorDiv, ImageEditorButtonTrayDiv, ImageEditorFontSelector, ImageEditorColorPicker, ImageEditorColorHouse} from '../ImageEditor/styles/ImageEditorStyles';
 import { TextEditorProps } from './types';
@@ -83,7 +84,7 @@ const TextEditor: React.FC<TextEditorProps> = () => {
          * If the editor exists and the activeColor isn't just hovercolor flashing
          */
         if (editor && activeSection.color !== config.hoverColor) {
-            if (activeSection.custom_texture && activeSection.custom_texture === lastSubmittedText && activeSection.tag === 'quarters') {
+            if (activeSection.custom_texture && _isEqual(activeSection.custom_texture, lastSubmittedText) && activeSection.tag === 'quarters') {
                 _generateCustomTexture();
             }
         }

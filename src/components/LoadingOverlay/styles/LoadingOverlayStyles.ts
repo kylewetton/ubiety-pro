@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { LoadingOverlayProps } from '../types';
-import {colors, radius, spacing} from '../../../theme';
+import {colors, spacing} from '../../../theme';
 
 export const LoadingOverlayDiv = styled.div`
     position: fixed;

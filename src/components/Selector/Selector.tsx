@@ -6,7 +6,6 @@ import {productSetTextureToActive} from '../../store/product/actions';
 import { SelectorProps } from './types';
 import { getActiveSection } from '../../store/product/selectors';
 import Icon from '../Icon';
-import { map } from 'lodash';
 
 const Selector: React.FC<SelectorProps> = ({type, color = 'green'}) => {
     

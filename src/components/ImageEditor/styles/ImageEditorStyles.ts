@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ImageEditorProps } from '../types';
-import {boxShadow, colors, radius, spacing} from '../../../theme';
+import {boxShadow, colors, spacing, textSize} from '../../../theme';
 
 export const ImageEditorDiv = styled.div<ImageEditorProps>`
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -35,4 +35,30 @@ export const ImageEditorColorHouse = styled.div`
     position: relative;
     display: flex;
     flex: 1 1 auto;
+`
+
+export const ImageEditorStencil = styled.img<{mirror: boolean}>`
+    position: absolute;
+    top: ${spacing[3]}; left: ${spacing[3]}; right: ${spacing[3]}; bottom: ${spacing[3]};
+    width: 480px;
+    height: 480px;
+    z-index: 3;
+    pointer-events: none;
+    ${props => props.mirror ? `transform: scaleX(-1)` : null};
+`
+
+export const ImageEditorProgressDiv = styled.div`
+    padding: ${spacing[2]} ${spacing[4]};
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: ${textSize.xs};
+    text-transform: uppercase;
+    background: ${colors.gray[200]};
+    p {
+        color: ${colors.gray[500]};
+        margin-right: ${spacing[2]};
+        margin-bottom: 0;
+        line-height: 1;
+    }
 `

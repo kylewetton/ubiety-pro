@@ -16,12 +16,14 @@
     "stage.initials.button.style-stitch": "Stitched",
 
     "modal.image-editor.confirm": "Confirm",
-    "modal.image-editor.clear": "Clear editor",
+    "modal.image-editor.next": "Next",
+    "modal.image-editor.clear": "Clear",
     "modal.image-editor.close": "Close",
-    "modal.image-editor.remove": "Remove image",
+    "modal.image-editor.stencil-note.outside": "outside",
+    "modal.image-editor.stencil-note.inside": "inside",
 
     "modal.text-editor.confirm": "Confirm",
-    "modal.text-editor.clear": "Clear editor",
+    "modal.text-editor.clear": "Clear",
     "modal.text-editor.close": "Close",
     "modal.text-editor.remove": "Remove text",
     "modal.text-editor.color-add" : "Done",

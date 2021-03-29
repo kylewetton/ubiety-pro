@@ -19,3 +19,12 @@ export const SwatchDiv = styled.div<SwatchProps>`
         width: 78px;
     }
 `
+
+export const SwatchTextureOverlay = styled.div<{src: string}>`
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    ${props => props.src && `background-image: url('${props.src}');`}
+    background-repeat: repeat-x;
+    background-size: contain;
+    z-index: 1;
+`

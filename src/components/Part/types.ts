@@ -5,6 +5,6 @@ export interface PartProps {
     locked: boolean;
     id: string;
     tag?: string;
-    customTexture?: string;
+    customTexture?: string | null;
     override?: {[key: string]: string};
 }
