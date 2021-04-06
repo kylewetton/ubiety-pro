@@ -12,7 +12,8 @@
     "stage.initials.button.right": "Destro",
     "stage.initials.button.color-add": "Salva",
     "stage.initials.button.color-edit": "Modifica colori",
-
+    "stage.initials.button.style-print": "Stampa",
+    "stage.initials.button.style-stitch": "Rimaco",
 
     "modal.image-editor.confirm": "Salva",
     "modal.image-editor.next": "Next",
