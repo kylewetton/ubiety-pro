@@ -1,747 +1,933 @@
-[
-    {
-    "id": 126,
-    "date": "2020-10-26T04:18:12",
-    "date_gmt": "2020-10-26T04:18:12",
-    "guid": {
-    "rendered": "http://localhost/?post_type=texture&#038;p=126"
-    },
-    "modified": "2020-10-26T04:28:33",
-    "modified_gmt": "2020-10-26T04:28:33",
-    "slug": "glossy_metal",
-    "status": "publish",
-    "type": "texture",
-    "link": "http://localhost/texture/glossy_metal/",
-    "title": {
-    "rendered": "Glossy Metal"
-    },
-    "template": "",
-    "acf": {
-    "texture_file": false,
-    "texture_maps_included": [],
-    "product": "",
-    "swatches": [
-    {
-    "label": "Yellow",
-    "swatch": "#eeee22"
-    },
-    {
-    "label": "Silver",
-    "swatch": "#f4f4f4"
-    },
-    {
-    "label": "Hot Pink",
-    "swatch": "#e668ed"
-    }
-    ],
-    "thumbnail_png": false,
-    "material_attributes": {
-    "blendable": false,
-    "metallic": true,
-    "double_sided": false,
-    "opacity": "1",
-    "roughness": "0",
-    "ambient_occlusion_intensity": "1",
-    "normal_intensity": "1",
-    "environment_map_intensity": "1",
-    "reflectivity": "1",
-    "repeat": "1"
-    }
-    },
-    "_links": {
-    "self": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture/126"
-    }
-    ],
-    "collection": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture"
-    }
-    ],
-    "about": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/types/texture"
-    }
-    ],
-    "wp:attachment": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/media?parent=126"
-    }
-    ],
-    "curies": [
-    {
-    "name": "wp",
-    "href": "https://api.w.org/{rel}",
-    "templated": true
-    }
-    ]
-    }
-    },
-    {
-    "id": 119,
-    "date": "2020-10-24T03:57:15",
-    "date_gmt": "2020-10-24T03:57:15",
-    "guid": {
-    "rendered": "http://localhost/?post_type=texture&#038;p=119"
-    },
-    "modified": "2020-10-26T04:23:04",
-    "modified_gmt": "2020-10-26T04:23:04",
-    "slug": "foxing_toe",
-    "status": "publish",
-    "type": "texture",
-    "link": "http://localhost/texture/foxing_toe/",
-    "title": {
-    "rendered": "Foxing Toe"
-    },
-    "template": "",
-    "acf": {
-    "texture_file": {
-    "ID": 120,
-    "id": 120,
-    "title": "foxing_toe",
-    "filename": "foxing_toe.zip",
-    "filesize": 16010,
-    "url": "http://localhost/wp-content/uploads/2020/10/foxing_toe.zip",
-    "link": "http://localhost/texture/foxing_toe/foxing_toe/",
-    "alt": "",
-    "author": "1",
-    "description": "",
-    "caption": "",
-    "name": "foxing_toe",
-    "status": "inherit",
-    "uploaded_to": 119,
-    "date": "2020-10-24 03:56:45",
-    "modified": "2020-10-24 03:56:45",
-    "menu_order": 0,
-    "mime_type": "application/zip",
-    "type": "application",
-    "subtype": "zip",
-    "icon": "http://localhost/wp-includes/images/media/archive.png"
-    },
-    "texture_maps_included": [
-    "normal"
-    ],
-    "product": "",
-    "swatches": [{
-        "label": "White",
-        "swatch": "#FFFFFF"
-
+[{
+        "id": 157,
+        "date": "2021-03-28T02:43:41",
+        "date_gmt": "2021-03-28T02:43:41",
+        "guid": {
+            "rendered": "http://localhost/?post_type=texture&#038;p=157"
+        },
+        "modified": "2021-03-28T02:54:41",
+        "modified_gmt": "2021-03-28T02:54:41",
+        "slug": "inner-pad",
+        "status": "publish",
+        "type": "texture",
+        "link": "http://localhost/texture/inner-pad/",
+        "title": {
+            "rendered": "Inner Pad"
+        },
+        "template": "",
+        "acf": {
+            "texture_file": {
+                "ID": 160,
+                "id": 160,
+                "title": "inner_pad",
+                "filename": "inner_pad.zip",
+                "filesize": 677798,
+                "url": "http://localhost/wp-content/uploads/2021/03/inner_pad.zip",
+                "link": "http://localhost/texture/inner-pad/inner_pad/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "inner_pad",
+                "status": "inherit",
+                "uploaded_to": 157,
+                "date": "2021-03-28 02:53:09",
+                "modified": "2021-03-28 02:53:09",
+                "menu_order": 0,
+                "mime_type": "application/zip",
+                "type": "application",
+                "subtype": "zip",
+                "icon": "http://localhost/wp-includes/images/media/archive.png"
+            },
+            "texture_maps_included": [
+                "ao",
+                "color",
+                "normal",
+                "roughness"
+            ],
+            "product": "",
+            "swatches": [{
+                "label": "White",
+                "swatch": "#FFFFFF"
+            }],
+            "thumbnail_png": false,
+            "material_attributes": {
+                "blendable": false,
+                "metallic": false,
+                "double_sided": false,
+                "opacity": "1",
+                "roughness": "1",
+                "ambient_occlusion_intensity": "1",
+                "normal_intensity": "1",
+                "environment_map_intensity": "1",
+                "reflectivity": "0.5",
+                "repeat": "3"
+            }
+        },
+        "_links": {
+            "self": [{
+                "href": "http://localhost/wp-json/wp/v2/texture/157"
+            }],
+            "collection": [{
+                "href": "http://localhost/wp-json/wp/v2/texture"
+            }],
+            "about": [{
+                "href": "http://localhost/wp-json/wp/v2/types/texture"
+            }],
+            "wp:attachment": [{
+                "href": "http://localhost/wp-json/wp/v2/media?parent=157"
+            }],
+            "curies": [{
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }]
+        }
     },
     {
-        "label": "Tan",
-        "swatch": "#807c6b"
+        "id": 126,
+        "date": "2020-10-26T04:18:12",
+        "date_gmt": "2020-10-26T04:18:12",
+        "guid": {
+            "rendered": "http://localhost/?post_type=texture&#038;p=126"
+        },
+        "modified": "2020-10-26T04:28:33",
+        "modified_gmt": "2020-10-26T04:28:33",
+        "slug": "glossy_metal",
+        "status": "publish",
+        "type": "texture",
+        "link": "http://localhost/texture/glossy_metal/",
+        "title": {
+            "rendered": "Glossy Metal"
+        },
+        "template": "",
+        "acf": {
+            "texture_file": false,
+            "texture_maps_included": [],
+            "product": "",
+            "swatches": [{
+                    "label": "Yellow",
+                    "swatch": "#eeee22"
+                },
+                {
+                    "label": "Silver",
+                    "swatch": "#f4f4f4"
+                },
+                {
+                    "label": "Hot Pink",
+                    "swatch": "#e668ed"
+                }
+            ],
+            "thumbnail_png": false,
+            "material_attributes": {
+                "blendable": false,
+                "metallic": true,
+                "double_sided": false,
+                "opacity": "1",
+                "roughness": "0",
+                "ambient_occlusion_intensity": "1",
+                "normal_intensity": "1",
+                "environment_map_intensity": "1",
+                "reflectivity": "1",
+                "repeat": "1"
+            }
+        },
+        "_links": {
+            "self": [{
+                "href": "http://localhost/wp-json/wp/v2/texture/126"
+            }],
+            "collection": [{
+                "href": "http://localhost/wp-json/wp/v2/texture"
+            }],
+            "about": [{
+                "href": "http://localhost/wp-json/wp/v2/types/texture"
+            }],
+            "wp:attachment": [{
+                "href": "http://localhost/wp-json/wp/v2/media?parent=126"
+            }],
+            "curies": [{
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }]
+        }
     },
     {
-        "label": "Clay",
-        "swatch": "#bfbeba"
+        "id": 119,
+        "date": "2020-10-24T03:57:15",
+        "date_gmt": "2020-10-24T03:57:15",
+        "guid": {
+            "rendered": "http://localhost/?post_type=texture&#038;p=119"
+        },
+        "modified": "2021-03-28T05:26:19",
+        "modified_gmt": "2021-03-28T05:26:19",
+        "slug": "foxing_toe",
+        "status": "publish",
+        "type": "texture",
+        "link": "http://localhost/texture/foxing_toe/",
+        "title": {
+            "rendered": "Foxing Toe"
+        },
+        "template": "",
+        "acf": {
+            "texture_file": {
+                "ID": 120,
+                "id": 120,
+                "title": "foxing_toe",
+                "filename": "foxing_toe.zip",
+                "filesize": 16010,
+                "url": "http://localhost/wp-content/uploads/2020/10/foxing_toe.zip",
+                "link": "http://localhost/texture/foxing_toe/foxing_toe/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "foxing_toe",
+                "status": "inherit",
+                "uploaded_to": 119,
+                "date": "2020-10-24 03:56:45",
+                "modified": "2020-10-24 03:56:45",
+                "menu_order": 0,
+                "mime_type": "application/zip",
+                "type": "application",
+                "subtype": "zip",
+                "icon": "http://localhost/wp-includes/images/media/archive.png"
+            },
+            "texture_maps_included": [
+                "normal"
+            ],
+            "product": "",
+            "swatches": [{
+                    "label": "White",
+                    "swatch": "#FFFFFF"
+                },
+                {
+                    "label": "Clay",
+                    "swatch": "#e0d7c3"
+                },
+                {
+                    "label": "Tan",
+                    "swatch": "#cdce94"
+                },
+                {
+                    "label": "Cement",
+                    "swatch": "#aaaaaa"
+                },
+                {
+                    "label": "Dark Tan",
+                    "swatch": "#86896f"
+                },
+                {
+                    "label": "Black",
+                    "swatch": "#212226"
+                }
+            ],
+            "thumbnail_png": {
+                "ID": 165,
+                "id": 165,
+                "title": "foxing_thumbnail",
+                "filename": "foxing_thumbnail.png",
+                "filesize": 3041,
+                "url": "foxing_toe/thumbnail.png",
+                "link": "http://localhost/texture/foxing_toe/foxing_thumbnail/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "foxing_thumbnail",
+                "status": "inherit",
+                "uploaded_to": 119,
+                "date": "2021-03-28 05:24:37",
+                "modified": "2021-03-28 05:24:37",
+                "menu_order": 0,
+                "mime_type": "image/png",
+                "type": "image",
+                "subtype": "png",
+                "icon": "http://localhost/wp-includes/images/media/default.png",
+                "width": 80,
+                "height": 80,
+                "sizes": {
+                    "thumbnail": "foxing_toe/thumbnail.png",
+                    "thumbnail-width": 80,
+                    "thumbnail-height": 80,
+                    "medium": "foxing_toe/thumbnail.png",
+                    "medium-width": 80,
+                    "medium-height": 80,
+                    "medium_large": "foxing_toe/thumbnail.png",
+                    "medium_large-width": 80,
+                    "medium_large-height": 80,
+                    "large": "foxing_toe/thumbnail.png",
+                    "large-width": 80,
+                    "large-height": 80,
+                    "1536x1536": "foxing_toe/thumbnail.png",
+                    "1536x1536-width": 80,
+                    "1536x1536-height": 80,
+                    "2048x2048": "foxing_toe/thumbnail.png",
+                    "2048x2048-width": 80,
+                    "2048x2048-height": 80,
+                    "woocommerce_thumbnail": "foxing_toe/thumbnail.png",
+                    "woocommerce_thumbnail-width": 80,
+                    "woocommerce_thumbnail-height": 80,
+                    "woocommerce_single": "foxing_toe/thumbnail.png",
+                    "woocommerce_single-width": 80,
+                    "woocommerce_single-height": 80,
+                    "woocommerce_gallery_thumbnail": "foxing_toe/thumbnail.png",
+                    "woocommerce_gallery_thumbnail-width": 80,
+                    "woocommerce_gallery_thumbnail-height": 80,
+                    "shop_catalog": "foxing_toe/thumbnail.png",
+                    "shop_catalog-width": 80,
+                    "shop_catalog-height": 80,
+                    "shop_single": "foxing_toe/thumbnail.png",
+                    "shop_single-width": 80,
+                    "shop_single-height": 80,
+                    "shop_thumbnail": "foxing_toe/thumbnail.png",
+                    "shop_thumbnail-width": 80,
+                    "shop_thumbnail-height": 80
+                }
+            },
+            "material_attributes": {
+                "blendable": false,
+                "metallic": false,
+                "double_sided": false,
+                "opacity": "1",
+                "roughness": "1",
+                "ambient_occlusion_intensity": "1",
+                "normal_intensity": "0.4",
+                "environment_map_intensity": "1",
+                "reflectivity": "0.5",
+                "repeat": "50"
+            }
+        },
+        "_links": {
+            "self": [{
+                "href": "http://localhost/wp-json/wp/v2/texture/119"
+            }],
+            "collection": [{
+                "href": "http://localhost/wp-json/wp/v2/texture"
+            }],
+            "about": [{
+                "href": "http://localhost/wp-json/wp/v2/types/texture"
+            }],
+            "wp:attachment": [{
+                "href": "http://localhost/wp-json/wp/v2/media?parent=119"
+            }],
+            "curies": [{
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }]
+        }
     },
     {
-       "label": "Black",
-       "swatch": "#222222" 
-    }
-],
-    "thumbnail_png": false,
-    "material_attributes": {
-    "blendable": false,
-    "metallic": false,
-    "double_sided": false,
-    "opacity": "1",
-    "roughness": "1",
-    "ambient_occlusion_intensity": "1",
-    "normal_intensity": "0.4",
-    "environment_map_intensity": "1",
-    "reflectivity": "0.5",
-    "repeat": "50"
-    }
-    },
-    "_links": {
-    "self": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture/119"
-    }
-    ],
-    "collection": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture"
-    }
-    ],
-    "about": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/types/texture"
-    }
-    ],
-    "wp:attachment": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/media?parent=119"
-    }
-    ],
-    "curies": [
-    {
-    "name": "wp",
-    "href": "https://api.w.org/{rel}",
-    "templated": true
-    }
-    ]
-    }
-    },
-    {
-    "id": 116,
-    "date": "2020-10-24T03:17:00",
-    "date_gmt": "2020-10-24T03:17:00",
-    "guid": {
-    "rendered": "http://localhost/?post_type=texture&#038;p=116"
-    },
-    "modified": "2020-10-24T03:26:30",
-    "modified_gmt": "2020-10-24T03:26:30",
-    "slug": "laces",
-    "status": "publish",
-    "type": "texture",
-    "link": "http://localhost/texture/laces/",
-    "title": {
-    "rendered": "Laces"
-    },
-    "template": "",
-    "acf": {
-    "texture_file": {
-    "ID": 117,
-    "id": 117,
-    "title": "laces",
-    "filename": "laces.zip",
-    "filesize": 1551360,
-    "url": "http://localhost/wp-content/uploads/2020/10/laces.zip",
-    "link": "http://localhost/texture/laces/laces/",
-    "alt": "",
-    "author": "1",
-    "description": "",
-    "caption": "",
-    "name": "laces",
-    "status": "inherit",
-    "uploaded_to": 116,
-    "date": "2020-10-24 03:16:15",
-    "modified": "2020-10-24 03:16:15",
-    "menu_order": 0,
-    "mime_type": "application/zip",
-    "type": "application",
-    "subtype": "zip",
-    "icon": "http://localhost/wp-includes/images/media/archive.png"
-    },
-    "texture_maps_included": [
-    "ao",
-    "color",
-    "normal"
-    ],
-    "product": "",
-    "swatches": [
-    {
-    "label": "White",
-    "swatch": "#FFFFFF"
+        "id": 116,
+        "date": "2020-10-24T03:17:00",
+        "date_gmt": "2020-10-24T03:17:00",
+        "guid": {
+            "rendered": "http://localhost/?post_type=texture&#038;p=116"
+        },
+        "modified": "2020-10-24T03:26:30",
+        "modified_gmt": "2020-10-24T03:26:30",
+        "slug": "laces",
+        "status": "publish",
+        "type": "texture",
+        "link": "http://localhost/texture/laces/",
+        "title": {
+            "rendered": "Laces"
+        },
+        "template": "",
+        "acf": {
+            "texture_file": {
+                "ID": 117,
+                "id": 117,
+                "title": "laces",
+                "filename": "laces.zip",
+                "filesize": 1551360,
+                "url": "http://localhost/wp-content/uploads/2020/10/laces.zip",
+                "link": "http://localhost/texture/laces/laces/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "laces",
+                "status": "inherit",
+                "uploaded_to": 116,
+                "date": "2020-10-24 03:16:15",
+                "modified": "2020-10-24 03:16:15",
+                "menu_order": 0,
+                "mime_type": "application/zip",
+                "type": "application",
+                "subtype": "zip",
+                "icon": "http://localhost/wp-includes/images/media/archive.png"
+            },
+            "texture_maps_included": [
+                "ao",
+                "color",
+                "normal"
+            ],
+            "product": "",
+            "swatches": [{
+                    "label": "White",
+                    "swatch": ""
+                },
+                {
+                    "label": "Black",
+                    "swatch": "#212121"
+                },
+                {
+                    "label": "Blue",
+                    "swatch": "#6394bf"
+                }
+            ],
+            "thumbnail_png": false,
+            "material_attributes": {
+                "blendable": false,
+                "metallic": false,
+                "double_sided": true,
+                "opacity": "1",
+                "roughness": "1",
+                "ambient_occlusion_intensity": "1",
+                "normal_intensity": "1",
+                "environment_map_intensity": "1",
+                "reflectivity": "0.5",
+                "repeat": "10"
+            }
+        },
+        "_links": {
+            "self": [{
+                "href": "http://localhost/wp-json/wp/v2/texture/116"
+            }],
+            "collection": [{
+                "href": "http://localhost/wp-json/wp/v2/texture"
+            }],
+            "about": [{
+                "href": "http://localhost/wp-json/wp/v2/types/texture"
+            }],
+            "wp:attachment": [{
+                "href": "http://localhost/wp-json/wp/v2/media?parent=116"
+            }],
+            "curies": [{
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }]
+        }
     },
     {
-    "label": "Black",
-    "swatch": "#212121"
+        "id": 100,
+        "date": "2020-10-23T21:19:47",
+        "date_gmt": "2020-10-23T21:19:47",
+        "guid": {
+            "rendered": "http://localhost/?post_type=texture&#038;p=100"
+        },
+        "modified": "2021-03-28T05:19:21",
+        "modified_gmt": "2021-03-28T05:19:21",
+        "slug": "leather",
+        "status": "publish",
+        "type": "texture",
+        "link": "http://localhost/texture/leather/",
+        "title": {
+            "rendered": "Leather"
+        },
+        "template": "",
+        "acf": {
+            "texture_file": {
+                "ID": 101,
+                "id": 101,
+                "title": "leather",
+                "filename": "leather.zip",
+                "filesize": 701618,
+                "url": "http://localhost/wp-content/uploads/2020/10/leather.zip",
+                "link": "http://localhost/texture/leather/leather/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "leather",
+                "status": "inherit",
+                "uploaded_to": 100,
+                "date": "2020-10-23 21:18:26",
+                "modified": "2020-10-23 21:18:26",
+                "menu_order": 0,
+                "mime_type": "application/zip",
+                "type": "application",
+                "subtype": "zip",
+                "icon": "http://localhost/wp-includes/images/media/archive.png"
+            },
+            "texture_maps_included": [
+                "ao",
+                "normal",
+                "roughness"
+            ],
+            "product": [{
+                "ID": 102,
+                "post_author": "1",
+                "post_date": "2020-10-23 21:18:48",
+                "post_date_gmt": "2020-10-23 21:18:48",
+                "post_content": "",
+                "post_title": "Leather",
+                "post_excerpt": "",
+                "post_status": "publish",
+                "comment_status": "open",
+                "ping_status": "closed",
+                "post_password": "",
+                "post_name": "leather",
+                "to_ping": "",
+                "pinged": "",
+                "post_modified": "2020-10-28 06:20:48",
+                "post_modified_gmt": "2020-10-28 06:20:48",
+                "post_content_filtered": "",
+                "post_parent": 0,
+                "guid": "http://localhost/?post_type=product&#038;p=102",
+                "menu_order": 0,
+                "post_type": "product",
+                "post_mime_type": "",
+                "comment_count": "0",
+                "filter": "raw"
+            }],
+            "swatches": [{
+                    "label": "White",
+                    "swatch": "#ffffff"
+                },
+                {
+                    "label": "Brown",
+                    "swatch": "#6d5819"
+                },
+                {
+                    "label": "Red",
+                    "swatch": "#dd3333"
+                },
+                {
+                    "label": "Tiel",
+                    "swatch": "#23d7dd"
+                }
+            ],
+            "thumbnail_png": {
+                "ID": 164,
+                "id": 164,
+                "title": "leather_thumbnail",
+                "filename": "leather_thumbnail.png",
+                "filesize": 4497,
+                "url": "leather/thumbnail.png",
+                "link": "http://localhost/texture/leather/leather_thumbnail/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "leather_thumbnail",
+                "status": "inherit",
+                "uploaded_to": 100,
+                "date": "2021-03-28 05:19:14",
+                "modified": "2021-03-28 05:19:14",
+                "menu_order": 0,
+                "mime_type": "image/png",
+                "type": "image",
+                "subtype": "png",
+                "icon": "http://localhost/wp-includes/images/media/default.png",
+                "width": 80,
+                "height": 80,
+                "sizes": {
+                    "thumbnail": "leather/thumbnail.png",
+                    "thumbnail-width": 80,
+                    "thumbnail-height": 80,
+                    "medium": "leather/thumbnail.png",
+                    "medium-width": 80,
+                    "medium-height": 80,
+                    "medium_large": "leather/thumbnail.png",
+                    "medium_large-width": 80,
+                    "medium_large-height": 80,
+                    "large": "leather/thumbnail.png",
+                    "large-width": 80,
+                    "large-height": 80,
+                    "1536x1536": "leather/thumbnail.png",
+                    "1536x1536-width": 80,
+                    "1536x1536-height": 80,
+                    "2048x2048": "leather/thumbnail.png",
+                    "2048x2048-width": 80,
+                    "2048x2048-height": 80,
+                    "woocommerce_thumbnail": "leather/thumbnail.png",
+                    "woocommerce_thumbnail-width": 80,
+                    "woocommerce_thumbnail-height": 80,
+                    "woocommerce_single": "leather/thumbnail.png",
+                    "woocommerce_single-width": 80,
+                    "woocommerce_single-height": 80,
+                    "woocommerce_gallery_thumbnail": "leather/thumbnail.png",
+                    "woocommerce_gallery_thumbnail-width": 80,
+                    "woocommerce_gallery_thumbnail-height": 80,
+                    "shop_catalog": "leather/thumbnail.png",
+                    "shop_catalog-width": 80,
+                    "shop_catalog-height": 80,
+                    "shop_single": "leather/thumbnail.png",
+                    "shop_single-width": 80,
+                    "shop_single-height": 80,
+                    "shop_thumbnail": "leather/thumbnail.png",
+                    "shop_thumbnail-width": 80,
+                    "shop_thumbnail-height": 80
+                }
+            },
+            "material_attributes": {
+                "blendable": false,
+                "metallic": false,
+                "double_sided": false,
+                "opacity": "1",
+                "roughness": "1",
+                "ambient_occlusion_intensity": "1",
+                "normal_intensity": "1",
+                "environment_map_intensity": "1",
+                "reflectivity": "0.5",
+                "repeat": "1"
+            }
+        },
+        "_links": {
+            "self": [{
+                "href": "http://localhost/wp-json/wp/v2/texture/100"
+            }],
+            "collection": [{
+                "href": "http://localhost/wp-json/wp/v2/texture"
+            }],
+            "about": [{
+                "href": "http://localhost/wp-json/wp/v2/types/texture"
+            }],
+            "wp:attachment": [{
+                "href": "http://localhost/wp-json/wp/v2/media?parent=100"
+            }],
+            "curies": [{
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }]
+        }
     },
     {
-    "label": "Blue",
-    "swatch": "#6394bf"
-    }
-    ],
-    "thumbnail_png": false,
-    "material_attributes": {
-    "blendable": false,
-    "metallic": false,
-    "double_sided": true,
-    "opacity": "1",
-    "roughness": "1",
-    "ambient_occlusion_intensity": "1",
-    "normal_intensity": "1",
-    "environment_map_intensity": "1",
-    "reflectivity": "0.5",
-    "repeat": "10"
-    }
-    },
-    "_links": {
-    "self": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture/116"
-    }
-    ],
-    "collection": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture"
-    }
-    ],
-    "about": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/types/texture"
-    }
-    ],
-    "wp:attachment": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/media?parent=116"
-    }
-    ],
-    "curies": [
-    {
-    "name": "wp",
-    "href": "https://api.w.org/{rel}",
-    "templated": true
-    }
-    ]
-    }
-    },
-    {
-    "id": 100,
-    "date": "2020-10-23T21:19:47",
-    "date_gmt": "2020-10-23T21:19:47",
-    "guid": {
-    "rendered": "http://localhost/?post_type=texture&#038;p=100"
-    },
-    "modified": "2020-10-25T08:19:35",
-    "modified_gmt": "2020-10-25T08:19:35",
-    "slug": "leather",
-    "status": "publish",
-    "type": "texture",
-    "link": "http://localhost/texture/leather/",
-    "title": {
-    "rendered": "Leather"
-    },
-    "template": "",
-    "acf": {
-    "texture_file": {
-    "ID": 101,
-    "id": 101,
-    "title": "leather",
-    "filename": "leather.zip",
-    "filesize": 701618,
-    "url": "http://localhost/wp-content/uploads/2020/10/leather.zip",
-    "link": "http://localhost/texture/leather/leather/",
-    "alt": "",
-    "author": "1",
-    "description": "",
-    "caption": "",
-    "name": "leather",
-    "status": "inherit",
-    "uploaded_to": 100,
-    "date": "2020-10-23 21:18:26",
-    "modified": "2020-10-23 21:18:26",
-    "menu_order": 0,
-    "mime_type": "application/zip",
-    "type": "application",
-    "subtype": "zip",
-    "icon": "http://localhost/wp-includes/images/media/archive.png"
-    },
-    "texture_maps_included": [
-    "ao",
-    "normal",
-    "roughness"
-    ],
-    "product": [
-    {
-    "ID": 102,
-    "post_author": "1",
-    "post_date": "2020-10-23 21:18:48",
-    "post_date_gmt": "2020-10-23 21:18:48",
-    "post_content": "",
-    "post_title": "Leather",
-    "post_excerpt": "",
-    "post_status": "publish",
-    "comment_status": "open",
-    "ping_status": "closed",
-    "post_password": "",
-    "post_name": "leather",
-    "to_ping": "",
-    "pinged": "",
-    "post_modified": "2020-10-28 06:20:48",
-    "post_modified_gmt": "2020-10-28 06:20:48",
-    "post_content_filtered": "",
-    "post_parent": 0,
-    "guid": "http://localhost/?post_type=product&#038;p=102",
-    "menu_order": 0,
-    "post_type": "product",
-    "post_mime_type": "",
-    "comment_count": "0",
-    "filter": "raw"
-    }
-    ],
-    "swatches": [
-    {
-    "label": "White",
-    "swatch": "#ffffff"
+        "id": 99,
+        "date": "2020-10-23T21:17:13",
+        "date_gmt": "2020-10-23T21:17:13",
+        "guid": {
+            "rendered": "http://localhost/?post_type=texture&#038;p=99"
+        },
+        "modified": "2020-11-04T07:53:35",
+        "modified_gmt": "2020-11-04T07:53:35",
+        "slug": "branding",
+        "status": "publish",
+        "type": "texture",
+        "link": "http://localhost/texture/branding/",
+        "title": {
+            "rendered": "Branding"
+        },
+        "template": "",
+        "acf": {
+            "texture_file": {
+                "ID": 148,
+                "id": 148,
+                "title": "livree-branding",
+                "filename": "livree-branding-1.zip",
+                "filesize": 0,
+                "url": "http://localhost/wp-content/uploads/2020/10/livree-branding-1.zip",
+                "link": "http://localhost/texture/branding/livree-branding-2/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "livree-branding-2",
+                "status": "inherit",
+                "uploaded_to": 99,
+                "date": "2020-11-04 07:53:15",
+                "modified": "2020-11-04 07:53:15",
+                "menu_order": 0,
+                "mime_type": "application/zip",
+                "type": "application",
+                "subtype": "zip",
+                "icon": "http://localhost/wp-includes/images/media/archive.png"
+            },
+            "texture_maps_included": [
+                "color",
+                "normal"
+            ],
+            "product": "",
+            "swatches": [{
+                "label": "White",
+                "swatch": ""
+            }],
+            "thumbnail_png": false,
+            "material_attributes": {
+                "blendable": false,
+                "metallic": false,
+                "double_sided": false,
+                "opacity": "1",
+                "roughness": "1",
+                "ambient_occlusion_intensity": "1",
+                "normal_intensity": "1",
+                "environment_map_intensity": "1",
+                "reflectivity": "0.5",
+                "repeat": "1"
+            }
+        },
+        "_links": {
+            "self": [{
+                "href": "http://localhost/wp-json/wp/v2/texture/99"
+            }],
+            "collection": [{
+                "href": "http://localhost/wp-json/wp/v2/texture"
+            }],
+            "about": [{
+                "href": "http://localhost/wp-json/wp/v2/types/texture"
+            }],
+            "wp:attachment": [{
+                "href": "http://localhost/wp-json/wp/v2/media?parent=99"
+            }],
+            "curies": [{
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }]
+        }
     },
     {
-    "label": "Brown",
-    "swatch": "#6d5819"
-    },
-    {
-    "label": "Red",
-    "swatch": "#dd3333"
-    },
-    {
-    "label": "Tiel",
-    "swatch": "#23d7dd"
+        "id": 96,
+        "date": "2020-10-23T21:13:21",
+        "date_gmt": "2020-10-23T21:13:21",
+        "guid": {
+            "rendered": "http://localhost/?post_type=texture&#038;p=96"
+        },
+        "modified": "2021-03-29T02:45:04",
+        "modified_gmt": "2021-03-29T02:45:04",
+        "slug": "canvas",
+        "status": "publish",
+        "type": "texture",
+        "link": "http://localhost/texture/canvas/",
+        "title": {
+            "rendered": "Canvas"
+        },
+        "template": "",
+        "acf": {
+            "texture_file": {
+                "ID": 71,
+                "id": 71,
+                "title": "canvas",
+                "filename": "canvas.zip",
+                "filesize": 1401293,
+                "url": "http://localhost/wp-content/uploads/2020/10/canvas.zip",
+                "link": "http://localhost/?attachment_id=71",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "canvas-2",
+                "status": "inherit",
+                "uploaded_to": 49,
+                "date": "2020-10-23 04:15:36",
+                "modified": "2020-10-23 04:15:36",
+                "menu_order": 0,
+                "mime_type": "application/zip",
+                "type": "application",
+                "subtype": "zip",
+                "icon": "http://localhost/wp-includes/images/media/archive.png"
+            },
+            "texture_maps_included": [
+                "ao",
+                "color",
+                "normal"
+            ],
+            "product": [{
+                "ID": 49,
+                "post_author": "1",
+                "post_date": "2020-10-11 20:30:28",
+                "post_date_gmt": "2020-10-11 20:30:28",
+                "post_content": "",
+                "post_title": "Canvas",
+                "post_excerpt": "",
+                "post_status": "publish",
+                "comment_status": "open",
+                "ping_status": "closed",
+                "post_password": "",
+                "post_name": "canvas",
+                "to_ping": "",
+                "pinged": "",
+                "post_modified": "2020-10-28 06:21:29",
+                "post_modified_gmt": "2020-10-28 06:21:29",
+                "post_content_filtered": "",
+                "post_parent": 0,
+                "guid": "http://localhost/?post_type=product&#038;p=49",
+                "menu_order": 0,
+                "post_type": "product",
+                "post_mime_type": "",
+                "comment_count": "0",
+                "filter": "raw"
+            }],
+            "swatches": [{
+                    "label": "White",
+                    "swatch": "#ffffff"
+                },
+                {
+                    "label": "Blue",
+                    "swatch": "#4e9dc4"
+                },
+                {
+                    "label": "Beige",
+                    "swatch": "#ddc8a8"
+                },
+                {
+                    "label": "Tiel",
+                    "swatch": "#23d7dd"
+                },
+                {
+                    "label": "Terra Cotta",
+                    "swatch": "#e07a5f"
+                },
+                {
+                    "label": "Eggshell",
+                    "swatch": "#f4f1de"
+                },
+                {
+                    "label": "Independence",
+                    "swatch": "#3d405b"
+                },
+                {
+                    "label": "Sheen",
+                    "swatch": "#81b29a"
+                },
+                {
+                    "label": "Lavender",
+                    "swatch": "#cdb4db"
+                },
+                {
+                    "label": "Orchid",
+                    "swatch": "#ffc8dd"
+                },
+                {
+                    "label": "Forest",
+                    "swatch": "#184d47"
+                },
+                {
+                    "label": "Grass",
+                    "swatch": "#96bb7c"
+                },
+                {
+                    "label": "Rose",
+                    "swatch": "#e84545"
+                },
+                {
+                    "label": "Sand",
+                    "swatch": "#897853"
+                },
+                {
+                    "label": "Mustard",
+                    "swatch": "#fed049"
+                },
+                {
+                    "label": "Coral",
+                    "swatch": "#f39189"
+                },
+                {
+                    "label": "Bruise",
+                    "swatch": "#bb8082"
+                },
+                {
+                    "label": "Apple",
+                    "swatch": "#cdc733"
+                },
+                {
+                    "label": "Pastel",
+                    "swatch": "#caf7e3"
+                },
+                {
+                    "label": "Charcoal",
+                    "swatch": "#383838"
+                }
+            ],
+            "thumbnail_png": {
+                "ID": 146,
+                "id": 146,
+                "title": "thumbnail",
+                "filename": "thumbnail.png",
+                "filesize": 7080,
+                "url": "canvas/thumbnail.png",
+                "link": "http://localhost/texture/canvas/thumbnail/",
+                "alt": "",
+                "author": "1",
+                "description": "",
+                "caption": "",
+                "name": "thumbnail",
+                "status": "inherit",
+                "uploaded_to": 96,
+                "date": "2020-11-01 04:41:47",
+                "modified": "2020-11-01 04:41:47",
+                "menu_order": 0,
+                "mime_type": "image/png",
+                "type": "image",
+                "subtype": "png",
+                "icon": "http://localhost/wp-includes/images/media/default.png",
+                "width": 80,
+                "height": 80,
+                "sizes": {
+                    "thumbnail": "canvas/thumbnail.png",
+                    "thumbnail-width": 80,
+                    "thumbnail-height": 80,
+                    "medium": "canvas/thumbnail.png",
+                    "medium-width": 80,
+                    "medium-height": 80,
+                    "medium_large": "canvas/thumbnail.png",
+                    "medium_large-width": 80,
+                    "medium_large-height": 80,
+                    "large": "canvas/thumbnail.png",
+                    "large-width": 80,
+                    "large-height": 80,
+                    "1536x1536": "canvas/thumbnail.png",
+                    "1536x1536-width": 80,
+                    "1536x1536-height": 80,
+                    "2048x2048": "canvas/thumbnail.png",
+                    "2048x2048-width": 80,
+                    "2048x2048-height": 80,
+                    "woocommerce_thumbnail": "canvas/thumbnail.png",
+                    "woocommerce_thumbnail-width": 80,
+                    "woocommerce_thumbnail-height": 80,
+                    "woocommerce_single": "canvas/thumbnail.png",
+                    "woocommerce_single-width": 80,
+                    "woocommerce_single-height": 80,
+                    "woocommerce_gallery_thumbnail": "canvas/thumbnail.png",
+                    "woocommerce_gallery_thumbnail-width": 80,
+                    "woocommerce_gallery_thumbnail-height": 80,
+                    "shop_catalog": "canvas/thumbnail.png",
+                    "shop_catalog-width": 80,
+                    "shop_catalog-height": 80,
+                    "shop_single": "canvas/thumbnail.png",
+                    "shop_single-width": 80,
+                    "shop_single-height": 80,
+                    "shop_thumbnail": "canvas/thumbnail.png",
+                    "shop_thumbnail-width": 80,
+                    "shop_thumbnail-height": 80
+                }
+            },
+            "material_attributes": {
+                "blendable": true,
+                "metallic": false,
+                "double_sided": false,
+                "opacity": "1",
+                "roughness": "1",
+                "ambient_occlusion_intensity": "1",
+                "normal_intensity": "0.1",
+                "environment_map_intensity": "1",
+                "reflectivity": "0.5",
+                "repeat": "1"
+            }
+        },
+        "_links": {
+            "self": [{
+                "href": "http://localhost/wp-json/wp/v2/texture/96"
+            }],
+            "collection": [{
+                "href": "http://localhost/wp-json/wp/v2/texture"
+            }],
+            "about": [{
+                "href": "http://localhost/wp-json/wp/v2/types/texture"
+            }],
+            "wp:attachment": [{
+                "href": "http://localhost/wp-json/wp/v2/media?parent=96"
+            }],
+            "curies": [{
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }]
+        }
     }
-    ],
-    "thumbnail_png": false,
-    "material_attributes": {
-    "blendable": false,
-    "metallic": false,
-    "double_sided": false,
-    "opacity": "1",
-    "roughness": "1",
-    "ambient_occlusion_intensity": "1",
-    "normal_intensity": "1",
-    "environment_map_intensity": "1",
-    "reflectivity": "0.5",
-    "repeat": "1"
-    }
-    },
-    "_links": {
-    "self": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture/100"
-    }
-    ],
-    "collection": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture"
-    }
-    ],
-    "about": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/types/texture"
-    }
-    ],
-    "wp:attachment": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/media?parent=100"
-    }
-    ],
-    "curies": [
-    {
-    "name": "wp",
-    "href": "https://api.w.org/{rel}",
-    "templated": true
-    }
-    ]
-    }
-    },
-    {
-    "id": 99,
-    "date": "2020-10-23T21:17:13",
-    "date_gmt": "2020-10-23T21:17:13",
-    "guid": {
-    "rendered": "http://localhost/?post_type=texture&#038;p=99"
-    },
-    "modified": "2020-11-04T07:53:35",
-    "modified_gmt": "2020-11-04T07:53:35",
-    "slug": "branding",
-    "status": "publish",
-    "type": "texture",
-    "link": "http://localhost/texture/branding/",
-    "title": {
-    "rendered": "Branding"
-    },
-    "template": "",
-    "acf": {
-    "texture_file": {
-    "ID": 148,
-    "id": 148,
-    "title": "livree-branding",
-    "filename": "livree-branding-1.zip",
-    "filesize": 0,
-    "url": "http://localhost/wp-content/uploads/2020/10/livree-branding-1.zip",
-    "link": "http://localhost/texture/branding/livree-branding-2/",
-    "alt": "",
-    "author": "1",
-    "description": "",
-    "caption": "",
-    "name": "livree-branding-2",
-    "status": "inherit",
-    "uploaded_to": 99,
-    "date": "2020-11-04 07:53:15",
-    "modified": "2020-11-04 07:53:15",
-    "menu_order": 0,
-    "mime_type": "application/zip",
-    "type": "application",
-    "subtype": "zip",
-    "icon": "http://localhost/wp-includes/images/media/archive.png"
-    },
-    "texture_maps_included": [
-    "color",
-    "normal"
-    ],
-    "product": "",
-    "swatches": [
-    {
-    "label": "White",
-    "swatch": ""
-    }
-    ],
-    "thumbnail_png": false,
-    "material_attributes": {
-    "blendable": false,
-    "metallic": false,
-    "double_sided": false,
-    "opacity": "1",
-    "roughness": "1",
-    "ambient_occlusion_intensity": "1",
-    "normal_intensity": "1",
-    "environment_map_intensity": "1",
-    "reflectivity": "0.5",
-    "repeat": "1"
-    }
-    },
-    "_links": {
-    "self": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture/99"
-    }
-    ],
-    "collection": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture"
-    }
-    ],
-    "about": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/types/texture"
-    }
-    ],
-    "wp:attachment": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/media?parent=99"
-    }
-    ],
-    "curies": [
-    {
-    "name": "wp",
-    "href": "https://api.w.org/{rel}",
-    "templated": true
-    }
-    ]
-    }
-    },
-    {
-    "id": 96,
-    "date": "2020-10-23T21:13:21",
-    "date_gmt": "2020-10-23T21:13:21",
-    "guid": {
-    "rendered": "http://localhost/?post_type=texture&#038;p=96"
-    },
-    "modified": "2020-11-04T03:19:47",
-    "modified_gmt": "2020-11-04T03:19:47",
-    "slug": "canvas",
-    "status": "publish",
-    "type": "texture",
-    "link": "http://localhost/texture/canvas/",
-    "title": {
-    "rendered": "Canvas"
-    },
-    "template": "",
-    "acf": {
-    "texture_file": {
-    "ID": 71,
-    "id": 71,
-    "title": "canvas",
-    "filename": "canvas.zip",
-    "filesize": 1401293,
-    "url": "http://localhost/wp-content/uploads/2020/10/canvas.zip",
-    "link": "http://localhost/?attachment_id=71",
-    "alt": "",
-    "author": "1",
-    "description": "",
-    "caption": "",
-    "name": "canvas-2",
-    "status": "inherit",
-    "uploaded_to": 49,
-    "date": "2020-10-23 04:15:36",
-    "modified": "2020-10-23 04:15:36",
-    "menu_order": 0,
-    "mime_type": "application/zip",
-    "type": "application",
-    "subtype": "zip",
-    "icon": "http://localhost/wp-includes/images/media/archive.png"
-    },
-    "texture_maps_included": [
-    "ao",
-    "color",
-    "normal"
-    ],
-    "product": [
-    {
-    "ID": 49,
-    "post_author": "1",
-    "post_date": "2020-10-11 20:30:28",
-    "post_date_gmt": "2020-10-11 20:30:28",
-    "post_content": "",
-    "post_title": "Canvas",
-    "post_excerpt": "",
-    "post_status": "publish",
-    "comment_status": "open",
-    "ping_status": "closed",
-    "post_password": "",
-    "post_name": "canvas",
-    "to_ping": "",
-    "pinged": "",
-    "post_modified": "2020-10-28 06:21:29",
-    "post_modified_gmt": "2020-10-28 06:21:29",
-    "post_content_filtered": "",
-    "post_parent": 0,
-    "guid": "http://localhost/?post_type=product&#038;p=49",
-    "menu_order": 0,
-    "post_type": "product",
-    "post_mime_type": "",
-    "comment_count": "0",
-    "filter": "raw"
-    }
-    ],
-    "swatches": [
-    {
-    "label": "White",
-    "swatch": "#ffffff"
-    },
-    {
-    "label": "Blue",
-    "swatch": "#4e9dc4"
-    },
-    {
-    "label": "Beige",
-    "swatch": "#ddc8a8"
-    },
-    {
-    "label": "Tiel",
-    "swatch": "#23d7dd"
-    },
-    {
-    "label": "Terra Cotta",
-    "swatch": "#e07a5f"
-    },
-    {
-    "label": "Eggshell",
-    "swatch": "#f4f1de"
-    },
-    {
-    "label": "Independence",
-    "swatch": "#3d405b"
-    },
-    {
-    "label": "Sheen",
-    "swatch": "#81b29a"
-    },
-    {
-    "label": "Lavender",
-    "swatch": "#cdb4db"
-    },
-    {
-    "label": "Orchid",
-    "swatch": "#ffc8dd"
-    }
-    ],
-    "thumbnail_png": {
-    "ID": 146,
-    "id": 146,
-    "title": "thumbnail",
-    "filename": "thumbnail.png",
-    "filesize": 7080,
-    "url": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "link": "http://localhost/texture/canvas/thumbnail/",
-    "alt": "",
-    "author": "1",
-    "description": "",
-    "caption": "",
-    "name": "thumbnail",
-    "status": "inherit",
-    "uploaded_to": 96,
-    "date": "2020-11-01 04:41:47",
-    "modified": "2020-11-01 04:41:47",
-    "menu_order": 0,
-    "mime_type": "image/png",
-    "type": "image",
-    "subtype": "png",
-    "icon": "http://localhost/wp-includes/images/media/default.png",
-    "width": 80,
-    "height": 80,
-    "sizes": {
-    "thumbnail": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "thumbnail-width": 80,
-    "thumbnail-height": 80,
-    "medium": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "medium-width": 80,
-    "medium-height": 80,
-    "medium_large": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "medium_large-width": 80,
-    "medium_large-height": 80,
-    "large": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "large-width": 80,
-    "large-height": 80,
-    "1536x1536": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "1536x1536-width": 80,
-    "1536x1536-height": 80,
-    "2048x2048": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "2048x2048-width": 80,
-    "2048x2048-height": 80,
-    "woocommerce_thumbnail": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "woocommerce_thumbnail-width": 80,
-    "woocommerce_thumbnail-height": 80,
-    "woocommerce_single": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "woocommerce_single-width": 80,
-    "woocommerce_single-height": 80,
-    "woocommerce_gallery_thumbnail": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "woocommerce_gallery_thumbnail-width": 80,
-    "woocommerce_gallery_thumbnail-height": 80,
-    "shop_catalog": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "shop_catalog-width": 80,
-    "shop_catalog-height": 80,
-    "shop_single": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "shop_single-width": 80,
-    "shop_single-height": 80,
-    "shop_thumbnail": "http://localhost/wp-content/uploads/2020/10/thumbnail.png",
-    "shop_thumbnail-width": 80,
-    "shop_thumbnail-height": 80
-    }
-    },
-    "material_attributes": {
-    "blendable": true,
-    "metallic": false,
-    "double_sided": false,
-    "opacity": "1",
-    "roughness": "1",
-    "ambient_occlusion_intensity": "1",
-    "normal_intensity": "0.1",
-    "environment_map_intensity": "1",
-    "reflectivity": "0.5",
-    "repeat": "1"
-    }
-    },
-    "_links": {
-    "self": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture/96"
-    }
-    ],
-    "collection": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/texture"
-    }
-    ],
-    "about": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/types/texture"
-    }
-    ],
-    "wp:attachment": [
-    {
-    "href": "http://localhost/wp-json/wp/v2/media?parent=96"
-    }
-    ],
-    "curies": [
-    {
-    "name": "wp",
-    "href": "https://api.w.org/{rel}",
-    "templated": true
-    }
-    ]
-    }
-    }
-    ]
+]

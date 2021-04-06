@@ -15,13 +15,14 @@ const languages: {[key: string]: any} = {
 }
 
 const browserLocale = _get(global, 'navigator.userLanguage') || _get(global, 'navigator.language');
-const locale = browserLocale ? browserLocale.includes('en') ? 'en' : browserLocale : 'en'  ;
+const locale = browserLocale || 'en';
+const localId = locale.split('-')[0];
 
 ReactDOM.render(
   <React.StrictMode>
       <Preflight />
       <Provider store={store}>
-        <IntlProvider locale={locale} messages={languages[locale]}>
+        <IntlProvider locale={localId} messages={languages[localId]}>
           <App />
         </IntlProvider>
     </Provider>
