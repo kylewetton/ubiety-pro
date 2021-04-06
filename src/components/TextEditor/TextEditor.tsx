@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {fabric} from 'fabric';
 import {useIntl} from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,11 +14,13 @@ import Modal from '../../layout/Modal';
 import { interfaceToggleModal } from '../../store/interface/actions';
 import { interfaceGetModalState } from '../../store/interface/selectors';
 import Dots from '../Dots';
+import { useCallback } from 'react';
 
 const TextEditor: React.FC<TextEditorProps> = () => {
   
     const dispatch = useDispatch();
     const [editor, setEditor] = useState<any>(null);
+    const canvasNode = useRef<HTMLCanvasElement | null>(null);
     const dimensions = 480;
     const modalState = useSelector(interfaceGetModalState('customText'));
     const [lastSubmittedText, setLastSubmittedText] = useState<string>();
@@ -34,12 +36,16 @@ const TextEditor: React.FC<TextEditorProps> = () => {
      */
 
     useEffect(() => {
+
+        if (canvasNode.current) {
+
             const canvas = new fabric.Canvas(
-                `image-editor-text`,
+                canvasNode.current,
                 {backgroundColor: activeSection.color}
             );
+
             canvas.setDimensions({width:dimensions, height:dimensions});
-                
+               
             const text = new fabric.IText("Text", {
                 left: 200,
                 top: 200,
@@ -47,13 +53,20 @@ const TextEditor: React.FC<TextEditorProps> = () => {
                 fill: "rgb(0,0,0)",
                 fontFamily: 'Arial'
               });
-              canvas.add(text);
-              text.enterEditing();
-              setTextNode(text);
-              canvas.setActiveObject(text);
-
+            canvas.add(text);
+            text.enterEditing();
+            setTextNode(text);
+            canvas.setActiveObject(text);
             setEditor(canvas);
-    }, []);
+
+        }
+
+            return () => {
+          editor && editor.dispose();
+            setEditor(null);
+            }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [canvasNode]);
 
     useEffect(() => {
         if (editor && activeSection.color !== config.hoverColor)
@@ -64,11 +77,11 @@ const TextEditor: React.FC<TextEditorProps> = () => {
     }, [activeSection, editor]);
 
 
-     const _handleCloseCustomImageModal = () => {
+     const _handleCloseCustomImageModal = useCallback(() => {
         dispatch(interfaceToggleModal({id: 'customText', status: 'closed'}));;
-    }
+    }, [dispatch])
 
-    const _generateCustomTexture = (goToNextPosition = false) => {
+    const _generateCustomTexture = useCallback((goToNextPosition = false) => {
         const texture = editor.toDataURL({multiplier: 1024 / dimensions});
         fetch(texture)
         .then(res => res.blob())
@@ -83,7 +96,7 @@ const TextEditor: React.FC<TextEditorProps> = () => {
                 _handleCloseCustomImageModal();
             }
         })
-    }
+    }, [_handleCloseCustomImageModal, dispatch, editor])
 
     useEffect(() => {
 
@@ -91,12 +104,12 @@ const TextEditor: React.FC<TextEditorProps> = () => {
          * If the editor exists and the activeColor isn't just hovercolor flashing
          */
         if (editor && activeSection.color !== config.hoverColor) {
-            if (activeSection.custom_texture && _isEqual(activeSection.custom_texture, lastSubmittedText) && activeSection.tag === 'quarters') {
-                _generateCustomTexture();
+            if (activeSection.custom_texture && _isEqual(activeSection.custom_texture, lastSubmittedText) && activeSection.allowCustom) {
+             _generateCustomTexture();
             }
         }
 
-    }, [activeSection.color]);
+    }, [_generateCustomTexture, activeSection.allowCustom, activeSection.color, activeSection.custom_texture, editor, lastSubmittedText]);
 
     /**
      * Clear the image editor, and REMOVE the texture on the active section
@@ -117,18 +130,20 @@ const TextEditor: React.FC<TextEditorProps> = () => {
             textNode.set("fill", textColor);
             editor.renderAll();
         }
-    }, [textColor, textNode]);
+    }, [textColor, editor, textNode]);
 
 
     const _renderContent = () => {
         
         return (
-                <ImageEditorDiv>
-                    {activeSection.customStencil && 
-                        <ImageEditorStencil mirror={customImagePos === 1} src={activeSection.customStencil} />
+            <ImageEditorDiv>
+                    <canvas ref={canvasNode} />
+
+                    {activeSection.customStencil ? 
+                        <ImageEditorStencil mirror={customImagePos === 1} src={activeSection.customStencil} /> :
+                        null
                     }
-                
-                    <canvas id={`image-editor-text`} />
+
                     <ImageEditorProgressDiv>
                         <p>{intl.formatMessage({id : customImagePos === 0 ? 'modal.image-editor.stencil-note.outside' : 'modal.image-editor.stencil-note.inside'})}</p>
                         <Dots count={2} activeIndex={customImagePos} onClick={(idx) => dispatch(productToggleCustomImagePos(idx))} />

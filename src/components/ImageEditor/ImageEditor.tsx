@@ -108,7 +108,7 @@ const ImageEditor: React.FC<ImageEditorProps> = () => {
         if (customImageUrl)
         return (
                 <ImageEditorDiv>
-                    {activeSection.customStencil && 
+                    {activeSection.customStencil && editor && 
                         <ImageEditorStencil mirror={customImagePos === 1} src={activeSection.customStencil} />
                     }
                     <canvas id={`image-editor-${uniq}`} />

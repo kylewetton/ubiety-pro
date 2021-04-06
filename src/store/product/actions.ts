@@ -23,7 +23,7 @@ const parseTag = (name: string) => {
 
 export function productAddMeshParts(data: any): productActionTypes {
 
-    const { sceneId } = data; 
+    const { sceneId } = data;
 
     const meshParts: productPartType[] = _map(data.meshParts, (part: Mesh) => {
         return {
@@ -118,7 +118,7 @@ export function destroyCustomTextureFromActive(): any {
     }
 }
 
-export function productSetStampa(data: {pos: '1' | '2', letter: string}): productActionTypes {
+export function productSetStampa(data: { pos: '1' | '2', letter: string }): productActionTypes {
     return {
         type: PRODUCT_SET_STAMPA,
         payload: data
