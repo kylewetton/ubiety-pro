@@ -4,28 +4,30 @@ import {useIntl} from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 import _isEqual from 'lodash/isEqual';
 import { HexColorPicker, HexColorInput } from "react-colorful";
-import {ImageEditorDiv, ImageEditorButtonTrayDiv, ImageEditorFontSelector, ImageEditorColorPicker, ImageEditorColorHouse} from '../ImageEditor/styles/ImageEditorStyles';
+import {ImageEditorDiv, ImageEditorButtonTrayDiv, ImageEditorStencil, ImageEditorProgressDiv, ImageEditorFontSelector, ImageEditorColorPicker, ImageEditorColorHouse} from '../ImageEditor/styles/ImageEditorStyles';
 import { TextEditorProps } from './types';
 import config from '../../config/brandConfig';
-import { getActiveSection } from '../../store/product/selectors';
-import { productApplyCustomImage, destroyCustomTextureFromActive } from '../../store/product/actions';
+import { getActiveSection, getProductCustomImagePos } from '../../store/product/selectors';
+import { productApplyCustomImage, productToggleCustomImagePos, destroyCustomTextureFromActive } from '../../store/product/actions';
 import Button from '../Button';
 import Modal from '../../layout/Modal';
 import { interfaceToggleModal } from '../../store/interface/actions';
 import { interfaceGetModalState } from '../../store/interface/selectors';
+import Dots from '../Dots';
 
 const TextEditor: React.FC<TextEditorProps> = () => {
   
     const dispatch = useDispatch();
     const [editor, setEditor] = useState<any>(null);
     const dimensions = 480;
-    const [activeSection] = useSelector(getActiveSection);
     const modalState = useSelector(interfaceGetModalState('customText'));
     const [lastSubmittedText, setLastSubmittedText] = useState<string>();
     const [textNode, setTextNode] = useState<any>();
     const [textColor, setTextColor] = useState<string>('#000000');
     const [colorPickerOpen, setColorPickerOpen] = useState<boolean>(false);
     const intl = useIntl();
+    const [activeSection] = useSelector(getActiveSection);
+    const customImagePos = useSelector(getProductCustomImagePos);
 
     /**
      * Instance setup
@@ -63,18 +65,23 @@ const TextEditor: React.FC<TextEditorProps> = () => {
 
 
      const _handleCloseCustomImageModal = () => {
-        dispatch(interfaceToggleModal({id: 'customImage', status: 'closed'}));;
+        dispatch(interfaceToggleModal({id: 'customText', status: 'closed'}));;
     }
 
-    const _generateCustomTexture = () => {
+    const _generateCustomTexture = (goToNextPosition = false) => {
         const texture = editor.toDataURL({multiplier: 1024 / dimensions});
-        _handleCloseCustomImageModal();
         fetch(texture)
         .then(res => res.blob())
         .then(window.URL.createObjectURL)
         .then(objectUrl => {
             dispatch(productApplyCustomImage(objectUrl))
             setLastSubmittedText(objectUrl);
+            if (goToNextPosition) {
+                dispatch(productToggleCustomImagePos(1));
+            } else {
+                dispatch(productToggleCustomImagePos(0));
+                _handleCloseCustomImageModal();
+            }
         })
     }
 
@@ -117,11 +124,22 @@ const TextEditor: React.FC<TextEditorProps> = () => {
         
         return (
                 <ImageEditorDiv>
+                    {activeSection.customStencil && 
+                        <ImageEditorStencil mirror={customImagePos === 1} src={activeSection.customStencil} />
+                    }
                 
                     <canvas id={`image-editor-text`} />
+                    <ImageEditorProgressDiv>
+                        <p>{intl.formatMessage({id : customImagePos === 0 ? 'modal.image-editor.stencil-note.outside' : 'modal.image-editor.stencil-note.inside'})}</p>
+                        <Dots count={2} activeIndex={customImagePos} onClick={(idx) => dispatch(productToggleCustomImagePos(idx))} />
+                    </ImageEditorProgressDiv>
+
                     <ImageEditorButtonTrayDiv>
-                        <div style={{flex: '1 1 auto', display: 'flex'}}>
-                            <Button color={'green'} onClick={_generateCustomTexture}>{intl.formatMessage({id: 'modal.text-editor.confirm'})}</Button>
+                        <div>
+                            <Button color={'red'} minimal onClick={_destroyCustomTexture}>{intl.formatMessage({id: 'modal.text-editor.clear'})}</Button>
+                        </div>
+
+                        <div style={{flex: '1 1 auto', display: 'flex', alignItems: 'center'}}>
                             <ImageEditorFontSelector onChange={event => _changeFont(event.target.value)} id="">
                                 <option value="Arial">Arial</option>
                                 <option value="Georgia">Georgia</option>
@@ -137,8 +155,16 @@ const TextEditor: React.FC<TextEditorProps> = () => {
                         </div>
                         
                         <div>
-                            <Button color={'gray'} minimal onClick={_destroyCustomTexture}>{intl.formatMessage({id: 'modal.text-editor.remove'})}</Button>
                             <Button color={'gray'} onClick={_handleCloseCustomImageModal}>{intl.formatMessage({id: 'modal.text-editor.close'})}</Button>
+                            {customImagePos === 0 ? 
+                            (<Button color={'green'} onClick={() => _generateCustomTexture(true)}>
+                                {intl.formatMessage({id : 'modal.text-editor.next'})}
+                            </Button>)
+                            :
+                            (<Button color={'green'} onClick={() => _generateCustomTexture(false)}>
+                                {intl.formatMessage({id : 'modal.text-editor.confirm'})}
+                            </Button>)
+                            }
                         </div>
                     </ImageEditorButtonTrayDiv>
                 </ImageEditorDiv>  

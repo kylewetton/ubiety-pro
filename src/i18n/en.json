@@ -23,9 +23,9 @@
     "modal.image-editor.stencil-note.inside": "inside",
 
     "modal.text-editor.confirm": "Confirm",
+    "modal.text-editor.next": "Next",
     "modal.text-editor.clear": "Clear",
     "modal.text-editor.close": "Close",
-    "modal.text-editor.remove": "Remove text",
     "modal.text-editor.color-add" : "Done",
     "modal.text-editor.color-edit" : "Edit color",
 

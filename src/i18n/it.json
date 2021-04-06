@@ -2,7 +2,7 @@
     "loading.message.fetching-data" : "Attendere il caricamento prego...",
     "loading.message.loading-model" : "Costruire il mondo...",
 
-    "stage.customImage.title": "Foto   ",
+    "stage.customImage.title": "Foto",
     "stage.customImage.button.add-edit" : "Aggiungi/modifica foto",
     "stage.customText.button.add-edit" : "Aggiungi/modifica testo",
     "stage.customText.title": "Testo",
@@ -15,12 +15,15 @@
 
 
     "modal.image-editor.confirm": "Salva",
+    "modal.image-editor.next": "Next",
     "modal.image-editor.clear": "Libero il redattore",
     "modal.image-editor.close": "Annulla",
     "modal.image-editor.remove": "Cancellare foto",
-    "modal.image-editor.stencil-note": "Side",
+    "modal.image-editor.stencil-note.outside": "outside",
+    "modal.image-editor.stencil-note.inside": "inside",
 
     "modal.text-editor.confirm": "Salva",
+    "modal.text-editor.next": "Next",
     "modal.text-editor.clear": "Libero il redattore",
     "modal.text-editor.close": "Annulla",
     "modal.text-editor.remove": "Cancellare testo",
