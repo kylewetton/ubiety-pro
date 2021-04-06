@@ -14,10 +14,10 @@ const _genButtonTheme = (color: string) => {
             return colors.brand.blue;
         case 'mint' :
             return colors.brand.mint;
-        case 'minimal':
-            return colors.gray[500];
         case 'gray' :
             return colors.gray[200];
+        case 'red' :
+            return colors.red[500];
         case 'green' :
         default :
             return colors.brand.green;
@@ -37,7 +37,7 @@ export const ButtonEl = styled.button<ButtonDivProps>`
 
     &.minimal {
         background: transparent;
-        color: ${props => props.color ? _genButtonTheme('minimal') : colors.brand.green};
+        color: ${props => props.color ? _genButtonTheme(props.color) : colors.brand.green};
         font-size: ${textSize.sm};
     }
     &:focus {

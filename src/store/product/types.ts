@@ -18,6 +18,7 @@ export const PRODUCT_SET_STAMPA_COLOR = 'PRODUCT_SET_STAMPA_COLOR';
 export const PRODUCT_SET_STAMPA_POS = 'PRODUCT_SET_STAMPA_POS';
 export const PRODUCT_SET_STAMPA_STYLE = 'PRODUCT_SET_STAMPA_STYLE';
 export const PRODUCT_ADD_CART_VARIATION_IDS = 'PRODUCT_ADD_CART_VARIATION_IDS';
+export const PRODUCT_TOGGLE_CUSTOM_IMAGE_POS = 'PRODUCT_TOGGLE_CUSTOM_IMAGE_POS';
 
 interface productAction {
     type: typeof PRODUCT_ADD_MESHPARTS
@@ -28,6 +29,7 @@ interface productAction {
     | typeof PRODUCT_SET_CUSTOM_IMAGE
     | typeof PRODUCT_APPLY_CUSTOM_IMAGE
     | typeof PRODUCT_CLEAR_CUSTOM_IMAGE
+    | typeof PRODUCT_TOGGLE_CUSTOM_IMAGE_POS
     | typeof PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE
     | typeof PRODUCT_SET_TEXTURE_TO_TAG
     | typeof PRODUCT_SET_STAMPA
@@ -69,6 +71,7 @@ export interface Texture {
     swatches: SwatchData[];
     repeat?: number;
     metallic?: boolean;
+    thumbnail?: string | null;
 }
 
 export type MaterialReference = {uid: number, tag: string, label: string};
@@ -82,9 +85,10 @@ export interface Section {
     active: boolean;
     meshPart: string;
     color: string;
-    custom_texture?: any;
+    custom_texture?: (string | null)[];
     locked: boolean;
     allowCustom: boolean;
+    customStencil?: string;
 }
 
 export type productActionTypes = productAction;
@@ -112,6 +116,7 @@ export type productState = {
     materials: Texture[];
     sections: Section[];
     src: string;
+    customImagePos: 0 | 1;
     customImage: string;
     stampa: {[key: string] : string};
     stampaColor: string;

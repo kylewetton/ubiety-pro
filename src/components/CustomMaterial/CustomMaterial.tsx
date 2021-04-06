@@ -78,7 +78,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
 
 
     // Convert to texture image paths
-        const paths = maps.map(texture => {
+        const paths = maps && maps.map(texture => {
             let fileName = override && override.hasOwnProperty(texture) ? override[texture] : texture;
             if (fileName === 'custom')
                 return compedCustomTexture ? compedCustomTexture : '';

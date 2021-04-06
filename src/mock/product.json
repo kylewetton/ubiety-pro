@@ -100,7 +100,7 @@
                     }
                 ],
                 "allow_custom": true,
-                "custom_stencil": "quaters-stencil-w2.png"
+                "custom_stencil": "ubiety/stencil/quaters-stencil-w2.png"
             },
             {
                 "model_tag": "badge",

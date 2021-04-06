@@ -1,4 +1,4 @@
-import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_ADD_CART_VARIATION_IDS, PRODUCT_SET_STAMPA_STYLE, PRODUCT_SET_STAMPA_POS, PRODUCT_SET_STAMPA_COLOR, PRODUCT_SET_STAMPA, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_CUSTOM_IMAGE } from './types';
+import { PRODUCT_ADD_MESHPARTS, PRODUCT_ADD_MATERIALS, PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE, PRODUCT_TOGGLE_CUSTOM_IMAGE_POS, PRODUCT_ADD_CART_VARIATION_IDS, PRODUCT_SET_STAMPA_STYLE, PRODUCT_SET_STAMPA_POS, PRODUCT_SET_STAMPA_COLOR, PRODUCT_SET_STAMPA, PRODUCT_SET_ACTIVE, PRODUCT_SET_TEXTURE, PRODUCT_CLEAR_CUSTOM_IMAGE, PRODUCT_APPLY_CUSTOM_IMAGE, PRODUCT_SET_COLOR, productActionTypes, productState, PRODUCT_ADD_MODEL_DATA, PRODUCT_SET_CUSTOM_IMAGE } from './types';
 import {shapeSectionData, shapeTextureData} from '../../utils';
 import {productPartType} from './types';
 import pathConfig from '../../config/pathConfig';
@@ -11,6 +11,7 @@ const initialState: productState = {
   materials: [],
   sections: [],
   src: '',
+  customImagePos: 0,
   customImage: '',
   stampa: {
     1: '',
@@ -46,7 +47,7 @@ const _updateCart = (state: productState, materials: any) => {
   const stepTwo = stepOne.map(li => {
     const variations = state.cartVariationIds && state.cartVariationIds[li.pid];
     const sectionVariation = variations && variations.filter(varia => varia.tag === li.tag);
-    if (!sectionVariation)
+    if (!sectionVariation || !sectionVariation.length)
       return li;
     return {
       ...li,
@@ -92,6 +93,7 @@ fetch(pathConfig.endpoints.cart, {
   method: 'POST',
   body: fd
 })
+.then(res => res.text())
 .then(res => _handleUpdateCartButton(res))
 .catch(err => console.warn('There was an error updating the cart (check reducer)', err));
 
@@ -234,16 +236,38 @@ export function productReducer(state = initialState, action: productActionTypes)
 
     case PRODUCT_APPLY_CUSTOM_IMAGE:
       // Get active section
-      const [activeSection] = state.sections.filter(section => section.active);
-      const rest = state.sections.filter(section => !section.active);
+      const [activeSection] = [...state.sections].filter(section => section.active);
+      const rest = [...state.sections].filter(section => !section.active);
+      const newCustomTexture = activeSection.custom_texture ? [...activeSection.custom_texture] : [null, null];
+
+      newCustomTexture[state.customImagePos] = newCustomTexture ? action.payload : null;
+
       const newActive = {
        ...activeSection,
-       custom_texture: action.payload
+       custom_texture: newCustomTexture
       }
       return {
         ...state,
+        customImagePos: state.customImagePos === 0 ? 1 : state.customImagePos,
         sections: [newActive, ...rest]
       }
+
+      case PRODUCT_DESTROY_ACTIVE_CUSTOM_IMAGE:
+        // Get active section
+        const [activeS] = [...state.sections].filter(section => section.active);
+        const rst = [...state.sections].filter(section => !section.active);
+        const newCustomT = [null, null];
+  
+        const newA = {
+         ...activeS,
+         custom_texture: newCustomT
+        }
+        return {
+          ...state,
+          sections: [newA, ...rst]
+        }
+
+      
 
     case PRODUCT_CLEAR_CUSTOM_IMAGE:
       return {
@@ -279,6 +303,12 @@ export function productReducer(state = initialState, action: productActionTypes)
           ...state,
           materials: newMats,
           stampaStyle: action.payload
+        }
+
+      case PRODUCT_TOGGLE_CUSTOM_IMAGE_POS:
+        return {
+          ...state,
+          customImagePos: action.payload
         }
     default:
       return state;

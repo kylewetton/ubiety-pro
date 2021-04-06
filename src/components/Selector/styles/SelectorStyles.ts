@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {boxShadow, colors, breakpoints, radius, spacing, textSize} from '../../../theme';
+import {boxShadow, colors, breakpoints, spacing, textSize} from '../../../theme';
 
 
 const _genSelectorTheme = (color: string) => {

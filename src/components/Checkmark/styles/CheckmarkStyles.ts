@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CheckmarkProps } from '../types';
-import {colors, radius, spacing} from '../../../theme';
+import {colors, spacing} from '../../../theme';
 
 export const CheckmarkDiv = styled.div<CheckmarkProps>`
     position: absolute;
@@ -12,6 +12,7 @@ export const CheckmarkDiv = styled.div<CheckmarkProps>`
     display: flex;
     justify-content: center;
     align-items: center; 
+    z-index: 2;
     svg, path {
         fill: ${colors.white};
     }

@@ -28,7 +28,9 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                         if (!part || !section) return null;
                         const {locked, id} = part;
                         const {current_material, custom_texture, color} = section;
-                        return <Part key={id} id={id} customTexture={custom_texture} locked={locked} mesh={mesh} materialUid={current_material.uid} color={color} />;
+                        const [c_texture_1, c_texture_2] = custom_texture || []; 
+                        
+                        return <Part key={id} id={id} customTexture={c_texture_1} locked={locked} mesh={mesh} materialUid={current_material.uid} color={color} />;
                     })
                 }
                 {
@@ -42,7 +44,8 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                             if (!part || !section) return null;
                             const {locked, id} = part;
                             const {current_material, custom_texture, color} = section;
-                            return <Part key={id} id={id} customTexture={custom_texture} locked={locked} mesh={child} materialUid={current_material.uid} color={color} />;
+                            const [c_texture_1, c_texture_2] = custom_texture || []; 
+                            return <Part key={id} id={id} customTexture={c_texture_2 || c_texture_1} locked={locked} mesh={child} materialUid={current_material.uid} color={color} />;
                         });
                     })
                 }

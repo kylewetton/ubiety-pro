@@ -1,6 +1,6 @@
 import { RootState } from '../index';
 
-export const getIsLoading = (state: RootState) => state.product.loadingMeshParts && state.product.loadingMaterials && state.product.loadingModelData;
+export const getIsLoading = (state: RootState) => state.product.loadingMeshParts || state.product.loadingMaterials || state.product.loadingModelData;
 
 export const getAllProductMeshParts = (state: RootState) => state.product.meshParts;
 
@@ -21,3 +21,4 @@ export const getProductStampas = (state: RootState) => state.product.stampa;
 export const getProductStampaColor = (state: RootState) => state.product.stampaColor;
 export const getProductStampaPos = (state: RootState) => state.product.stampaPos;
 export const getProductStampaStyle = (state: RootState) => state.product.stampaStyle;
+export const getProductCustomImagePos = (state: RootState) => state.product.customImagePos;

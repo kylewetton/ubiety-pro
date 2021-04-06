@@ -25,7 +25,7 @@ const SwatchTray: React.FC<SwatchTrayProps> = () => {
     const _renderSwatchTrayContent = () => {
         if (ACTIVE_STAGE === 'initials')
             return alphabet.map(letter => <LetterInitial active={STAMPAS[STAMPA_POS] === letter} onClick={() => dispatch(productSetStampa({pos: STAMPA_POS, letter}))} key={letter} letter={letter} />);
-        return SWATCHES && SWATCHES.map((swatch: SwatchData) => <Swatch active={ACTIVE_SECTION.color === swatch.swatch} key={swatch.label} label={swatch.label} color={swatch.swatch} />)
+        return SWATCHES && SWATCHES.map((swatch: SwatchData) => <Swatch thumbnail={ACTIVE_MATERIALS.thumbnail} active={ACTIVE_SECTION.color === swatch.swatch} key={swatch.label} label={swatch.label} color={swatch.swatch} />)
     }
 
   if (!ACTIVE_PRODUCT)

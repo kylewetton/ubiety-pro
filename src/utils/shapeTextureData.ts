@@ -35,7 +35,8 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
             swatches: entry.acf.swatches,
             repeat: +entry.acf.material_attributes.repeat || 1,
             metallic: entry.acf.material_attributes.metallic,
-            wooProduct: wooProduct && {id: wooProduct.ID, tag: wooProduct.post_name, label: wooProduct.post_title}
+            wooProduct: wooProduct && {id: wooProduct.ID, tag: wooProduct.post_name, label: wooProduct.post_title},
+            thumbnail: entry.acf.thumbnail_png ? entry.acf.thumbnail_png.url : null
         }
     });
 }

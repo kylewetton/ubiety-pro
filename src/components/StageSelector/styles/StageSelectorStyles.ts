@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { StageSelectorProps } from '../types';
-import {breakpoints, colors, radius, spacing} from '../../../theme';
+import {breakpoints, colors, spacing} from '../../../theme';
 
 export const StageSelectorDiv = styled.div<StageSelectorProps>`
     width: ${props => props.active ? '100%' : `calc(100% - ${spacing[10]})`};
