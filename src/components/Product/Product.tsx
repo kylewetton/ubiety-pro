@@ -56,7 +56,7 @@ const Product: React.FC<ProductProps> = ({file, rotation = [0, 0, 0]}) => {
                     _map(meshParts, (part: any) => {
                         const {locked, id} = part;
                         const [shadowMesh] = _filter(file, (mesh: any) => mesh.name === 'shadow|disable');
-                        if (part.tag !== 'shadow')
+                        if (part.tag !== 'shadow' || !shadowMaterial)
                             return null;
                         return <Part key={id} id={id} locked={locked} mesh={shadowMesh} materialUid={shadowMaterial.uid} color={'#000000'} />;
                     })

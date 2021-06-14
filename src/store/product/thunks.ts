@@ -4,6 +4,7 @@ import {GetState, RootState} from '../../store';
 import {productAddMaterials, productAddModelData, productAddCartVariationIds} from './actions';
 import {shapeTextureData} from '../../utils';
 import pathConfig from '../../config/pathConfig';
+import productConfig from '../../config/productConfig';
 
 const IS_STANDALONE = window.location.host.includes('netlify');
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
@@ -14,7 +15,7 @@ if (IS_STANDALONE)
 const mockProductData = IS_STANDALONE ? require('../../mock/product.json') : null;
 const mockTextureData = IS_STANDALONE ? require('../../mock/texture.json') : null;
 
-const PRODUCT_ID = IS_DEVELOPMENT ? '51' : document.getElementById('post_id')?.dataset.id;
+const PRODUCT_ID = IS_DEVELOPMENT ? productConfig.wpid : document.getElementById('post_id')?.dataset.id;
 
 export const thunkProductLoadMaterials = (): ThunkAction<void, RootState, unknown, Action<string>> => async(dispatch: Dispatch, getState: GetState) => {
     fetch(IS_STANDALONE ? `https://jsonplaceholder.typicode.com/todos/100` : pathConfig.endpoints.texture)

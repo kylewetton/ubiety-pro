@@ -1,8 +1,9 @@
 import {Texture} from '../store/product/types';
+import productConfig from '../config/productConfig';
 
 type ShapeTextureFn = (data: any, isMaskedShadow?: boolean) => Texture[];
 
-const PRODUCT_ID = process.env.NODE_ENV === 'development' || window.location.host.includes('netlify') ? '51' : document.getElementById('post_id')?.dataset.id;
+const PRODUCT_ID = process.env.NODE_ENV === 'development' || window.location.host.includes('netlify') ? productConfig.wpid : document.getElementById('post_id')?.dataset.id;
 
 const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
 
@@ -10,7 +11,7 @@ const shapeTextureData: ShapeTextureFn = (data, isMaskedShadow) => {
         return data.map((entry: any) => {
             return  {
                 uid: -1,
-                tag: entry.title,
+                tag: 'shadow',
                 src: `/${PRODUCT_ID}`,
                 maps: ['alpha'],
                 normalIntensity: 0,
