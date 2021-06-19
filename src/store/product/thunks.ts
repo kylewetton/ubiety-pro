@@ -14,7 +14,7 @@ if (IS_STANDALONE)
     console.log('Environment: ', process.env.NODE_ENV);
 
     
-    const PRODUCT_ID = IS_DEVELOPMENT || IS_STANDALONE ? productConfig.wpid : document.getElementById('post_id')?.dataset.id;
+    const PRODUCT_ID = (IS_DEVELOPMENT || IS_STANDALONE) ? productConfig.wpid : document.getElementById('post_id')?.dataset.id;
     const mockProductData = IS_STANDALONE ? require(`../../mock/product-${PRODUCT_ID}.json`) : null;
     const mockTextureData = IS_STANDALONE ? require('../../mock/texture.json') : null;
 
