@@ -6,11 +6,12 @@ import {shapeTextureData} from '../../utils';
 import pathConfig from '../../config/pathConfig';
 import productConfig from '../../config/productConfig';
 
-const IS_STANDALONE =  window.location.host.includes('netlify');
+const IS_STANDALONE = window.location.host.includes('netlify');
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 if (IS_STANDALONE)
     console.log('Running standalone version, loading mock data');
+    console.log('Environment: ', process.env.NODE_ENV);
 
     
     const PRODUCT_ID = IS_DEVELOPMENT ? productConfig.wpid : document.getElementById('post_id')?.dataset.id;
