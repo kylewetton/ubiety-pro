@@ -154,7 +154,7 @@ const CustomMaterial: React.FC<CustomMaterialProps> = ({uid, color, customTextur
             color={color}
             metalness={material.metallic ? 1 : 0}
             roughness={0}
-            envMap={envMap}
+            envMap={envMap && envMap}
         />
     );
 
