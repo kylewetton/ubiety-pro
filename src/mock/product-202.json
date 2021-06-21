@@ -16,7 +16,7 @@
     },
     "template": "",
     "acf": {
-    "model_file": "https://livree.test/wp-content/uploads/2021/06/SarpaBassa-v17.glb",
+    "model_file": "./SarpaBassa-v17.glb",
     "sections": [
     {
     "model_tag": "cuciture",

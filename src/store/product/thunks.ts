@@ -3,10 +3,9 @@ import {Action, Dispatch} from 'redux';
 import {GetState, RootState} from '../../store';
 import {productAddMaterials, productAddModelData, productAddCartVariationIds} from './actions';
 import {shapeTextureData} from '../../utils';
-import pathConfig from '../../config/pathConfig';
+import pathConfig, {IS_STANDALONE} from '../../config/pathConfig';
 import productConfig from '../../config/productConfig';
 
-const IS_STANDALONE = window.location.host.includes('netlify');
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 if (IS_STANDALONE)

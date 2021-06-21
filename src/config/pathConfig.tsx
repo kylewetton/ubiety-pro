@@ -1,7 +1,8 @@
-const {protocol: PROTOCOL, hostname: HOST} = window.location;
+export const IS_STANDALONE = window.location.host.includes('netlify');
+const {protocol: PROTOCOL, hostname: HOST, port: PORT} = window.location;
     let hostname = HOST;
-    let API = `${PROTOCOL}//${hostname}`;
-if (process.env.NODE_ENV === 'development')
+    let API = `${PROTOCOL}//${hostname}:${PORT}`;
+if (process.env.NODE_ENV === 'development' && !IS_STANDALONE)
     API = `https://livree.test`;
 
 const pathConfig = {
