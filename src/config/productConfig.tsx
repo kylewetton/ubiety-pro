@@ -1,5 +1,5 @@
 const productConfig = {
-    wpid: 202
+    wpid: 171
 };
 
 export default productConfig;
